@@ -1,0 +1,61 @@
+.login-div-above-text{
+    font-size: 25px;
+    font-weight: bold;
+    margin-left: 35%;
+    margin-top: 7%;
+}
+
+.login-div{
+    margin-left: 35%;
+    margin-top: 1%;
+    width: 30%;
+    height: 58%;
+    border: solid 1px lightgray;
+
+    -webkit-box-shadow: 0px -2px 250px -54px rgba(0,0,0,0.21);
+    -moz-box-shadow: 0px -2px 250px -54px rgba(0,0,0,0.21);
+    box-shadow: 0px -2px 250px -54px rgba(0,0,0,0.21);
+}
+
+.login-text{
+    font-size: 25px;
+    font-weight: bold;
+    margin:10%;
+}
+
+.id-box{
+    margin-left: 15%;
+    width: 70%;
+    height: 46px;
+}
+
+.password-box{
+    margin-top: 5%;
+    margin-left: 15%;
+    width: 70%;
+    height: 46px;
+}
+
+.login-and-join-div{
+    margin-left: 15%;
+    margin-top: 5%;
+    display: flex;
+}
+
+.login-button{
+    margin-top: 5%;
+    margin-left: 15%;
+    border-radius: 15px;
+    width: 30%;
+    height: 46px;
+}
+
+.join-text{
+    margin-top: 30%;
+    margin-left: 62%;
+    align-self: center;
+    font-size: 15px;
+}
+
+
+

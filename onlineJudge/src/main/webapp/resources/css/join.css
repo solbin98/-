@@ -1,0 +1,47 @@
+.join-div-above-text{
+    font-size: 25px;
+    font-weight: bold;
+    margin-left: 35%;
+    margin-top: 7%;
+}
+
+.join-form-div{
+    margin-left: 35%;
+    margin-top: 1%;
+    width: 30%;
+    height: 80%;
+    margin-bottom: 25%;
+    border: solid 1px lightgray;
+
+    -webkit-box-shadow: 0px -2px 250px -54px rgba(0,0,0,0.21);
+    -moz-box-shadow: 0px -2px 250px -54px rgba(0,0,0,0.21);
+    box-shadow: 0px -2px 250px -54px rgba(0,0,0,0.21);
+}
+
+.join-text{
+    font-size: 25px;
+    font-weight: bold;
+    margin:10%;
+}
+
+.input-box{
+    margin-top: 4%;
+    margin-left: 15%;
+    width: 70%;
+    height: 46px;
+}
+
+.introduction-box{
+    margin-top: 4%;
+    margin-left: 15%;
+    width: 70%;
+    height: 80px;
+}
+
+.join-button{
+    margin-top: 5%;
+    margin-left: 15%;
+    border-radius: 15px;
+    width: 30%;
+    height: 46px;
+}

@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="onlineJudge:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>onlineJudge</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="onlineJudge-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="onlineJudge:war exploded" />
+    </root>
+  </artifact>
+</component>
