@@ -13,7 +13,7 @@ public class ProfileDao {
         @Override
         public ProfileDto mapRow(ResultSet rs, int i) throws SQLException {
             ProfileDto profileDto = new ProfileDto(
-                    rs.getString("member_id"),
+                    rs.getInt("member_id"),
                     rs.getInt("submission_id"),
                     rs.getInt("solved_num")
             );

@@ -1,19 +1,19 @@
 package com.project.dto;
 
 public class ProfileFileDto {
-    String member_id;
+    int member_id;
     int file_id;
 
-    public ProfileFileDto(String member_id, int file_id) {
+    public ProfileFileDto(int member_id, int file_id) {
         this.member_id = member_id;
         this.file_id = file_id;
     }
 
-    public String getMember_id() {
+    public int getMember_id() {
         return member_id;
     }
 
-    public void setMember_id(String member_id) {
+    public void setMember_id(int member_id) {
         this.member_id = member_id;
     }
 

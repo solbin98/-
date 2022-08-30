@@ -19,7 +19,7 @@ public class CommentDao {
                     rs.getInt("board_id"),
                     rs.getString("content"),
                     rs.getString("date"),
-                    rs.getString("member_id")
+                    rs.getInt("member_id")
             );
             return commentDto;
         }

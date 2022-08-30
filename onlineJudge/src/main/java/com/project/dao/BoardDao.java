@@ -21,7 +21,7 @@ public class BoardDao {
                     rs.getBoolean("question"),
                     rs.getString("content"),
                     rs.getString("date"),
-                    rs.getString("member_id")
+                    rs.getInt("member_id")
                     );
             return boardDto;
         }

@@ -1,20 +1,30 @@
 package com.project.dto;
 
 public class MemberDto {
-    String member_id;
+    int member_id;
+    String userid;
     String password;
     String name;
     String email;
     String introduction;
     String date;
 
-    public MemberDto(String member_id, String password, String name, String email, String introduction, String date) {
+    public MemberDto(int member_id, String userid, String password, String name, String email, String introduction, String date) {
         this.member_id = member_id;
+        this.userid = userid;
         this.password = password;
         this.name = name;
         this.email = email;
         this.introduction = introduction;
         this.date = date;
+    }
+
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
     }
 
     public String getDate() {
@@ -25,11 +35,11 @@ public class MemberDto {
         this.date = date;
     }
 
-    public String getMember_id() {
+    public int getMember_id() {
         return member_id;
     }
 
-    public void setMember_id(String member_id) {
+    public void setMember_id(int member_id) {
         this.member_id = member_id;
     }
 

@@ -14,7 +14,8 @@ public class MemberDao {
         @Override
         public MemberDto mapRow(ResultSet rs, int i) throws SQLException {
             MemberDto memberDto = new MemberDto(
-                    rs.getString("member_id"),
+                    rs.getInt("member_id"),
+                    rs.getString("userid"),
                     rs.getString("password"),
                     rs.getString("name"),
                     rs.getString("email"),

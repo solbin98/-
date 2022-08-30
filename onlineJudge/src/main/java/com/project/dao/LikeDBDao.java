@@ -14,7 +14,7 @@ public class LikeDBDao {
         public LikeDBDto mapRow(ResultSet rs, int i) throws SQLException {
             LikeDBDto likeDBDto = new LikeDBDto(
                     rs.getInt("board_id"),
-                    rs.getString("member_id")
+                    rs.getInt("member_id")
             );
             return likeDBDto;
         }

@@ -1,0 +1,76 @@
+package com.project.dao;
+
+import com.project.dto.CommentDto;
+import com.project.dto.EmailAuthDto;
+import org.aopalliance.intercept.Interceptor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
+
+import javax.sql.DataSource;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
+@Repository
+public class EmailAuthDao {
+    private RowMapper<EmailAuthDto> emailAuthDtoRowMapper = new RowMapper<EmailAuthDto>() {
+        @Override
+        public EmailAuthDto mapRow(ResultSet rs, int i) throws SQLException {
+            EmailAuthDto emailAuthDto = new EmailAuthDto(
+                    rs.getString("email"),
+                    rs.getString("code"),
+                    rs.getTimestamp("expire_date").toLocalDateTime(),
+                    rs.getBoolean("auth")
+            );
+            return emailAuthDto;
+        }
+    };
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    public EmailAuthDto selectByEmail(String email){
+        try {
+            EmailAuthDto res = jdbcTemplate.queryForObject("select * from email_auth where email = ?", EmailAuthDto.class, email);
+            return res;
+        }
+        catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
+
+    public EmailAuthDto selectByEmailAndCode(String email, String code){
+        try{
+            EmailAuthDto res = jdbcTemplate.queryForObject("select count(*) from email_auth where email = ? and code = ?", EmailAuthDto.class, email, code);
+            return res;
+        }
+        catch(EmptyResultDataAccessException e){
+            return null;
+        }
+
+    }
+
+    public void insert(EmailAuthDto emailAuthDto){
+        try{
+            jdbcTemplate.update("insert into email_auth(email, code, expire_date, auth) values(?, ?, ?, ? )",
+                    emailAuthDto.getEmail(), emailAuthDto.getCode(), emailAuthDto.getExpire_date(), emailAuthDto.getAuth());
+        }
+        catch (Exception e){
+            throw e;
+        }
+    }
+
+    public void update(EmailAuthDto emailAuthDto){
+        try{
+            jdbcTemplate.update("update email_auth set code=?, expire_date=?, auth=? where email=?",
+                    emailAuthDto.getCode(), emailAuthDto.getExpire_date(), emailAuthDto.getAuth(),emailAuthDto.getEmail());
+        }
+        catch (Exception e){
+            throw e;
+        }
+    }
+
+}

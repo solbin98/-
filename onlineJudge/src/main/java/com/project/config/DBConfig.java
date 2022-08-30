@@ -1,5 +1,6 @@
 package com.project.config;
 
+import com.project.dao.EmailAuthDao;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,4 +26,7 @@ public class DBConfig {
         jdbcTemplate.setDataSource(dataSource());
         return jdbcTemplate;
     }
+
+    @Bean
+    public EmailAuthDao emailAuthDao(){ return new EmailAuthDao(); }
 }

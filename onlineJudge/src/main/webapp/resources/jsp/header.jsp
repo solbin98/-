@@ -24,7 +24,6 @@
             <a href="/join" methods="GET" class="header-text" id="join-link">   <spring:message code="menu.text.join"> </spring:message> </a>
         </div>
     </div>
-
 </div>
 </body>
 </html>

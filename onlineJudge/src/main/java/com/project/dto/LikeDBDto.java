@@ -2,9 +2,9 @@ package com.project.dto;
 
 public class LikeDBDto {
     int board_id;
-    String member_id;
+    int member_id;
 
-    public LikeDBDto(int board_id, String member_id) {
+    public LikeDBDto(int board_id, int member_id) {
         this.board_id = board_id;
         this.member_id = member_id;
     }
@@ -17,11 +17,11 @@ public class LikeDBDto {
         this.board_id = board_id;
     }
 
-    public String getMember_id() {
+    public int getMember_id() {
         return member_id;
     }
 
-    public void setMember_id(String member_id) {
+    public void setMember_id(int member_id) {
         this.member_id = member_id;
     }
 }

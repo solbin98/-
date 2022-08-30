@@ -1,21 +1,21 @@
 package com.project.dto;
 
 public class ProfileDto {
-    String member_id;
+    int member_id;
     int submission_num;
     int solved_num;
 
-    public ProfileDto(String member_id, int submission_num, int solved_num) {
+    public ProfileDto(int member_id, int submission_num, int solved_num) {
         this.member_id = member_id;
         this.submission_num = submission_num;
         this.solved_num = solved_num;
     }
 
-    public String getMember_id() {
+    public int getMember_id() {
         return member_id;
     }
 
-    public void setMember_id(String member_id) {
+    public void setMember_id(int member_id) {
         this.member_id = member_id;
     }
 

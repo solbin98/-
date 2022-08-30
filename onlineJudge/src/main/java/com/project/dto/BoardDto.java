@@ -9,9 +9,9 @@ public class BoardDto {
     boolean question;
     String content;
     String date;
-    String member_id;
+    int member_id;
 
-    public BoardDto(int board_id, int question_id, int difficulty, int problem_id, int category_id, boolean question, String content, String date, String member_id) {
+    public BoardDto(int board_id, int question_id, int difficulty, int problem_id, int category_id, boolean question, String content, String date, int member_id) {
         this.board_id = board_id;
         this.question_id = question_id;
         this.difficulty = difficulty;
@@ -87,11 +87,11 @@ public class BoardDto {
         this.date = date;
     }
 
-    public String getMember_id() {
+    public int getMember_id() {
         return member_id;
     }
 
-    public void setMember_id(String member_id) {
+    public void setMember_id(int member_id) {
         this.member_id = member_id;
     }
 

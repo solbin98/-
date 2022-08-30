@@ -2,6 +2,7 @@ package com.project.config;
 
 
 import com.project.member.join.JoinService;
+import com.project.member.join.MailService;
 import com.project.member.login.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -19,4 +20,7 @@ public class ServiceConfig {
 
     @Bean
     public JoinService joinService(){ return new JoinService();}
+
+    @Bean
+    public MailService mailService() { return new MailService(); }
 }

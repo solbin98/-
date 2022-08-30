@@ -22,7 +22,7 @@ public class SubmissionDao {
                     rs.getString("time"),
                     rs.getString("code_length"),
                     rs.getString("date"),
-                    rs.getString("member_id")
+                    rs.getInt("member_id")
             );
             return submissionDto;
         }

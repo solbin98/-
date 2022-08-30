@@ -9,9 +9,9 @@ public class SubmissionDto {
     String time;
     String code_length;
     String date;
-    String member_id;
+    int member_id;
 
-    public SubmissionDto(int submission_id, int problem_id, int language_id, String state, String memory, String time, String code_length, String date, String member_id) {
+    public SubmissionDto(int submission_id, int problem_id, int language_id, String state, String memory, String time, String code_length, String date, int member_id) {
         this.submission_id = submission_id;
         this.problem_id = problem_id;
         this.language_id = language_id;
@@ -71,11 +71,11 @@ public class SubmissionDto {
         this.date = date;
     }
 
-    public String getMember_id() {
+    public int getMember_id() {
         return member_id;
     }
 
-    public void setMember_id(String member_id) {
+    public void setMember_id(int member_id) {
         this.member_id = member_id;
     }
 

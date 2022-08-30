@@ -6,9 +6,9 @@ public class CommentDto {
     int board_id;
     String content;
     String date;
-    String member_id;
+    int member_id;
 
-    public CommentDto(int comment_id, int parent, int board_id, String content, String date, String member_id) {
+    public CommentDto(int comment_id, int parent, int board_id, String content, String date, int member_id) {
         this.comment_id = comment_id;
         this.parent = parent;
         this.board_id = board_id;
@@ -57,11 +57,11 @@ public class CommentDto {
         this.date = date;
     }
 
-    public String getMember_id() {
+    public int getMember_id() {
         return member_id;
     }
 
-    public void setMember_id(String member_id) {
+    public void setMember_id(int member_id) {
         this.member_id = member_id;
     }
 }

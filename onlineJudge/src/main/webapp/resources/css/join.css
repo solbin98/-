@@ -9,7 +9,7 @@
     margin-left: 35%;
     margin-top: 1%;
     width: 30%;
-    height: 80%;
+    height: 145%;
     margin-bottom: 25%;
     border: solid 1px lightgray;
 
@@ -31,17 +31,68 @@
     height: 46px;
 }
 
+.input-box-email1{
+    width: 50%;
+    height: 32px;
+}
+
+.input-box-email2{
+    width: 30%;
+    height: 32px;
+}
+
+.email-box{
+    margin-top: 5%;
+    margin-left: 15%;
+}
+
+.email-check-button{
+    margin-top: 2%;
+    margin-left: 15%;
+    width: 25%;
+    height: 25px;
+    background-color: lightgreen;
+}
+
+.email-check-button-div{
+    display: flex;
+}
+
+.email-check-time-text{
+    margin-left: 15%;
+    align-self: center;
+}
+
 .introduction-box{
     margin-top: 4%;
     margin-left: 15%;
     width: 70%;
     height: 80px;
+    resize: none;
+}
+
+.profile-image{
+    margin-top: 10%;
+    margin-left: 34%;
+    width: 150px;
+    height: 150px;
+    align-self: center;
+}
+
+.profile-text{
+    margin-left: 15%;
+    font-size: 20px;
+}
+
+.profile-image-select-box{
+    margin-left: 34%;
 }
 
 .join-button{
-    margin-top: 5%;
-    margin-left: 15%;
+    margin-top: 20%;
+    margin-left: 34%;
     border-radius: 15px;
     width: 30%;
     height: 46px;
 }
+
