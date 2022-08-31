@@ -50,7 +50,7 @@
         let result = ajaxForm("POST", "/emailCertification",{"email": email, "code" : code},{});
         alert(result.message);
         console.log(result);
-        //if(result.result == true) window.close();
+        if(result.result == true) window.close();
     }
 </script>
 </html>

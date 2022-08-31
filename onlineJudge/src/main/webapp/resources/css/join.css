@@ -9,7 +9,7 @@
     margin-left: 35%;
     margin-top: 1%;
     width: 30%;
-    height: 145%;
+    height: 165%;
     margin-bottom: 25%;
     border: solid 1px lightgray;
 
@@ -44,6 +44,19 @@
 .email-box{
     margin-top: 5%;
     margin-left: 15%;
+}
+
+.error-text-email{
+    margin-left: 4%;
+    color: red;
+}
+
+.error-text{
+    margin-top: 4%;
+    margin-left: 15%;
+    width: 70%;
+    height: 46px;
+    color: red;
 }
 
 .email-check-button{

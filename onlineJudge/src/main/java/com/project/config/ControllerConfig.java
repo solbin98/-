@@ -1,5 +1,6 @@
 package com.project.config;
 
+import com.project.mainController;
 import com.project.member.join.JoinController;
 import com.project.member.login.LoginController;
 import org.springframework.context.annotation.Bean;
@@ -12,4 +13,7 @@ public class ControllerConfig {
 
     @Bean
     public JoinController joinController(){ return new JoinController(); }
+
+    @Bean
+    public mainController mainController() { return new mainController();}
 }

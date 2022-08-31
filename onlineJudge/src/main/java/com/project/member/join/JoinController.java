@@ -1,29 +1,60 @@
 package com.project.member.join;
 
+import com.fasterxml.jackson.databind.annotation.JsonAppend;
+import com.project.dto.MemberDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 @Controller
 public class JoinController {
     @Autowired
+    JoinService joinService;
+    @Autowired
     MailService mailService;
+    @Autowired
+    JoinValidator joinValidator;
+
+    @Autowired
+    MessageSource messageSource;
 
     @GetMapping("/join")
-    public String joinPage(){
+    public String getJoinPage(){
         return "join/joinPage";
+    }
+
+    @PostMapping("/join")
+    public String join(@Validated @ModelAttribute("JoinFormData") JoinFormData joinFormData, BindingResult bindingResult, Model model){
+        // joinValidator 을 통한 회원 가입 폼 데이터 검증
+        joinValidator.validate(joinFormData, bindingResult);
+
+        if(bindingResult.hasErrors()) {
+            setModelObjectFromJoinFormData(model, joinFormData);
+            return "join/joinPage";
+        }
+
+        joinService.joinMember(convertJoinFormDataToMemberDto(joinFormData));
+        return "login/loginPage";
     }
 
     @PostMapping("/email")
     @ResponseBody
-    public String sendEmail(@RequestParam String email){
-        System.out.println(email + " 도착함.");
-        String authKey = mailService.sendAuthMail(email);
-        return authKey;
+    public Map<String, Object> sendEmail(@RequestParam String email){
+        Map<String, Object> resultMap = mailService.sendAuthMail(email);
+        return resultMap;
     }
 
     @PostMapping(value ="/emailCertification")
@@ -50,6 +81,24 @@ public class JoinController {
     public String getEmailCertificatePage(@RequestParam("email") String email, Model model){
         model.addAttribute("email", email);
         return "join/emailCertificationPage";
+    }
+
+    public MemberDto convertJoinFormDataToMemberDto(JoinFormData joinFormData){
+        return new MemberDto(0,
+                joinFormData.getId(),
+                joinFormData.getPassword(),
+                joinFormData.getNickName(),
+                joinFormData.getEmail(),
+                joinFormData.getIntroduction(),
+                LocalDateTime.now());
+    }
+
+    public void setModelObjectFromJoinFormData(Model model, JoinFormData joinFormData){
+        model.addAttribute("id", joinFormData.getId());
+        model.addAttribute("password", joinFormData.getPassword());
+        model.addAttribute("passwordCheck", joinFormData.getPasswordCheck());
+        model.addAttribute("nickName", joinFormData.getNickName());
+        model.addAttribute("introduction", joinFormData.getIntroduction());
     }
 
 }

@@ -2,7 +2,8 @@ package com.project.config;
 
 
 import com.project.interceptor.LoginInterceptor;
-import com.project.member.util.AuthKeyMaker;
+import com.project.member.join.JoinValidator;
+import com.project.member.join.AuthKeyMaker;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
@@ -50,11 +51,11 @@ public class MvcConfig implements WebMvcConfigurer {
     @Bean
     public ReloadableResourceBundleMessageSource messageSource() {
         ReloadableResourceBundleMessageSource source = new ReloadableResourceBundleMessageSource();
-        source.setBasenames("/resources/messages/errors_ko_KR");
-        source.setBasenames("/resources/messages/labels_ko_KR");
+        source.setBasenames("/resources/messages/errors_ko", "/resources/messages/labels_ko");
         source.setDefaultEncoding("utf-8");
         return source;
     }
+
 
     @Bean(name="mailSender")
     public JavaMailSenderImpl mailSender(){
@@ -81,4 +82,7 @@ public class MvcConfig implements WebMvcConfigurer {
     public AuthKeyMaker authKeyMaker(){
         return new AuthKeyMaker();
     }
+
+    @Bean
+    public JoinValidator joinValidator() { return new JoinValidator();}
 }

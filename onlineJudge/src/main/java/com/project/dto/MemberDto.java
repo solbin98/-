@@ -1,5 +1,8 @@
 package com.project.dto;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 public class MemberDto {
     int member_id;
     String userid;
@@ -7,9 +10,9 @@ public class MemberDto {
     String name;
     String email;
     String introduction;
-    String date;
+    LocalDateTime date;
 
-    public MemberDto(int member_id, String userid, String password, String name, String email, String introduction, String date) {
+    public MemberDto(int member_id, String userid, String password, String name, String email, String introduction, LocalDateTime date) {
         this.member_id = member_id;
         this.userid = userid;
         this.password = password;
@@ -27,11 +30,11 @@ public class MemberDto {
         this.userid = userid;
     }
 
-    public String getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

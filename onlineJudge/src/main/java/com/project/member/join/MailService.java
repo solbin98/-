@@ -2,10 +2,10 @@ package com.project.member.join;
 
 import com.project.dao.EmailAuthDao;
 import com.project.dto.EmailAuthDto;
-import com.project.member.util.AuthKeyMaker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +14,9 @@ import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 @Service
 public class MailService {
@@ -23,11 +26,15 @@ public class MailService {
     AuthKeyMaker authKeyMaker;
     @Autowired
     EmailAuthDao emailAuthDao;
+    @Autowired
+    MessageSource messageSource;
 
     private final Logger log = LoggerFactory.getLogger(getClass());
+    private final Locale locale = Locale.KOREA;
 
+    public Map<String, Object> sendAuthMail(String email) {
+        Map<String,Object> resultMap = new HashMap<>();
 
-    public String sendAuthMail(String email) {
         String authKey = authKeyMaker.getKey(6);
         // 인증 코드 발급/재발급 파트
         try{
@@ -35,14 +42,20 @@ public class MailService {
             LocalDateTime newExpireDateTime = LocalDateTime.now().plusSeconds(120);
             if(emailAuthDto == null) addEmailAuth(new EmailAuthDto(email, authKey, newExpireDateTime, false));
             else{
-                if(isExpiredCode(emailAuthDto)) // 만료된 코드인 경우에, 이메일 재 발송 요청을 수행
+                if(isExpiredCode(emailAuthDto)) { // 만료된 코드인 경우에, 이메일 재 발송 요청을 수행
                     updateEmailAuth(new EmailAuthDto(email, authKey, newExpireDateTime, false));
-                else // 아직 만료되지 않은 코드인 경우에, 에러 메시지 반환
-                    return emailAuthDto.getExpire_date() + " 이후에 재 발급 가능";
+                }
+                else { // 아직 만료되지 않은 코드인 경우에, 에러 메시지 반환
+                    resultMap.put("message", messageSource.getMessage("join.email.retry", null, locale) + emailAuthDto.getExpire_date());
+                    resultMap.put("result", false);
+                    return resultMap;
+                }
             }
         }
         catch (Exception e){
             log.debug("error message : {}",e);
+            resultMap.put("message", messageSource.getMessage("join.email.fail", null, locale));
+            resultMap.put("result", false);
         }
 
         // 이메일 전송 파트
@@ -57,12 +70,14 @@ public class MailService {
         } catch (MessagingException e) {
             e.printStackTrace();
         }
-        return authKey;
+
+        resultMap.put("message", messageSource.getMessage("join.email.success", null, locale));
+        return resultMap;
     }
 
     public boolean checkAuthCode(String email, String code){
         EmailAuthDto result = getEmailAuthByEmailAndCode(email, code);
-        if(result != null) { // 1 이상인 경우 vaild 함
+        if(result != null && !isExpiredCode(result)) {
             updateEmailAuth(new EmailAuthDto(email, code, LocalDateTime.now(), true));
             return true;
         }
@@ -81,6 +96,10 @@ public class MailService {
 
     public EmailAuthDto getEmailAuthByEmailAndCode(String email, String code){
         return emailAuthDao.selectByEmailAndCode(email, code);
+    }
+
+    public boolean getAuthByEmail(String email){
+        return emailAuthDao.selectAuthByEmail(email);
     }
 
     public void addEmailAuth(EmailAuthDto emailAuthDto){

@@ -1,4 +1,4 @@
-package com.project.member.util;
+package com.project.member.join;
 
 import java.util.Random;
 

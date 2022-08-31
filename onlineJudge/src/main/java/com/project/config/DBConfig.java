@@ -1,6 +1,7 @@
 package com.project.config;
 
 import com.project.dao.EmailAuthDao;
+import com.project.dao.MemberDao;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,4 +30,6 @@ public class DBConfig {
 
     @Bean
     public EmailAuthDao emailAuthDao(){ return new EmailAuthDao(); }
+    @Bean
+    public MemberDao memberDao(){ return new MemberDao(); }
 }

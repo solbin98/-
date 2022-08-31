@@ -33,24 +33,25 @@ public class EmailAuthDao {
     private JdbcTemplate jdbcTemplate;
 
     public EmailAuthDto selectByEmail(String email){
-        try {
-            EmailAuthDto res = jdbcTemplate.queryForObject("select * from email_auth where email = ?", EmailAuthDto.class, email);
-            return res;
-        }
-        catch (EmptyResultDataAccessException e){
-            return null;
-        }
+        List<EmailAuthDto> res = jdbcTemplate.query("select * from email_auth where email = ?", emailAuthDtoRowMapper, email);
+        if(res.size() == 0) return null;
+        return res.get(0);
     }
 
     public EmailAuthDto selectByEmailAndCode(String email, String code){
-        try{
-            EmailAuthDto res = jdbcTemplate.queryForObject("select count(*) from email_auth where email = ? and code = ?", EmailAuthDto.class, email, code);
-            return res;
-        }
-        catch(EmptyResultDataAccessException e){
-            return null;
-        }
+        List<EmailAuthDto> res = jdbcTemplate.query("select * from email_auth where email = ? and code = ?", emailAuthDtoRowMapper, email, code);
+        if(res.size() == 0) return null;
+        return res.get(0);
+    }
 
+    public boolean selectAuthByEmail(String email){
+        try{
+            boolean ret = jdbcTemplate.queryForObject("select auth from email_auth where email = ?", Boolean.class, email);
+            return ret;
+        }
+        catch (Exception e){
+            return false;
+        }
     }
 
     public void insert(EmailAuthDto emailAuthDto){
