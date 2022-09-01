@@ -12,7 +12,12 @@ public class mainController {
     @Autowired
     MessageSource messageSource;
 
-    @GetMapping("/main")
+    @GetMapping("/user")
+    public String test(){
+        return "main/mainPage";
+    }
+
+    @GetMapping("/test")
     public String getMainPage(){
         return "main/mainPage";
     }
