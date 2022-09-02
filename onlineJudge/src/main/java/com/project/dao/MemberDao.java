@@ -35,7 +35,7 @@ public class MemberDao {
         try{
             List<MemberDto> ret = jdbcTemplate.query("select * from member where userid = ? and password = ?",
                     memberDtoMapper,
-                    loginInfoData.getId(),
+                    loginInfoData.getUsername(),
                     loginInfoData.getPassword());
 
             if(ret.size() == 0) return false;
@@ -44,6 +44,12 @@ public class MemberDao {
         catch (Exception e){
             throw e;
         }
+    }
+
+    public MemberDto selectByUserName(String username){
+        List<MemberDto> ret = jdbcTemplate.query("select * from member where userid = ?", memberDtoMapper, username);
+        if(ret.size() == 0) return null;
+        return ret.get(0);
     }
 
     public int countById(String id){

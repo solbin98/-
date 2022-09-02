@@ -13,8 +13,8 @@
         <p class="join-text"><spring:message code="join.text.login"></spring:message></p>
 
         <form:form modelAttribute="JoinFormData" method="post" enctype="multipart/form-data" action="/join">
-            <input name="id" class="input-box" placeholder="<spring:message code="join.text.id"></spring:message>" value="${id}"></input>
-            <form:errors path="id" cssClass="error-text"></form:errors>
+            <input name="username" class="input-box" placeholder="<spring:message code="join.text.id"></spring:message>" value="${username}"></input>
+            <form:errors path="username" cssClass="error-text"></form:errors>
             <input name="password" type="password" class="input-box" placeholder="<spring:message code="join.text.password"></spring:message>" value="${password}"> </input>
             <form:errors path="password" cssClass="error-text"></form:errors>
             <input name="passwordCheck" type="password" class="input-box" placeholder="<spring:message code="join.text.passwordCheck"></spring:message>" value="${passwordCheck}"> </input>

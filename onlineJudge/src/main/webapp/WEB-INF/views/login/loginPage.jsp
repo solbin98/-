@@ -14,8 +14,8 @@
     <div class="login-div">
         <p class="login-text"><spring:message code="login.text.login"></spring:message></p>
         <form:form modelAttribute="LoginInfoData" method="post">
-            <input name="id" class="id-box" placeholder="<spring:message code="login.text.id"></spring:message>" value="${id}"> </input>
-            <form:errors path="id" cssClass="error-text"></form:errors>
+            <input name="username" class="id-box" placeholder="<spring:message code="login.text.id"></spring:message>" value="${username}"> </input>
+            <form:errors path="username" cssClass="error-text"></form:errors>
             <input name="password" class="password-box" placeholder="<spring:message code="login.text.password"></spring:message>" value="${password}"> </input>
             <form:errors path="password" cssClass="error-text"></form:errors>
             <br></br>

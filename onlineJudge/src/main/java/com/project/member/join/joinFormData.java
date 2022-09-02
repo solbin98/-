@@ -6,7 +6,7 @@ import javax.validation.constraints.*;
 
 public class JoinFormData {
     @NotBlank
-    String id;
+    String username;
     @NotBlank
     String password;
     @NotBlank
@@ -19,8 +19,8 @@ public class JoinFormData {
     String introduction;
     MultipartFile image;
 
-    public JoinFormData(String id, String password, String passwordCheck, String nickName, String email, String introduction, MultipartFile image) {
-        this.id = id;
+    public JoinFormData(String username, String password, String passwordCheck, String nickName, String email, String introduction, MultipartFile image) {
+        this.username = username;
         this.password = password;
         this.passwordCheck = passwordCheck;
         this.nickName = nickName;
@@ -29,12 +29,12 @@ public class JoinFormData {
         this.image = image;
     }
 
-    public String getId() {
-        return id;
+    public String getUsername() {
+        return username;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setUsername(String id) {
+        this.username = id;
     }
 
     public String getPassword() {
@@ -88,7 +88,7 @@ public class JoinFormData {
     @Override
     public String toString() {
         return "JoinFormData{" +
-                "id='" + id + '\'' +
+                "username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", passwordCheck='" + passwordCheck + '\'' +
                 ", nickName='" + nickName + '\'' +

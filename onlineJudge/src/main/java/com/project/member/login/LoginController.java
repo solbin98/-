@@ -23,12 +23,12 @@ public class LoginController {
 
     @PostMapping("/login")
     public String login(@ModelAttribute("LoginInfoData") @Validated LoginInfoData loginInfoData, BindingResult bindingResult, Model model){
-        if(!loginService.validateLoginInfo(loginInfoData) && loginInfoData.getId() != null && !loginInfoData.getId().equals("")){
-            bindingResult.rejectValue("id","loginFail");
+        if(!loginService.validateLoginInfo(loginInfoData) && loginInfoData.getUsername() != null && !loginInfoData.getUsername().equals("")){
+            bindingResult.rejectValue("username","loginFail");
         }
 
         if(bindingResult.hasErrors()){
-            model.addAttribute("id", loginInfoData.getId());
+            model.addAttribute("username", loginInfoData.getUsername());
             model.addAttribute("password", loginInfoData.getPassword());
             return "login/loginPage";
         }

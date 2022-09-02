@@ -85,7 +85,7 @@ public class JoinController {
 
     public MemberDto convertJoinFormDataToMemberDto(JoinFormData joinFormData){
         return new MemberDto(0,
-                joinFormData.getId(),
+                joinFormData.getUsername(),
                 joinFormData.getPassword(),
                 joinFormData.getNickName(),
                 joinFormData.getEmail(),
@@ -94,7 +94,7 @@ public class JoinController {
     }
 
     public void setModelObjectFromJoinFormData(Model model, JoinFormData joinFormData){
-        model.addAttribute("id", joinFormData.getId());
+        model.addAttribute("id", joinFormData.getUsername());
         model.addAttribute("password", joinFormData.getPassword());
         model.addAttribute("passwordCheck", joinFormData.getPasswordCheck());
         model.addAttribute("nickName", joinFormData.getNickName());

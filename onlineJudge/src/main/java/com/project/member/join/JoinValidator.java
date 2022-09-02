@@ -34,7 +34,7 @@ public class JoinValidator implements Validator {
         }
 
         // 아이디 중복 여부 검사
-        if(joinService.checkUserIdDuplication(joinFormData.getId())){
+        if(joinService.checkUserIdDuplication(joinFormData.getUsername())){
             errors.rejectValue("id","idDuplication");
         }
 

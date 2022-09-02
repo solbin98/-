@@ -4,6 +4,7 @@ package com.project.config;
 import com.project.member.join.JoinService;
 import com.project.member.join.MailService;
 import com.project.member.login.LoginService;
+import com.project.security.PrincipalDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,4 +24,7 @@ public class ServiceConfig {
 
     @Bean
     public MailService mailService() { return new MailService(); }
+
+    @Bean
+    public PrincipalDetailsService principalDetailsService(){ return new PrincipalDetailsService(); }
 }

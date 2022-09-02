@@ -4,21 +4,21 @@ import javax.validation.constraints.NotBlank;
 
 public class LoginInfoData {
     @NotBlank
-    String id;
+    String username;
     @NotBlank
     String password;
 
-    public LoginInfoData(String id, String password) {
-        this.id = id;
+    public LoginInfoData(String username, String password) {
+        this.username = username;
         this.password = password;
     }
 
-    public String getId() {
-        return id;
+    public String getUsername() {
+        return this.username;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {

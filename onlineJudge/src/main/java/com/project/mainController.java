@@ -21,4 +21,10 @@ public class mainController {
     public String getMainPage(){
         return "main/mainPage";
     }
+
+    @GetMapping("/access-denied")
+    public String getAccessDeniedPage(){
+        System.out.println();
+        return "login/loginPage";
+    }
 }
