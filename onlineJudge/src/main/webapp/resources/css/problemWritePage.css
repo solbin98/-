@@ -1,0 +1,98 @@
+.title{
+    font-size: 28px;
+    margin-left: 30px;
+    padding: 10px;
+    width: 95%;
+    border-radius: 7px;
+}
+
+.title-text{
+    margin-left: 30px;
+}
+
+.editor{
+    margin: 30px;
+}
+
+.tag-box{
+    margin-left: 30px;
+    display: flex;
+}
+
+.testcase-box{
+    margin-left: 30px;
+}
+
+.tag-input{
+    margin-top: 10px;
+    border-radius: 7px;
+    padding: 10px;
+    height: 65%;
+    align-self: center;
+    margin-left: 15px;
+    width: 70%;
+}
+
+.limit-text-input{
+    border-radius: 7px;
+    padding: 10px;
+    height: 65%;
+    align-self: center;
+    margin-left: 15px;
+    width: 20%;
+}
+
+.category-box{
+    margin-left: 30px;
+    display: flex;
+    height: 15%
+}
+
+.category-text{
+    align-self: center;
+}
+
+.category-select{
+    align-self: center;
+    height: 30px;
+    margin-left: 19px;
+    margin-top: 5px;
+}
+
+.submit-button-div{
+    width: 100%;
+    display: flex;
+    justify-content : center;
+}
+
+.submit-button{
+    width: 15%;
+    margin-left: 30px;
+    margin-top: 50px;
+    margin-bottom: 100px;
+    height: 50px;
+    border: none;
+    border-radius: 7px;
+    background-color: black;
+    color: white;
+    align-self: center;
+}
+
+.testcase-add-button{
+    width: 15%;
+    margin-bottom: 20px;
+    height: 50px;
+    border: none;
+    border-radius: 7px;
+    background-color: black;
+    color: white;
+    align-self: center;
+}
+
+.testcase-input-box{
+
+}
+
+.testcase-header-div{
+
+}

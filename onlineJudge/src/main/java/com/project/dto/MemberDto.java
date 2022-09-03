@@ -10,16 +10,26 @@ public class MemberDto {
     String name;
     String email;
     String introduction;
+    String role;
     LocalDateTime date;
 
-    public MemberDto(int member_id, String userid, String password, String name, String email, String introduction, LocalDateTime date) {
+    public MemberDto(int member_id, String userid, String password, String name, String email, String introduction, String role, LocalDateTime date) {
         this.member_id = member_id;
         this.userid = userid;
         this.password = password;
         this.name = name;
         this.email = email;
         this.introduction = introduction;
+        this.role = role;
         this.date = date;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getUserid() {

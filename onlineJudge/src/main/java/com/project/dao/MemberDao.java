@@ -22,6 +22,7 @@ public class MemberDao {
                     rs.getString("name"),
                     rs.getString("email"),
                     rs.getString("introduction"),
+                    rs.getString("role"),
                     rs.getTimestamp("date").toLocalDateTime()
             );
             return memberDto;
@@ -75,12 +76,13 @@ public class MemberDao {
     public void insert(MemberDto memberDto){
         try{
             jdbcTemplate.update(
-                    "insert into member(userid, password, name, email, introduction, date) values(?, ?, ?, ?, ?, ? )",
+                    "insert into member(userid, password, name, email, introduction, role, date) values(?, ?, ?, ?, ?, ?, ? )",
                     memberDto.getUserid(),
                     memberDto.getPassword(),
                     memberDto.getName(),
                     memberDto.getEmail(),
                     memberDto.getIntroduction(),
+                    memberDto.getRole(),
                     memberDto.getDate());
         }
         catch (Exception e){

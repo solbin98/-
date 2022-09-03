@@ -13,7 +13,7 @@ public class DBConfig {
     public DataSource dataSource(){
         DataSource ds = new DataSource();
         ds.setDriverClassName("com.mysql.jdbc.Driver");
-        ds.setUrl("jdbc:mysql://localhost/onlinejudge?characterEncoding=utf8");
+        ds.setUrl("jdbc:mysql://localhost/onlinejudge?characterEncoding=UTF-8&amp");
         ds.setUsername("root");
         ds.setPassword("232423e");
         ds.setInitialSize(5);

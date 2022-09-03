@@ -4,7 +4,6 @@ package com.project.config;
 import com.project.interceptor.LoginInterceptor;
 import com.project.member.join.JoinValidator;
 import com.project.member.join.AuthKeyMaker;
-import com.project.security.JwtFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;

@@ -90,11 +90,12 @@ public class JoinController {
                 joinFormData.getNickName(),
                 joinFormData.getEmail(),
                 joinFormData.getIntroduction(),
+                "ROLE_USER",
                 LocalDateTime.now());
     }
 
     public void setModelObjectFromJoinFormData(Model model, JoinFormData joinFormData){
-        model.addAttribute("id", joinFormData.getUsername());
+        model.addAttribute("username", joinFormData.getUsername());
         model.addAttribute("password", joinFormData.getPassword());
         model.addAttribute("passwordCheck", joinFormData.getPasswordCheck());
         model.addAttribute("nickName", joinFormData.getNickName());

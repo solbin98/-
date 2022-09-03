@@ -63,10 +63,10 @@
         let email_suffix = document.getElementById("email-suffix").value;
         if(email_prefix == "" || email_suffix == "") alert("이메일을 입력해야합니다.");
         else{
-            let emailAddress = email_prefix + "@" + email_suffix;
+            let emailHiddenBox = document.getElementById("total-email");
+            let emailAddress = emailHiddenBox.value;
             window.open('/emailCertificationPage?email=' + emailAddress , '이메일 인증', 'width=450, height=300');
         }
     }
-
 </script>
 </html>

@@ -52,5 +52,6 @@
         console.log(result);
         if(result.result == true) window.close();
     }
+
 </script>
 </html>

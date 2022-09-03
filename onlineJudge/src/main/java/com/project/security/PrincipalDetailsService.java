@@ -17,13 +17,15 @@ public class PrincipalDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println("loadUserByUsername 실행됨, username : " + username);
+        System.out.println("loadUserByUsername 실행됨!!, username : " + username);
         MemberDto memberDto = memberDao.selectByUserName(username);
         if(memberDto != null){
             User user = new User(memberDto.getMember_id(), memberDto.getUserid(), memberDto.getPassword(), "ROLE_USER");
             return new PrincipalDetails(user);
         }
-
-        return new PrincipalDetails(null);
+        else {
+            System.out.println("여기 실행!");
+            throw new UsernameNotFoundException("로그인 실패");
+        }
     }
 }
