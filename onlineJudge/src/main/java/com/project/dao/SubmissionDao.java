@@ -27,6 +27,20 @@ public class SubmissionDao {
             return submissionDto;
         }
     };
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
+    public Integer selectByProblemId(int problem_id){
+        Integer ret = jdbcTemplate.queryForObject("select count(*) from submission where problem_id = ?",
+                Integer.class, problem_id);
+        return ret;
+    }
+
+    public Integer selectByProblemIdAndAc(int problem_id){
+        String state = "AC";
+        Integer ret = jdbcTemplate.queryForObject("select count(*) from submission where problem_id = ? and state = ?",
+                Integer.class, problem_id, state);
+        return ret;
+    }
 }

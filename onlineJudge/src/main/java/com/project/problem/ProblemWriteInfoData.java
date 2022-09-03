@@ -11,6 +11,7 @@ public class ProblemWriteInfoData {
     String content;
     String input_condition;
     String output_condition;
+    String difficulty;
     List<String> tags; // 파싱되어 넘어온 태그 목록
     List<String> images; // 최종적으로 들어온 이미지 파일 목록
     List<MultipartFile> inputFiles; // 문제의 입력 파일들
@@ -22,6 +23,7 @@ public class ProblemWriteInfoData {
                                 String content,
                                 String input_condition,
                                 String output_condition,
+                                String difficulty,
                                 List<String> tags,
                                 List<String> images,
                                 List<MultipartFile> inputFiles,
@@ -36,8 +38,15 @@ public class ProblemWriteInfoData {
         this.images = images;
         this.inputFiles = inputFiles;
         this.outputFiles = outputFiles;
+        this.difficulty = difficulty;
     }
 
+    public List<MultipartFile> getInputFiles() { return inputFiles; }
+
+    public void setInputFiles(List<MultipartFile> inputFiles) { this.inputFiles = inputFiles; }
+    public List<MultipartFile> getOutputFiles() { return outputFiles; }
+
+    public void setOutputFiles(List<MultipartFile> outputFiles) { this.outputFiles = outputFiles; }
 
     public String getTitle() {
         return title;
@@ -101,6 +110,14 @@ public class ProblemWriteInfoData {
 
     public void setImages(List<String> images) {
         this.images = images;
+    }
+
+    public String getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
     }
 
     @Override

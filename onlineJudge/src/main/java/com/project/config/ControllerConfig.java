@@ -1,9 +1,11 @@
 package com.project.config;
 
+import com.project.image.ImageController;
 import com.project.mainController;
 import com.project.member.join.JoinController;
 import com.project.member.login.LoginController;
 import com.project.problem.ProblemController;
+import com.project.submission.SubmissionController;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -20,5 +22,11 @@ public class ControllerConfig {
 
     @Bean
     public ProblemController problemController() { return new ProblemController(); }
+
+    @Bean
+    public ImageController imageController() { return new ImageController(); }
+
+    @Bean
+    public SubmissionController submissionController() { return new SubmissionController(); }
 
 }

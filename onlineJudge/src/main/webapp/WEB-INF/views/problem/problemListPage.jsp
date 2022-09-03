@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -22,38 +23,17 @@
                 <th scope="col">제출</th>
                 <th scope="col">맞힌 사람</th>
             </thead>
-            <tr>
-                <td> 1 </td>
-                <td> 아주쉬움 </td>
-                <td> A + B </td>
-                <td> 구현/수학 </td>
-                <td> 32323 </td>
-                <td> 31233 </td>
-            </tr>
-            <tr>
-                <td> 2 </td>
-                <td> 아주쉬움 </td>
-                <td> A - B </td>
-                <td> 구현/수학 </td>
-                <td> 52323 </td>
-                <td> 42323 </td>
-            </tr>
-            <tr>
-                <td> 3 </td>
-                <td> 아주쉬움 </td>
-                <td> A x B </td>
-                <td> 구현/수학 </td>
-                <td> 52323 </td>
-                <td> 42323 </td>
-            </tr>
-            <tr>
-                <td> 4 </td>
-                <td> 아주쉬움 </td>
-                <td> A / B </td>
-                <td> 구현/수학 </td>
-                <td> 52323 </td>
-                <td> 42323 </td>
-            </tr>
+
+            <c:forEach var="problem" items="${problems}" varStatus="idx">
+                <tr>
+                    <td> ${problem.problem_id} </td>
+                    <td> ${problem.difficulty} </td>
+                    <td><a href="/problems/${problem.problem_id}"> ${problem.title}</a></td>
+                    <td> 구현/수학 </td>
+                    <td> ${submitNumber} </td>
+                    <td> ${acNumber} </td>
+                </tr>
+            </c:forEach>
         </table>
     </div>
     <div class="page-number-div-outer">

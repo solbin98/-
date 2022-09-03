@@ -8,8 +8,17 @@ public class ProblemDto {
     String content;
     String input_condition;
     String output_condition;
+    String difficulty;
 
-    public ProblemDto(int problem_id, String title, String time_limit, String memory_limit, String content, String input_condition, String output_condition) {
+    public String getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public ProblemDto(int problem_id, String title, String time_limit, String memory_limit, String content, String input_condition, String output_condition, String difficulty) {
         this.problem_id = problem_id;
         this.title = title;
         this.time_limit = time_limit;
@@ -17,6 +26,7 @@ public class ProblemDto {
         this.content = content;
         this.input_condition = input_condition;
         this.output_condition = output_condition;
+        this.difficulty = difficulty;
     }
 
     public int getProblem_id() {

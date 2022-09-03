@@ -1,0 +1,127 @@
+.content-side{
+    width: 83%;
+    height: 100%;
+}
+
+.board-block-full{
+    width: 95%;
+    background-color: white;
+    border: 0.2px solid lightgray;
+    margin-left: 11%;
+    margin-top: 5%;
+    padding: 15px;
+}
+
+.board-headline{
+    width: 95%;
+    margin-left: 1%;
+    display: flex;
+    border-bottom: 1px solid lightgray;
+    border-left : 5px solid black;
+}
+
+.board-headline-front{
+    width: 10px;
+    margin:0px;
+    padding : 5px;
+}
+
+.board-headline-title{
+    width: 80%;
+    font-size:25px;
+    font-weight: bold;
+    padding : 2%;
+}
+
+.board-headline-date{
+    width: 20%;
+    margin:auto;
+    font-size:15px;
+    text-align: right;
+    padding: 15px;
+}
+
+.board-edit-outer{
+    width: 20px;
+    height: 20px;
+    margin-top: 2.5%;
+}
+
+.board-edit{
+    width: 100%;
+    height: 100%;
+}
+
+.board-delete{
+    width: 20px;
+    height: 20px;
+    margin: 2%;
+    align-self: center;
+}
+
+.board-tagline{
+    width: 95%;
+    padding-left: 15px;
+    padding-bottom: 15px;
+    display: flex;
+    margin: 1%;
+}
+
+.board-tagline-tag{
+    margin:auto;
+}
+
+.board-content{
+    width: 95%;
+    margin-top: 35px;
+    margin-left: 1%;
+    align-self: center;
+    padding: 20px;
+}
+
+.tag-box{
+    background-color: lightgray;
+    border-radius: 7px;
+    margin: 0.3%;
+    font-weight: bold;
+    padding: 0.4%;
+}
+
+.tag-front{
+    margin: 0.3%;
+    font-weight: bold;
+    padding: 0.4%;
+}
+
+.testcase-text{
+    margin-left: 3%;
+}
+
+.testcase-text-box{
+    border-radius: 15px;
+    padding: 2%;
+    background-color: #E8E8E8;
+    width: 85%;
+    margin-left: 3%;
+}
+
+.testcase-text-header{
+    border-bottom: solid 1px lightgray;
+}
+
+.testcase-bottom-line{
+    border-bottom: solid 1px lightgray;
+}
+
+.submit-button{
+    width: 15%;
+    margin-left: 42.5%;
+    margin-top: 50px;
+    margin-bottom: 100px;
+    height: 50px;
+    border: none;
+    border-radius: 7px;
+    background-color: black;
+    color: white;
+    align-self: center;
+}

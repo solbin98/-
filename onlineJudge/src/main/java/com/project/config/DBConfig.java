@@ -1,11 +1,12 @@
 package com.project.config;
 
-import com.project.dao.EmailAuthDao;
-import com.project.dao.MemberDao;
+import com.project.dao.*;
+import com.project.dto.TestcaseDto;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.core.parameters.P;
 
 @Configuration
 public class DBConfig {
@@ -32,4 +33,32 @@ public class DBConfig {
     public EmailAuthDao emailAuthDao(){ return new EmailAuthDao(); }
     @Bean
     public MemberDao memberDao(){ return new MemberDao(); }
+    @Bean
+    public ProblemDao problemDao() { return new ProblemDao(); }
+    @Bean
+    public TestcaseDao testcaseDto() { return new TestcaseDao(); }
+
+    @Bean
+    public TagDao tagDao() { return new TagDao(); }
+    @Bean
+    public ProblemTagDao problemTagDao() { return new ProblemTagDao(); }
+    @Bean
+    public SubmissionDao submissionDao() { return new SubmissionDao(); }
+    @Bean
+    public BoardDao boardDao() { return new BoardDao(); }
+
+    @Bean
+    public CategoryDao categoryDao() { return new CategoryDao(); }
+    @Bean
+    public CommentDao commentDao() { return new CommentDao(); }
+    @Bean
+    public FileDao fileDao() { return new FileDao(); }
+    @Bean
+    public LikeDBDao likeDBDao() { return new LikeDBDao(); }
+
+    @Bean
+    public ProfileDao profileDao() { return new ProfileDao(); }
+    @Bean
+    public LanguageDao languageDao() { return new LanguageDao(); }
+
 }

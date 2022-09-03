@@ -1,0 +1,31 @@
+.submit-text{
+    margin-top: 5%;
+    margin-left: 11%;
+}
+
+.source-code-text{
+    margin-left: 2%;
+}
+
+.submit-language{
+    margin-left: 2%;
+    display: flex;
+}
+
+.submit-language-select{
+    margin-left: 1%;
+    align-self: center;
+    height: 35px;
+}
+
+.source-code-div{
+    padding: 3%;
+    margin-top: 1%;
+    margin-left: 2%;
+    margin-right: 2%;
+    width: 96%;
+    height: 500px;
+    background-color: #E8E8E8;
+    border-radius: 5px;
+    resize: none;
+}

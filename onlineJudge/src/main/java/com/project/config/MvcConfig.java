@@ -31,7 +31,8 @@ public class MvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-        registry.addResourceHandler("/images/**").addResourceLocations("file:///C:/springTest/");
+        registry.addResourceHandler("/images/boards/**").addResourceLocations("file:///C:/springTest/images/boards/");
+        registry.addResourceHandler("/images/profiles/**").addResourceLocations("file:///C:/springTest/images/profiles/");
     }
 
     @Override
@@ -52,7 +53,9 @@ public class MvcConfig implements WebMvcConfigurer {
     @Bean
     public ReloadableResourceBundleMessageSource messageSource() {
         ReloadableResourceBundleMessageSource source = new ReloadableResourceBundleMessageSource();
-        source.setBasenames("/resources/messages/errors_ko", "/resources/messages/labels_ko");
+        source.setBasenames("/resources/messages/errors_ko",
+                "/resources/messages/labels_ko",
+                "/resources/messages/system_ko");
         source.setDefaultEncoding("utf-8");
         return source;
     }

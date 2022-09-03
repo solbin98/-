@@ -40,22 +40,22 @@
 
 <div class="tag-box">
     <h3 class="tag-text"> <spring:message code="problemWritePage.text.timeLimit"></spring:message> </h3>
-    <input class="limit-text-input" type="text" placeholder="<spring:message code="problemWritePage.input.text.timeLimit"></spring:message>" id="time-limit-text" value="">
+    <input class="limit-text-input" type="text" placeholder="<spring:message code="problemWritePage.input.text.timeLimit"></spring:message>" id="time-limit-text">
 </div>
 
 <div class="tag-box">
     <h3 class="tag-text"> <spring:message code="problemWritePage.text.memoryLimit"></spring:message> </h3>
-    <input class="limit-text-input" type="text" placeholder="<spring:message code="problemWritePage.input.text.memoryLimit"></spring:message>" id="memory-limit-text" value="">
+    <input  class="limit-text-input" type="text" placeholder="<spring:message code="problemWritePage.input.text.memoryLimit"></spring:message>" id="memory-limit-text">
 </div>
 
 <div class="tag-box">
     <h3 class="tag-text"> <spring:message code="problemWritePage.text.inputLimit"></spring:message> </h3>
-    <input class="tag-input" type="text" placeholder="<spring:message code="problemWritePage.input.text.inputLimit"></spring:message>" id="input-limit-text" value="">
+    <input class="tag-input" type="text" placeholder="<spring:message code="problemWritePage.input.text.inputLimit"></spring:message>" id="input-limit-text">
 </div>
 
 <div class="tag-box">
     <h3 class="tag-text"> <spring:message code="problemWritePage.text.outputLimit"></spring:message> </h3>
-    <input class="tag-input" type="text" placeholder="<spring:message code="problemWritePage.input.text.outputLimit"></spring:message>" id="output-limit-text" value="">
+    <input class="tag-input" type="text" placeholder="<spring:message code="problemWritePage.input.text.outputLimit"></spring:message>" id="output-limit-text">
 </div>
 
 <div class="testcase-box">
@@ -63,6 +63,11 @@
     <button class="testcase-add-button" onclick="createTestCaseElements()" class="submit-button"> 케이스 추가 </button>
     <p></p>
     <div id="testcase-div"><!-- 동적으로 테스트 케이스 박스들이 추가되는 곳 --></div>
+</div>
+
+<div class="tag-box">
+    <h3 class="tag-text"> <spring:message code="problemWritePage.text.difficulty"></spring:message> </h3>
+    <input  class="limit-text-input" type="text" placeholder="<spring:message code="problemWritePage.input.text.difficulty"></spring:message>" id="difficulty">
 </div>
 
 <div class="testcase-box">
@@ -87,7 +92,6 @@
 <script>
     let allImage = [];
     let testCaseNumber = 0;
-
     const Editor = toastui.Editor;
     const editor = new Editor({
         el: document.querySelector('#editor'),
@@ -98,7 +102,6 @@
             latex(node) {
                 const generator = new latexjs.HtmlGenerator({ hyphenate: false });
                 const { body } = latexjs.parse(node.literal, { generator }).htmlDocument();
-
                 return [
                     { type: 'openTag', tagName: 'div', outerNewLine: true },
                     { type: 'html', content: body.content },
@@ -109,7 +112,8 @@
         hooks: {
             addImageBlobHook: (file, callback) => {
                 const formData = new FormData();
-                formData.append("image", file);
+                formData.append("images", file);
+                formData.append("type", "board");
                 sendImage(formData, callback);
             }
         }
@@ -123,7 +127,7 @@
     function sendImage(formData, callback){
         $.ajax({
             type: 'POST',
-            url: '/boards/image',
+            url: '/images',
             data: formData,
             dataType: 'json',
             processData: false,
@@ -132,7 +136,7 @@
             timeout: 6000000,
             success: function(data) {
                 allImage.push(data.name);
-                let url = '/images/' + data.name;
+                let url = '/images/boards/' + data.name;
                 callback(url, '이미지 추가');
             },
             error: function(e) {
@@ -152,7 +156,7 @@
         let time_limit = document.getElementById("time-limit-text").value;
         let inputFiles = document.getElementById("inputFile").files;
         let outputFiles = document.getElementById("outputFile").files;
-
+        let difficulty = document.getElementById("difficulty").value;
         let formData = new FormData();
         let testcaseJson = {"testcaseNumber" : testCaseNumber};
 
@@ -165,11 +169,13 @@
             testcaseJson["input"+(i+1)] = testCaseInputText;
             testcaseJson["output"+(i+1)] = testCaseOutputText;
         }
+
+        formData.append("difficulty", difficulty);
         formData.append('testcases', new Blob([ JSON.stringify(testcaseJson) ], {type : "application/json"}));
         formData.append("memory_limit", memory_limit);
         formData.append("time_limit", time_limit);
-        formData.append("input_limit", input_limit);
-        formData.append("output_limit", output_limit);
+        formData.append("input_condition", input_limit);
+        formData.append("output_condition", output_limit);
         formData.append("content", htmlCode);
         formData.append("title", title);
         formData.append("tags", tags);

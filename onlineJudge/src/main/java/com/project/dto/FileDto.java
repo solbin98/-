@@ -67,7 +67,7 @@ public class FileDto {
         this.size = size;
     }
 
-    public boolean isUsed() {
+    public boolean getUsed() {
         return used;
     }
 
