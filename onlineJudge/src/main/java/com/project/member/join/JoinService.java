@@ -2,16 +2,13 @@ package com.project.member.join;
 
 import com.project.dao.MemberDao;
 import com.project.dto.MemberDto;
+import com.project.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
-public class JoinService {
-    @Autowired
-    MemberDao memberDao;
-
-
+public class JoinService extends MemberService {
     public void joinMember(MemberDto memberDto){
         memberDao.insert(memberDto);
     }

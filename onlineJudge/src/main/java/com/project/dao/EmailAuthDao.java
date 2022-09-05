@@ -54,24 +54,14 @@ public class EmailAuthDao {
         }
     }
 
-    public void insert(EmailAuthDto emailAuthDto){
-        try{
-            jdbcTemplate.update("insert into email_auth(email, code, expire_date, auth) values(?, ?, ?, ? )",
-                    emailAuthDto.getEmail(), emailAuthDto.getCode(), emailAuthDto.getExpire_date(), emailAuthDto.getAuth());
-        }
-        catch (Exception e){
-            throw e;
-        }
+    public void insert(EmailAuthDto emailAuthDto) throws Exception{
+        jdbcTemplate.update("insert into email_auth(email, code, expire_date, auth) values(?, ?, ?, ? )",
+                emailAuthDto.getEmail(), emailAuthDto.getCode(), emailAuthDto.getExpire_date(), emailAuthDto.getAuth());
     }
 
-    public void update(EmailAuthDto emailAuthDto){
-        try{
-            jdbcTemplate.update("update email_auth set code=?, expire_date=?, auth=? where email=?",
+    public void update(EmailAuthDto emailAuthDto) throws Exception{
+        jdbcTemplate.update("update email_auth set code=?, expire_date=?, auth=? where email=?",
                     emailAuthDto.getCode(), emailAuthDto.getExpire_date(), emailAuthDto.getAuth(),emailAuthDto.getEmail());
-        }
-        catch (Exception e){
-            throw e;
-        }
     }
 
 }

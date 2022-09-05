@@ -75,7 +75,7 @@ public class MailService {
         return resultMap;
     }
 
-    public boolean checkAuthCode(String email, String code){
+    public boolean checkAuthCode(String email, String code) throws Exception {
         EmailAuthDto result = getEmailAuthByEmailAndCode(email, code);
         if(result != null && !isExpiredCode(result)) {
             updateEmailAuth(new EmailAuthDto(email, code, LocalDateTime.now(), true));
@@ -102,11 +102,11 @@ public class MailService {
         return emailAuthDao.selectAuthByEmail(email);
     }
 
-    public void addEmailAuth(EmailAuthDto emailAuthDto){
+    public void addEmailAuth(EmailAuthDto emailAuthDto) throws Exception{
         emailAuthDao.insert(emailAuthDto);
     }
 
-    public void updateEmailAuth(EmailAuthDto emailAuthDto){
+    public void updateEmailAuth(EmailAuthDto emailAuthDto) throws Exception{
         emailAuthDao.update(emailAuthDto);
     }
 

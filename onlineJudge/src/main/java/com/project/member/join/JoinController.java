@@ -60,7 +60,7 @@ public class JoinController {
     @PostMapping(value ="/emailCertification")
     @ResponseBody
     public Map<String,Object> certificateEmail(@RequestParam("email") String email,
-                                               @RequestParam("code") String code){
+                                               @RequestParam("code") String code) throws Exception {
         boolean res = mailService.checkAuthCode(email, code);
         String message = "";
         boolean result = true;

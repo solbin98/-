@@ -2,16 +2,25 @@ package com.project.problem;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 public class ProblemWriteInfoData {
+    @NotBlank
     String title;
+    @NotBlank
     String time_limit;
+    @NotBlank
     String memory_limit;
+    @NotBlank
     String content;
+    @NotBlank
     String input_condition;
+    @NotBlank
     String output_condition;
+    @NotBlank
     String difficulty;
+
     List<String> tags; // 파싱되어 넘어온 태그 목록
     List<String> images; // 최종적으로 들어온 이미지 파일 목록
     List<MultipartFile> inputFiles; // 문제의 입력 파일들

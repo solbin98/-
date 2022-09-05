@@ -2,11 +2,10 @@ package com.project.dto;
 
 import java.time.LocalDateTime;
 
-public class SubmissionDto {
+public class SubmissionJoinDto {
     int submission_id;
     int problem_id;
     int language_id;
-
     String code;
     String state;
     String memory;
@@ -14,7 +13,10 @@ public class SubmissionDto {
     int code_length;
     LocalDateTime date;
     int member_id;
-    String username;
+    //이하는 외래키들의 이름을 담는 String 변수 3개
+    String nickName;
+    String languageName;
+    String problemName;
 
     public String getCode() {
         return code;
@@ -22,19 +24,6 @@ public class SubmissionDto {
 
     public void setCode(String code) {
         this.code = code;
-    }
-
-    public SubmissionDto(int submission_id, int problem_id, int language_id, String code, String state, String memory, String time, int code_length, LocalDateTime date, int member_id) {
-        this.code = code;
-        this.submission_id = submission_id;
-        this.problem_id = problem_id;
-        this.language_id = language_id;
-        this.state = state;
-        this.memory = memory;
-        this.time = time;
-        this.code_length = code_length;
-        this.date = date;
-        this.member_id = member_id;
     }
 
     public int getSubmission_id() {
@@ -47,6 +36,22 @@ public class SubmissionDto {
 
     public String getState() {
         return state;
+    }
+
+    public SubmissionJoinDto(int submission_id, int problem_id, int language_id, String code, String state, String memory, String time, int code_length, LocalDateTime date, int member_id, String nickName, String languageName, String problemName) {
+        this.submission_id = submission_id;
+        this.problem_id = problem_id;
+        this.language_id = language_id;
+        this.code = code;
+        this.state = state;
+        this.memory = memory;
+        this.time = time;
+        this.code_length = code_length;
+        this.date = date;
+        this.member_id = member_id;
+        this.nickName = nickName;
+        this.languageName = languageName;
+        this.problemName = problemName;
     }
 
     public void setState(String state) {
@@ -71,6 +76,30 @@ public class SubmissionDto {
 
     public int getCode_length() {
         return code_length;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public String getLanguageName() {
+        return languageName;
+    }
+
+    public void setLanguageName(String languageName) {
+        this.languageName = languageName;
+    }
+
+    public String getProblemName() {
+        return problemName;
+    }
+
+    public void setProblemName(String problemName) {
+        this.problemName = problemName;
     }
 
     public void setCode_length(int code_length) {
@@ -108,8 +137,4 @@ public class SubmissionDto {
     public void setLanguage_id(int language_id) {
         this.language_id = language_id;
     }
-
-    public String getUsername() { return username; }
-
-    public void setUsername(String username) { this.username = username;}
 }

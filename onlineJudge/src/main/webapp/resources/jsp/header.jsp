@@ -16,7 +16,7 @@
         <div class="header-text-div">
             <a href="/problemsList?page=1" methods="GET" class="header-text" id="problem-link"> <spring:message code="menu.text.problem"> </spring:message> </a>
             <a href="/boards" methods="GET" class="header-text" id="board-link">  <spring:message code="menu.text.board"> </spring:message> </a>
-            <a href="/boards" methods="GET" class="header-text" id="submission-link">  <spring:message code="menu.text.submission"> </spring:message> </a>
+            <a href="/submissionListPage" methods="GET" class="header-text" id="submission-link">  <spring:message code="menu.text.submission"> </spring:message> </a>
             <a href="/ranking" methods="GET" class="header-text" id="ranking-link">  <spring:message code="menu.text.ranking"> </spring:message> </a>
             <a href="/profile" methods="GET" class="header-text" id="write-board">   <spring:message code="menu.text.profile"> </spring:message> </a>
         </div>

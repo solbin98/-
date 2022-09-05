@@ -2,16 +2,11 @@ package com.project.security;
 
 public class User {
     int id;
+    String nickname;
     String username;
     String password;
     String role;
 
-    public User(int id, String username, String password, String role) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.role = role;
-    }
 
     public int getId() {
         return id;
@@ -19,6 +14,14 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public String getUsername() {
@@ -42,6 +45,14 @@ public class User {
     }
 
     public void setRole(String role) {
+        this.role = role;
+    }
+
+    public User(int id, String username, String password, String role, String nickname) {
+        this.id = id;
+        this.nickname = nickname;
+        this.username = username;
+        this.password = password;
         this.role = role;
     }
 

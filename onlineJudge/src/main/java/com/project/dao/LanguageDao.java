@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class LanguageDao {
 
@@ -23,4 +24,8 @@ public class LanguageDao {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
+    public List<LanguageDto> select(){
+        return jdbcTemplate.query("select * from language", languageDtoRowMapper);
+    }
 }

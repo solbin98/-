@@ -37,7 +37,6 @@ public class DBConfig {
     public ProblemDao problemDao() { return new ProblemDao(); }
     @Bean
     public TestcaseDao testcaseDto() { return new TestcaseDao(); }
-
     @Bean
     public TagDao tagDao() { return new TagDao(); }
     @Bean
@@ -46,7 +45,6 @@ public class DBConfig {
     public SubmissionDao submissionDao() { return new SubmissionDao(); }
     @Bean
     public BoardDao boardDao() { return new BoardDao(); }
-
     @Bean
     public CategoryDao categoryDao() { return new CategoryDao(); }
     @Bean
@@ -55,7 +53,6 @@ public class DBConfig {
     public FileDao fileDao() { return new FileDao(); }
     @Bean
     public LikeDBDao likeDBDao() { return new LikeDBDao(); }
-
     @Bean
     public ProfileDao profileDao() { return new ProfileDao(); }
     @Bean

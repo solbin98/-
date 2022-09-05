@@ -34,22 +34,22 @@
             </div>
 
             <div class="board-tagline" id = "board-tagline">
-                <div class="tag-front"> • 시간 제한 : </div>
+                <div class="tag-front"> • <spring:message code="text.timeLimit"></spring:message> : </div>
                 <div class="tag-box"> ${problem.time_limit}</div>
-                <div class="tag-front"> • 메모리 제한 : </div>
+                <div class="tag-front"> • <spring:message code="text.memoryLimit"></spring:message> : </div>
                 <div class="tag-box"> ${problem.memory_limit}</div>
-                <div class="tag-front"> • 제출 : </div>
+                <div class="tag-front"> • <spring:message code="text.submission"></spring:message> : </div>
                 <div class="tag-box"> ${submitNumber}</div>
-                <div class="tag-front"> • 정답 : </div>
+                <div class="tag-front"> • <spring:message code="text.acSubmission"></spring:message> : </div>
                 <div class="tag-box"> ${acSubmitNumber}</div>
-                <div class="tag-front"> • 난이도 : </div>
+                <div class="tag-front"> • <spring:message code="text.difficulty"></spring:message> : </div>
                 <div class="tag-box"> ${problem.difficulty}</div>
             </div>
 
             <div class="board-content">${problem.content}</div>
 
             <div class="board-tagline">
-                <div class="tag-front"> • 분류 : </div>
+                <div class="tag-front"> • <spring:message code="text.tag"></spring:message> : </div>
                 <c:forEach var="tag" items="${tags}">
                     <div class="tag-box">${tag.name}</div>
                 </c:forEach>
@@ -64,10 +64,10 @@
                 <h2 class="testcase-text">  조건 제한 </h2>
             </div>
 
-            <h5 class="testcase-text">  입력 </h5>
+            <h5 class="testcase-text">  <spring:message code="text.inputLimit"></spring:message> </h5>
             <p class="testcase-text-box"> ${problem.input_condition}</p>
 
-            <h5 class="testcase-text">  출력 </h5>
+            <h5 class="testcase-text">  <spring:message code="text.outputLimit"></spring:message> </h5>
             <p class="testcase-text-box"> ${problem.output_condition}</p>
         </div>
     </div>
@@ -76,13 +76,13 @@
     <div class="content-side">
         <div class="board-block-full">
             <div class="testcase-text-header">
-                <h2 class="testcase-text">  테스트 케이스 </h2>
+                <h2 class="testcase-text">  <spring:message code="text.testcase"></spring:message> </h2>
             </div>
             <c:forEach var="testcase" items="${testcases}" varStatus="idx">
-                    <h5 class="testcase-text">  입력 ${idx.index + 1} </h5>
+                    <h5 class="testcase-text">  <spring:message code="text.input"></spring:message> ${idx.index + 1} </h5>
                     <p class="testcase-text-box"> ${testcase.input}</p>
 
-                    <h5 class="testcase-text">  출력 ${idx.index + 1}</h5>
+                    <h5 class="testcase-text">  <spring:message code="text.output"></spring:message> ${idx.index + 1}</h5>
                     <p class="testcase-text-box"> ${testcase.output}</p>
                     <br></br>
                     <p class="testcase-bottom-line"></p>

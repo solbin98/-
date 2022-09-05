@@ -1,7 +1,7 @@
 package com.project.submission;
 
 public class SubmissionInfoData {
-    String language;
+    int language_id;
     String sourceCode;
     int problem_id;
 
@@ -13,18 +13,18 @@ public class SubmissionInfoData {
         this.problem_id = problem_id;
     }
 
-    public SubmissionInfoData(String language, String sourceCode, int problem_id) {
-        this.language = language;
+    public SubmissionInfoData(int language_id, String sourceCode, int problem_id) {
+        this.language_id = language_id;
         this.sourceCode = sourceCode;
         this.problem_id = problem_id;
     }
 
-    public String getLanguage() {
-        return language;
+    public int getLanguage_id() {
+        return language_id;
     }
 
-    public void setLanguage(String language) {
-        this.language = language;
+    public void setLanguage_id(int language_id) {
+        this.language_id = language_id;
     }
 
     public String getSourceCode() {
@@ -38,7 +38,7 @@ public class SubmissionInfoData {
     @Override
     public String toString() {
         return "SubmissionInfoData{" +
-                "language='" + language + '\'' +
+                "language='" + language_id + '\'' +
                 ", sourceCode='" + sourceCode + '\'' +
                 ", problem_id=" + problem_id +
                 '}';

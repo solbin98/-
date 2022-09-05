@@ -47,8 +47,19 @@ public class MemberDao {
         }
     }
 
-    public MemberDto selectByUserName(String username){
+    public String selectByMemberId(int member_id){
+        String ret = jdbcTemplate.queryForObject("select username from member where member_id = ?", String.class, member_id);
+        return ret;
+    }
+
+    public MemberDto selectByUserUserId(String username){
         List<MemberDto> ret = jdbcTemplate.query("select * from member where userid = ?", memberDtoMapper, username);
+        if(ret.size() == 0) return null;
+        return ret.get(0);
+    }
+
+    public MemberDto selectByUserNickName(String nickname){
+        List<MemberDto> ret = jdbcTemplate.query("select * from member where name = ?", memberDtoMapper, nickname);
         if(ret.size() == 0) return null;
         return ret.get(0);
     }

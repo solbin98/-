@@ -4,6 +4,7 @@ import com.project.dto.ProblemDto;
 import com.project.dto.ProblemTagDto;
 import com.project.dto.TagDto;
 import com.project.dto.TestcaseDto;
+import com.project.submission.SubmissionService;
 import com.project.util.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -15,10 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class ProblemController {
@@ -33,7 +31,6 @@ public class ProblemController {
     ProblemTagService problemTagService;
     @Autowired
     TagService tagService;
-
     @Autowired
     SubmissionService submissionService;
 
@@ -61,8 +58,29 @@ public class ProblemController {
     public String getProblemListPage(@RequestParam(value = "page", required = false) String nowPage, Model model) throws Exception {
         int total = problemService.getTotal();
         Paging paging = new Paging(Integer.parseInt(nowPage), perPage, total);
-        List<ProblemDto> ret = problemService.getProblemsByPaging(paging);
-        model.addAttribute("problems", ret);
+        List<ProblemDto> problemDtoList = problemService.getProblemsByPaging(paging);
+
+        Map<Integer, List<TagDto>> tags = new HashMap<>();
+        Map<Integer, String> submits = new HashMap<>();
+        Map<Integer, String> acSubmits = new HashMap<>();
+
+        for(int i=0;i<problemDtoList.size();i++){
+            int problem_id = problemDtoList.get(i).getProblem_id();
+            List<ProblemTagDto> problemTagDtoList = problemTagService.getProblemTagByProblemId(problem_id);
+            List<TagDto> tagDtoList = tagService.getTagDtoListByProblemTagDtoList(problemTagDtoList);
+
+            String submitNumber = Integer.toString(submissionService.getSubmissionCountByProblemId(problem_id));
+            String acSubmitNumber = Integer.toString(submissionService.getAcSubmissionCountByProblemId(problem_id));
+
+            tags.put(problem_id, tagDtoList);
+            submits.put(problem_id,submitNumber);
+            acSubmits.put(problem_id, acSubmitNumber);
+        }
+
+        List<ProblemInfoData> problems = problemService.getProblemsInfoDataListByProblemDtoList(problemDtoList, tags, submits, acSubmits);
+
+        model.addAttribute("problems", problems);
+        model.addAttribute("paging", paging);
         return "problem/problemListPage";
     }
 
@@ -72,13 +90,10 @@ public class ProblemController {
     }
 
     @PostMapping("/problems")
-    // Todo : ProblemWriteInfoData 객체 검증 로직 추가하기
     public String writeProblem(@Validated @ModelAttribute ProblemWriteInfoData problemWriteInfoData,
                                @RequestPart(value = "testcases", required = false) Map<String, Object> testcases) throws Exception {
 
         ProblemDto problemDto = ConvertProblemWriteInfoDateToProblemDto(problemWriteInfoData);
-        System.out.println("넘어온 데이터 : " + problemWriteInfoData.toString());
-
         try{
             // problem db에 삽입하기
             int problem_id = problemService.addNewProblem(problemDto);
@@ -89,11 +104,9 @@ public class ProblemController {
 
             // 채점 데이터 해당하는 경로에 저장해주기
             // 1. makeProblemInputOutputFilesFolder 호출해서 폴더가 없는 경우 만들어주고
-            // 2. saveInputOutputFiles() 호출해서 파일 저장해준다.
+            // 2. saveInputOutputFiles() 호출해서 채점 파일들을 저장해준다.
             makeProblemInputOutputFilesFolder(problem_id);
-            List<MultipartFile> inputFiles = problemWriteInfoData.getInputFiles();
-            List<MultipartFile> outputFiles = problemWriteInfoData.getOutputFiles();
-            saveInputOutputFiles(inputFiles, outputFiles, problem_id);
+            saveInputOutputFiles(problemWriteInfoData.getInputFiles(), problemWriteInfoData.getOutputFiles(), problem_id);
 
             // 태그 db에 추가
             // 1. 태그의 이름을 바탕으로 태그 db 업데이트 해줌.

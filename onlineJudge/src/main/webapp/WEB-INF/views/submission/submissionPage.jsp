@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -13,9 +14,10 @@
             <form method="post" action="/submission">
                 <div class="submit-language">
                     <h4> 제출 언어 </h4>
-                    <select class="submit-language-select" value="select" name="language">
-                        <option value="C"> C </option>
-                        <option value="C++"> C++</option>
+                    <select class="submit-language-select" value="select" name="language_id">
+                        <c:forEach items="${languages}" var="language">
+                            <option value="${language.language_id}">${language.name}</option>
+                        </c:forEach>
                     </select>
                 </div>
                 <textarea class="source-code-div" id="source-code" name="sourceCode"></textarea>

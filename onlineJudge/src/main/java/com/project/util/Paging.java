@@ -26,6 +26,7 @@ public class Paging {
     void calcLeftAndRightMostPage(){
         this.rightMostPage = (int) Math.ceil((((double)nowPage)/(double)10.0))*10;
         leftMostPage = rightMostPage - 9;
+        this.rightMostPage = Math.min(rightMostPage, lastPage);
     }
 
     void calcPossible(){

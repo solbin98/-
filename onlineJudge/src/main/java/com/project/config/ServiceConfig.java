@@ -1,11 +1,14 @@
 package com.project.config;
 
 
+import com.project.member.MemberService;
 import com.project.member.join.JoinService;
 import com.project.member.join.MailService;
 import com.project.member.login.LoginService;
 import com.project.problem.*;
 import com.project.security.PrincipalDetailsService;
+import com.project.submission.LanguageService;
+import com.project.submission.SubmissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,4 +37,8 @@ public class ServiceConfig {
     public ProblemTagService problemTagService() { return new ProblemTagService(); }
     @Bean
     public SubmissionService submissionService() { return new SubmissionService(); }
+    @Bean
+    public LanguageService languageService() { return new LanguageService(); }
+    @Bean
+    public MemberService memberService() { return new MemberService(); }
 }
