@@ -10,15 +10,9 @@ public class ProblemDto {
     String output_condition;
     String difficulty;
 
-    public String getDifficulty() {
-        return difficulty;
-    }
+    int tesecase_num;
 
-    public void setDifficulty(String difficulty) {
-        this.difficulty = difficulty;
-    }
-
-    public ProblemDto(int problem_id, String title, String time_limit, String memory_limit, String content, String input_condition, String output_condition, String difficulty) {
+    public ProblemDto(int problem_id, String title, String time_limit, String memory_limit, String content, String input_condition, String output_condition, String difficulty, int tesecase_num) {
         this.problem_id = problem_id;
         this.title = title;
         this.time_limit = time_limit;
@@ -26,6 +20,15 @@ public class ProblemDto {
         this.content = content;
         this.input_condition = input_condition;
         this.output_condition = output_condition;
+        this.difficulty = difficulty;
+        this.tesecase_num = tesecase_num;
+    }
+
+    public String getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(String difficulty) {
         this.difficulty = difficulty;
     }
 
@@ -83,5 +86,13 @@ public class ProblemDto {
 
     public void setOutput_condition(String output_condition) {
         this.output_condition = output_condition;
+    }
+
+    public int getTesecase_num() {
+        return tesecase_num;
+    }
+
+    public void setTesecase_num(int tesecase_num) {
+        this.tesecase_num = tesecase_num;
     }
 }

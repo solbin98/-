@@ -25,7 +25,8 @@ public class ProblemDao {
                     rs.getString("content"),
                     rs.getString("input_condition"),
                     rs.getString("output_condition"),
-                    rs.getString("difficulty")
+                    rs.getString("difficulty"),
+                    rs.getInt("testcase_num")
             );
             return problemDto;
         }

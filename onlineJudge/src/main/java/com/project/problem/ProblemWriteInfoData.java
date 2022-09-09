@@ -20,11 +20,20 @@ public class ProblemWriteInfoData {
     String output_condition;
     @NotBlank
     String difficulty;
+    int testcase_num;
 
     List<String> tags; // 파싱되어 넘어온 태그 목록
     List<String> images; // 최종적으로 들어온 이미지 파일 목록
     List<MultipartFile> inputFiles; // 문제의 입력 파일들
     List<MultipartFile> outputFiles; // 문제의 출력 파일들
+
+    public int getTestcase_num() {
+        return testcase_num;
+    }
+
+    public void setTestcase_num(int testcase_num) {
+        this.testcase_num = testcase_num;
+    }
 
     public ProblemWriteInfoData(String title,
                                 String time_limit,
@@ -36,7 +45,8 @@ public class ProblemWriteInfoData {
                                 List<String> tags,
                                 List<String> images,
                                 List<MultipartFile> inputFiles,
-                                List<MultipartFile> outputFiles) {
+                                List<MultipartFile> outputFiles,
+                                int testcase_num) {
         this.title = title;
         this.time_limit = time_limit;
         this.memory_limit = memory_limit;
@@ -48,6 +58,7 @@ public class ProblemWriteInfoData {
         this.inputFiles = inputFiles;
         this.outputFiles = outputFiles;
         this.difficulty = difficulty;
+        this.testcase_num = testcase_num;
     }
 
     public List<MultipartFile> getInputFiles() { return inputFiles; }

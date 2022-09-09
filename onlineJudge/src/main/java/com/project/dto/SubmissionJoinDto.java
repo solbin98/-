@@ -17,6 +17,7 @@ public class SubmissionJoinDto {
     String nickName;
     String languageName;
     String problemName;
+    int testcase_num;
 
     public String getCode() {
         return code;
@@ -38,7 +39,7 @@ public class SubmissionJoinDto {
         return state;
     }
 
-    public SubmissionJoinDto(int submission_id, int problem_id, int language_id, String code, String state, String memory, String time, int code_length, LocalDateTime date, int member_id, String nickName, String languageName, String problemName) {
+    public SubmissionJoinDto(int submission_id, int problem_id, int language_id, String code, String state, String memory, String time, int code_length, LocalDateTime date, int member_id, String nickName, String languageName, String problemName, int testcase_num) {
         this.submission_id = submission_id;
         this.problem_id = problem_id;
         this.language_id = language_id;
@@ -52,6 +53,15 @@ public class SubmissionJoinDto {
         this.nickName = nickName;
         this.languageName = languageName;
         this.problemName = problemName;
+        this.testcase_num = testcase_num;
+    }
+
+    public int getTestcase_num() {
+        return testcase_num;
+    }
+
+    public void setTestcase_num(int testcase_num) {
+        this.testcase_num = testcase_num;
     }
 
     public void setState(String state) {

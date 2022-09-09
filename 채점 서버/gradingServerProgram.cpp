@@ -11,8 +11,9 @@
 #include <unistd.h>
 #include <wait.h>
 #include <sys/resource.h>
-#include <thread>
-#include <mutex>
+#include <arpa/inet.h>
+#include <sys/types.h>
+#include <sys/un.h>
 
 using namespace std;
 
@@ -23,9 +24,8 @@ using namespace std;
 #define WRONG_ANSWER 0
 #define ANSWER_CORRECT 1
 #define PROCEEDING 2
-
-mutex m;
-
+#define PORT 9001
+#define MAXLINE 100
 
 void initMysql(MYSQL* mysql, MYSQL_RES* res, MYSQL_ROW* row){
     
@@ -195,15 +195,39 @@ int compareToAnswer(const int & problem_id, const int & num, const string & outp
     return ANSWER_CORRECT;
 }
 
+void sendMessageToWebSocket(const char * message){
+    int sockfd; 
+    char buffer[MAXLINE]; 
+    struct sockaddr_in servaddr; 
+    
+    if ((sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) { 
+        perror("socket creation failed"); 
+        exit(EXIT_FAILURE); 
+    } 
+    
+    memset(&servaddr, 0, sizeof(servaddr)); 
+        
+    servaddr.sin_family = AF_INET; 
+    servaddr.sin_port = htons(PORT); 
+    servaddr.sin_addr.s_addr = INADDR_ANY; 
+        
+    int n, len; 
+        
+    sendto(sockfd, (const char *)message, strlen(message), 
+        MSG_CONFIRM, (const struct sockaddr *) &servaddr,  
+            sizeof(servaddr)); 
+            
+    close(sockfd);  
+}
+
 void grading(vector<SubmissionData> & queue){
     int size = queue.size();
     for(int i=0;i<size;i++){
 	int inputFileNum = 0;
-	int gradingResult = 0;
+	int gradingResult = 1;
 	int resultCode = 0;
 	long int runningTime = 0;
 	long int memoryUsage = 0;
-
 	int submission_id = queue[i].submission_id;
 	int problem_id = queue[i].problem_id;
 	string code = queue[i].code;
@@ -213,18 +237,18 @@ void grading(vector<SubmissionData> & queue){
 	makeSubmittedCodeFile(code);
 	if(compile()){
 	    // 1이 반환된 경우 컴파일 실패
-	    queue[i].gradingResult = COMPILE_ERROR;
-	    continue;
+	    gradingResult = COMPILE_ERROR;
+	    queue[i].gradingResult = gradingResult;
 	}
 	
 	// 데이터 채점
-	while(1){ 
+	while(gradingResult > 0){ 
 	   ++inputFileNum;
 	   string inputFilePath = getInputFilePath(std::to_string(problem_id), std::to_string(inputFileNum));
 	   string outputFilePath = getOutputFilePath(std::to_string(problem_id), std::to_string(inputFileNum));
 	   
 	   int resultCode = run(problem_id, inputFileNum, runningTime, memoryUsage, queue[i].time_limit, queue[i].memory_limit, inputFilePath);   
-	   if(resultCode < 0){
+	   if(resultCode < 0){ // 런타임 에러, 메모리 초과, 시간 초과 등등의 경우 음수가 반환됨, 그대로 에러코드로 출력하기.
 	       if(resultCode != -1) gradingResult = resultCode;
 	       printGradingResult(gradingResult);
 	       printf("\n");
@@ -235,9 +259,12 @@ void grading(vector<SubmissionData> & queue){
 	   gradingResult = compareToAnswer(problem_id, inputFileNum, outputFilePath);
 	   printGradingResult(gradingResult);
 	   printf(", 실행시간 : %ld ms 메모리 사용: %ld kb\n",runningTime, memoryUsage);
-	   if(gradingResult == WRONG_ANSWER) break;
+	   sendMessageToWebSocket((std::to_string(gradingResult) + ":"  + std::to_string(submission_id) + ":" + std::to_string(inputFileNum)).c_str());
 	}
 	printf("\n\n");
+
+
+	sendMessageToWebSocket((std::to_string(gradingResult) + ":"  + std::to_string(submission_id) + ":" + std::to_string(inputFileNum) + ":" + std::to_string(runningTime) + ":" + std::to_string(memoryUsage)).c_str());
 
 	// 채점 결과 저장
 	queue[i].gradingResult = gradingResult;
@@ -246,26 +273,15 @@ void grading(vector<SubmissionData> & queue){
     }    
 }
 
-void makeSocket(mutex & m){
-    printf("-- 웹 소켓 초기화 --\n");
-
-
-
-
-}
 
 void updateSubmissionState(){
-
+    
 
 }
 
 
 int main()
 {
-    thread socketThread;
-    socketThread = thread(makeSocket);
-    socketThread.join();
-
     MYSQL mysql;
     MYSQL_RES* res;
     MYSQL_ROW row;

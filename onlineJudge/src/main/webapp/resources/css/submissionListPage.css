@@ -1,0 +1,14 @@
+.answer-correct{
+    color : forestgreen;
+    font-weight: bold;
+}
+
+.wrong-answer{
+    color: #ff0b0e;
+    font-weight: bold;
+}
+
+.proceeding{
+    color: goldenrod;
+    font-weight: bold;
+}

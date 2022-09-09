@@ -16,6 +16,11 @@ public class mainController {
     @Autowired
     MessageSource messageSource;
 
+    @GetMapping("/socket")
+    public String socketTestPage(){
+        return "test/test";
+    }
+
     @GetMapping("/submit")
     public String test(Authentication authentication, HttpSession session){
         String abc = (String)session.getAttribute("username");

@@ -48,7 +48,8 @@ public class SubmissionDao {
                     rs.getInt("member_id"),
                     rs.getString("nickName"),
                     rs.getString("languageName"),
-                    rs.getString("problemName")
+                    rs.getString("problemName"),
+                    rs.getInt("testcase_num")
             );
             return submissionJoinDto;
         }
@@ -89,7 +90,7 @@ public class SubmissionDao {
         String query = "select submission_id, code, state, memory, " +
                 "time, code_length, submission.date, submission.member_id, submission.problem_id, " +
                 "submission.language_id, member.name as nickName, problem.title as problemName, " +
-                "language.name as languageName from submission inner join member on " +
+                "language.name as languageName, problem.testcase_num from submission inner join member on " +
                 "submission.member_id = member.member_id inner join problem on submission.problem_id = problem.problem_id " +
                 "inner join language on submission.language_id = language.language_id " + conditionSql + " limit ?, ?";
 

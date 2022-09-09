@@ -14,9 +14,9 @@ public class DBConfig {
     public DataSource dataSource(){
         DataSource ds = new DataSource();
         ds.setDriverClassName("com.mysql.jdbc.Driver");
-        ds.setUrl("jdbc:mysql://localhost/onlinejudge?characterEncoding=UTF-8&amp");
-        ds.setUsername("root");
-        ds.setPassword("232423e");
+        ds.setUrl("jdbc:mysql://13.209.144.139/onlineJudge?characterEncoding=UTF-8&amp");
+        ds.setUsername("solbin98");
+        ds.setPassword("rmsmsrksma1@");
         ds.setInitialSize(5);
         ds.setMaxActive(20);
         return ds;

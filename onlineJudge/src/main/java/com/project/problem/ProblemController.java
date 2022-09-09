@@ -92,7 +92,7 @@ public class ProblemController {
     @PostMapping("/problems")
     public String writeProblem(@Validated @ModelAttribute ProblemWriteInfoData problemWriteInfoData,
                                @RequestPart(value = "testcases", required = false) Map<String, Object> testcases) throws Exception {
-
+        problemWriteInfoData.setTestcase_num((Integer)testcases.get("testcaseNumber"));
         ProblemDto problemDto = ConvertProblemWriteInfoDateToProblemDto(problemWriteInfoData);
         try{
             // problem db에 삽입하기
@@ -132,7 +132,8 @@ public class ProblemController {
                 problemWriteInfoData.getContent(),
                 problemWriteInfoData.getInput_condition(),
                 problemWriteInfoData.getOutput_condition(),
-                problemWriteInfoData.getDifficulty()
+                problemWriteInfoData.getDifficulty(),
+                problemWriteInfoData.getTestcase_num()
                 );
     }
 
