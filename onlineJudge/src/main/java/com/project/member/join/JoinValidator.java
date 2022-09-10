@@ -34,12 +34,17 @@ public class JoinValidator implements Validator {
         }
 
         // 아이디 중복 여부 검사
-        if(joinService.checkUserIdDuplication(joinFormData.getUsername())){
+        if(!joinService.checkUserIdDuplication(joinFormData.getUsername())){
             errors.rejectValue("id","idDuplication");
         }
 
+        // 닉네임 중복 여부 검사
+        if(!joinService.checkNickNameDuplication(joinFormData.getNickName())){
+            errors.rejectValue("nickName","nickNameDuplication");
+        }
+
         //이메일 중복 여부 검사
-        if(joinService.checkEmailDuplication(joinFormData.getEmail())){
+        if(!joinService.checkEmailDuplication(joinFormData.getEmail())){
             errors.rejectValue("email","emailDuplication");
         }
     }

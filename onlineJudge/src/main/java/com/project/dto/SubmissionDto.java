@@ -16,6 +16,10 @@ public class SubmissionDto {
     int member_id;
     String username;
 
+    public SubmissionDto() {
+
+    }
+
     public String getCode() {
         return code;
     }

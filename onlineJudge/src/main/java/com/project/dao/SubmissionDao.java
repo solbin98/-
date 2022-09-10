@@ -87,12 +87,11 @@ public class SubmissionDao {
         int offset = (paging.getNowPage()-1) * paging.getPerPage();
         int limits = paging.getPerPage();
 
-        String query = "select submission_id, code, state, memory, " +
-                "time, code_length, submission.date, submission.member_id, submission.problem_id, " +
+        String query = "select submission_id, code, state, memory, time, code_length, submission.date, submission.member_id, submission.problem_id, " +
                 "submission.language_id, member.name as nickName, problem.title as problemName, " +
                 "language.name as languageName, problem.testcase_num from submission inner join member on " +
                 "submission.member_id = member.member_id inner join problem on submission.problem_id = problem.problem_id " +
-                "inner join language on submission.language_id = language.language_id " + conditionSql + " limit ?, ?";
+                "inner join language on submission.language_id = language.language_id " + conditionSql + " order by submission_id desc limit ?, ? ";
 
         return jdbcTemplate.query(query, submissionJoinDtoRowMapper, offset, limits);
     }

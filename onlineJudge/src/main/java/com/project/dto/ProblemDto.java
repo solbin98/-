@@ -9,10 +9,9 @@ public class ProblemDto {
     String input_condition;
     String output_condition;
     String difficulty;
+    int testcase_num;
 
-    int tesecase_num;
-
-    public ProblemDto(int problem_id, String title, String time_limit, String memory_limit, String content, String input_condition, String output_condition, String difficulty, int tesecase_num) {
+    public ProblemDto(int problem_id, String title, String time_limit, String memory_limit, String content, String input_condition, String output_condition, String difficulty, int testcase_num) {
         this.problem_id = problem_id;
         this.title = title;
         this.time_limit = time_limit;
@@ -21,7 +20,7 @@ public class ProblemDto {
         this.input_condition = input_condition;
         this.output_condition = output_condition;
         this.difficulty = difficulty;
-        this.tesecase_num = tesecase_num;
+        this.testcase_num = testcase_num;
     }
 
     public String getDifficulty() {
@@ -88,11 +87,11 @@ public class ProblemDto {
         this.output_condition = output_condition;
     }
 
-    public int getTesecase_num() {
-        return tesecase_num;
+    public int getTestcase_num() {
+        return testcase_num;
     }
 
-    public void setTesecase_num(int tesecase_num) {
-        this.tesecase_num = tesecase_num;
+    public void setTestcase_num(int tesecase_num) {
+        this.testcase_num = tesecase_num;
     }
 }

@@ -1,8 +1,8 @@
 .header-div{
     height: 8%;
     border-bottom: solid 1px lightgray;
-
-
+    align-self: center;
+    font-weight: bold;
 }
 
 .header-inner-div{
@@ -42,5 +42,6 @@
     width: 35px;
     height: 35px;
     margin-left: 100px;
+    margin-right: 15px;
     align-self: center;
 }

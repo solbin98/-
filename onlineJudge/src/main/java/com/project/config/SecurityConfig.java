@@ -22,14 +22,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter  {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/submit").access("hasRole('ROLE_USER')")
+                .antMatchers("/submit", "/board-write").access("hasRole('ROLE_USER')")
+                .antMatchers("/problem-write").access("hasRole('ROLE_ADMIN')")
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
                 .failureHandler(failureHandler()) // 로그인 실패 핸들러
-                .successHandler(successHandler())
+                .successHandler(successHandler()) // 로그인 성공 핸들러
                 .and()
                 .logout()
                 .invalidateHttpSession(true).deleteCookies("JSESSIONID");

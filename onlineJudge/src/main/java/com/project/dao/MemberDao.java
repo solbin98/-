@@ -67,7 +67,17 @@ public class MemberDao {
     public int countById(String id){
         try{
             Integer integer = jdbcTemplate.queryForObject("select count(*) from member where userid = ?", Integer.class, id);
-            return 1;
+            return integer;
+        }
+        catch (Exception e){
+            return 0;
+        }
+    }
+
+    public int countByNickName(String nickName){
+        try{
+            Integer integer = jdbcTemplate.queryForObject("select count(*) from member where nickname = ?", Integer.class, nickName);
+            return integer;
         }
         catch (Exception e){
             return 0;
@@ -76,8 +86,10 @@ public class MemberDao {
 
     public int countByEmail(String email){
         try{
+            System.out.println("email : " + email);
             Integer integer = jdbcTemplate.queryForObject("select count(*) from member where email = ?", Integer.class, email);
-            return 1;
+            System.out.println("결과 : " + integer.toString());
+            return integer;
         }
         catch (Exception e){
             return 0;

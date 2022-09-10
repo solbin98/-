@@ -1,5 +1,6 @@
 package com.project.config;
 
+import com.project.board.BoardController;
 import com.project.image.ImageController;
 import com.project.mainController;
 import com.project.member.join.JoinController;
@@ -28,5 +29,8 @@ public class ControllerConfig {
 
     @Bean
     public SubmissionController submissionController() { return new SubmissionController(); }
+
+    @Bean
+    public BoardController boardController() { return new BoardController(); }
 
 }

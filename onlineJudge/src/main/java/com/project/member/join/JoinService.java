@@ -19,6 +19,12 @@ public class JoinService extends MemberService {
         return true;
     }
 
+    public boolean checkNickNameDuplication(String nickName){
+        int ret = memberDao.countByNickName(nickName);
+        if(ret > 0) return false;
+        return true;
+    }
+
     public boolean checkEmailDuplication(String email) {
         int ret = memberDao.countByEmail(email);
         if(ret > 0) return false;

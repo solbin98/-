@@ -3,20 +3,16 @@ package com.project.dto;
 public class BoardDto {
     int board_id;
     int question_id;
-    int difficulty;
     int problem_id;
-    int category_id;
     boolean question;
     String content;
     String date;
     int member_id;
 
-    public BoardDto(int board_id, int question_id, int difficulty, int problem_id, int category_id, boolean question, String content, String date, int member_id) {
+    public BoardDto(int board_id, int question_id, int problem_id, boolean question, String content, String date, int member_id) {
         this.board_id = board_id;
         this.question_id = question_id;
-        this.difficulty = difficulty;
         this.problem_id = problem_id;
-        this.category_id = category_id;
         this.question = question;
         this.content = content;
         this.date = date;
@@ -39,28 +35,12 @@ public class BoardDto {
         this.question_id = question_id;
     }
 
-    public int getDifficulty() {
-        return difficulty;
-    }
-
-    public void setDifficulty(int difficulty) {
-        this.difficulty = difficulty;
-    }
-
     public int getProblem_id() {
         return problem_id;
     }
 
     public void setProblem_id(int problem_id) {
         this.problem_id = problem_id;
-    }
-
-    public int getCategory_id() {
-        return category_id;
-    }
-
-    public void setCategory_id(int category_id) {
-        this.category_id = category_id;
     }
 
     public boolean isQuestion() {
@@ -100,9 +80,7 @@ public class BoardDto {
         return "boardDto{" +
                 "board_id=" + board_id +
                 ", question_id=" + question_id +
-                ", difficulty=" + difficulty +
                 ", problem_id=" + problem_id +
-                ", category_id=" + category_id +
                 ", question=" + question +
                 ", content='" + content + '\'' +
                 ", date='" + date + '\'' +

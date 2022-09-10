@@ -1,6 +1,7 @@
 package com.project.config;
 
 
+import com.project.board.BoardService;
 import com.project.member.MemberService;
 import com.project.member.join.JoinService;
 import com.project.member.join.MailService;
@@ -41,4 +42,7 @@ public class ServiceConfig {
     public LanguageService languageService() { return new LanguageService(); }
     @Bean
     public MemberService memberService() { return new MemberService(); }
+    @Bean
+    public BoardService boardService() { return new BoardService(); }
+
 }

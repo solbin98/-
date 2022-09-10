@@ -72,7 +72,6 @@
         </div>
     </div>
 
-
     <div class="content-side">
         <div class="board-block-full">
             <div class="testcase-text-header">
@@ -81,7 +80,6 @@
             <c:forEach var="testcase" items="${testcases}" varStatus="idx">
                     <h5 class="testcase-text">  <spring:message code="text.input"></spring:message> ${idx.index + 1} </h5>
                     <p class="testcase-text-box"> ${testcase.input}</p>
-
                     <h5 class="testcase-text">  <spring:message code="text.output"></spring:message> ${idx.index + 1}</h5>
                     <p class="testcase-text-box"> ${testcase.output}</p>
                     <br></br>

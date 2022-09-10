@@ -1,0 +1,118 @@
+.board-root-div{
+    display: flex;
+}
+
+.board-side-div{
+    padding-top: 2%;
+    width: 70%
+}
+
+.board-side-list-div{
+
+}
+
+.board-side-element-search-div{
+    display: flex;
+    width: 100%;
+    margin-bottom: 5%;
+    margin-top: 2%;
+    margin-left: 2%;
+}
+
+.board-side-element-search-option-div{
+    display: flex;
+    width: 100%;
+    margin-bottom: 5%;
+    margin-left: 2%;
+    border-bottom: solid 1px lightgray;
+    margin-top: 3%;
+}
+
+.board-search-button{
+    width: 10%;
+    align-self: center;
+    border-radius: 7px;
+    border: none;
+    color: white;
+    height: 42px;
+    background-color: #00c471;
+    margin-left: 2%;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.board-side-element-div{
+    display: flex;
+    border-bottom: solid 1px lightgray;
+    border-top: solid 1px lightgray;
+    width: 100%;
+}
+
+.board-side-element-content-side{
+    width: 80%;
+}
+
+.board-search-bar{
+    padding: 2%;
+    height: 46px;
+    width: 80%;
+    border-radius: 10px;
+}
+
+.board-title{
+    margin-top: 3%;
+    margin-left: 2%;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.board-content{
+    margin-top: 2%;
+    margin-left: 2%;
+}
+
+.board-bottom{
+    margin-top: 2%;
+    margin-bottom: 2%;
+    display: flex;
+    margin-left: 2%;
+}
+
+.board-writer-text{
+    font-size: 13px;
+}
+
+.board-time-text{
+    margin-left: 2%;
+    font-size: 13px;
+}
+
+.board-side-element-info-side{
+    width: 20%;
+}
+
+.board-answer-text{
+    margin-top: 12%;
+}
+
+.board-like-text{
+    margin-top: 2%;
+}
+
+.board-order-text{
+    margin: 1%;
+}
+
+.board-write-button{
+    margin-left: 50%;
+    margin-bottom: 2%;
+    padding: 1%;
+    background-color: #00c471;
+    border : none;
+    border-radius: 7px;
+    color: white;
+    font-weight: bold;
+}
+
+
+

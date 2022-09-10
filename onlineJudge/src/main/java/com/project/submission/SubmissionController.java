@@ -63,7 +63,7 @@ public class SubmissionController {
         String code = submissionInfoData.getSourceCode();
         int code_length = code.getBytes().length;
 
-        SubmissionDto submissionDto = new SubmissionDto(0, problem_id, language_id, code, "CP","", "", code_length, LocalDateTime.now(), member_id);
+        SubmissionDto submissionDto = new SubmissionDto(0, problem_id, language_id, code, "PC","", "", code_length, LocalDateTime.now(), member_id);
         submissionService.addSubmission(submissionDto);
         return "redirect:/submissionList?problem_id=" + problem_id + "&" + "nickname=" + nickName;
     }

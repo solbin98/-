@@ -84,7 +84,7 @@ public class ProblemController {
         return "problem/problemListPage";
     }
 
-    @GetMapping("/problemWrite")
+    @GetMapping("/problem-write")
     public String getProblemWritePage(){
         return "problem/problemWritePage";
     }
