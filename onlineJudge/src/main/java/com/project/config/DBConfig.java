@@ -46,10 +46,6 @@ public class DBConfig {
     @Bean
     public BoardDao boardDao() { return new BoardDao(); }
     @Bean
-    public CategoryDao categoryDao() { return new CategoryDao(); }
-    @Bean
-    public CommentDao commentDao() { return new CommentDao(); }
-    @Bean
     public FileDao fileDao() { return new FileDao(); }
     @Bean
     public LikeDBDao likeDBDao() { return new LikeDBDao(); }

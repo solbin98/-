@@ -3,6 +3,7 @@ package com.project.board;
 import java.time.LocalDateTime;
 
 public class BoardListPageDto{
+    int board_id;
     int problem_id;
     String content;
     String title;
@@ -11,12 +12,21 @@ public class BoardListPageDto{
     int likeCount;
     int answerCount;
 
-    public BoardListPageDto(int problem_id, String content, String title, String nickName, LocalDateTime date) {
+    public BoardListPageDto(int board_id, int problem_id, String content, String title, String nickName, LocalDateTime date) {
+        this.board_id = board_id;
         this.problem_id = problem_id;
         this.content = content;
         this.title = title;
         this.nickName = nickName;
         this.date = date;
+    }
+
+    public int getBoard_id() {
+        return board_id;
+    }
+
+    public void setBoard_id(int board_id) {
+        this.board_id = board_id;
     }
 
     public int getProblem_id() {

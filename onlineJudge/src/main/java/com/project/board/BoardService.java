@@ -21,12 +21,18 @@ public class BoardService {
         return sql;
     }
 
+    public void updateQuestion(QuestionUpdateData questionUpdateData) { boardDao.updateQuestion(questionUpdateData); }
+
+    public BoardListPageDto getBoardByBoardId(int board_id) throws Exception { return boardDao.selectByBoardId(board_id);}
+
+    public List<BoardListPageDto> getBoardsByQuestionId(int question_id) throws Exception { return boardDao.selectByQuestionId(question_id);}
+
     public void addQuestion(BoardWriteData boardWriteInfoData){
         boardDao.insertQuestion(boardWriteInfoData);
     }
 
     public void addAnswer(AnswerWriteData answerWriteData){
-       boardDao.insetAnswer(answerWriteData);
+       boardDao.insertAnswer(answerWriteData);
     }
 
     public List<BoardListPageDto> getBoardListPageDtoByConditionSqlAndPaging(String sql, Paging paging){

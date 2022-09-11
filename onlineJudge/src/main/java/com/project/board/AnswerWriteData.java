@@ -1,10 +1,17 @@
 package com.project.board;
 
-public class AnswerWriteData extends BoardWriteData{
+public class AnswerWriteData {
+    int member_id;
     int question_id;
+    boolean question;
+    String content;
 
-    public AnswerWriteData(int problem_id, boolean question, String title, String content) {
-        super(problem_id, question, title, content);
+    public int getMember_id() {
+        return member_id;
+    }
+
+    public void setMember_id(int member_id) {
+        this.member_id = member_id;
     }
 
     public int getQuestion_id() {
@@ -13,5 +20,27 @@ public class AnswerWriteData extends BoardWriteData{
 
     public void setQuestion_id(int question_id) {
         this.question_id = question_id;
+    }
+
+    public boolean isQuestion() {
+        return question;
+    }
+
+    public void setQuestion(boolean question) {
+        this.question = question;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public AnswerWriteData(int question_id, boolean question, String content) {
+        this.question_id = question_id;
+        this.question = question;
+        this.content = content;
     }
 }

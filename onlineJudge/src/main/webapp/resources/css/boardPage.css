@@ -1,0 +1,178 @@
+.board-root-div{
+    margin-left: 15%;
+    margin-top: 4%;
+    width: 70%;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+    padding-top: 1.5%;
+    border-radius: 5px;
+    border: solid 1px lightgray;
+
+    -webkit-box-shadow: 0px -2px 250px -54px rgba(0,0,0,0.21);
+    -moz-box-shadow: 0px -2px 250px -54px rgba(0,0,0,0.21);
+    box-shadow: 0px -2px 250px -54px rgba(0,0,0,0.21);
+}
+
+
+.board-block-full{
+    width: 60%;
+    background-color: white;
+    border: 0.2px solid lightgray;
+    margin-left: 20%;
+    margin-top: 2%;
+    padding: 15px;
+    -webkit-box-shadow: 0px -2px 250px -54px rgba(0,0,0,0.21);
+    -moz-box-shadow: 0px -2px 250px -54px rgba(0,0,0,0.21);
+    box-shadow: 0px -2px 250px -54px rgba(0,0,0,0.21);
+}
+
+.board-headline{
+    height: 80px;
+    width: 95%;
+    margin-left: 1%;
+    display: flex;
+    border-bottom: solid 1px lightgray;
+}
+
+.board-headline-front-div{
+    width: 15%;
+}
+
+.board-headline-middle-div{
+    width: 70%;
+    padding-top: 1%;
+    padding-left: 1%;
+}
+
+.board-headline-back-div{
+    width: 15%;
+    padding-left: 2.5%;
+    align-content: end;
+}
+
+.board-headline-image{
+    height: 50px;
+    margin-left: 1%;
+    display: flex;
+}
+
+.board-headline-front{
+    width: 10px;
+    margin:0px;
+    padding : 2%;
+}
+
+.board-headline-nickName{
+    font-size:14px;
+    font-weight: bold;
+    margin : 0px;
+}
+
+.board-headline-date{
+    font-size:14px;
+    font-weight: bold;
+    margin : 0px;
+}
+
+.board-edit-text{
+    font-size:14px;
+    font-weight: bold;
+    margin : 0px;
+}
+
+.board-edit-text:hover{
+    color: #00c471;
+}
+
+.board-edit-outer{
+    width: 20px;
+    height: 20px;
+    margin-top: 2.5%;
+}
+
+.board-edit{
+    width: 100%;
+    height: 100%;
+}
+
+.board-delete{
+    width: 20px;
+    height: 20px;
+    margin: 2%;
+    align-self: center;
+}
+
+.board-tagline{
+    width: 95%;
+    padding-left: 15px;
+    display: flex;
+    margin: 1%;
+}
+
+.board-tagline-tag{
+}
+
+.board-content{
+    width: 95%;
+    margin-top: 35px;
+    margin-left: 1%;
+    align-self: center;
+    padding: 20px;
+}
+
+.tag-box{
+    background-color: lightgray;
+    border-radius: 7px;
+    margin: 0.3%;
+    font-weight: bold;
+    padding: 0.4%;
+}
+
+.tag-front{
+    margin: 0.3%;
+    font-weight: bold;
+    padding: 0.4%;
+}
+
+.testcase-text{
+    margin-top: 3%;
+    margin-left: 3%;
+}
+
+.testcase-text-box{
+    border-radius: 15px;
+    padding: 2%;
+    background-color: #E8E8E8;
+    width: 85%;
+    margin-left: 3%;
+}
+
+.testcase-text-header{
+    border-bottom: solid 1px lightgray;
+}
+
+.testcase-bottom-line{
+    border-bottom: solid 1px lightgray;
+}
+
+.question-title{
+    color: white;
+    padding: 2%;
+    border-radius: 7px;
+    background-color: #00c471;
+    margin: 2%;
+    margin-bottom: 3%;
+}
+
+.submit-button{
+    width: 15%;
+    margin-left: 42.5%;
+    margin-top: 50px;
+    margin-bottom: 100px;
+    height: 50px;
+    border: none;
+    border-radius: 7px;
+    background-color: black;
+    color: white;
+    align-self: center;
+}

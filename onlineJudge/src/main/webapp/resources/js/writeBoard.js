@@ -115,27 +115,18 @@ function submitProblem(){
     });
 }
 
-function submitQuestion(type){
-    let question_id = "";
-    let content = editor.getHTML();
-    let problem_id = document.getElementById("problem_id").value;
-    let title = document.getElementById("title").value;
-    let data = {"content" : content, "problem_id" : problem_id, "question" : 1, "title" : title};
-    if(type == "answer") {
-        question_id = document.getElementById("question_id");
-        data["question"] = question_id;
-    }
-
+function submitBoardAjaxForm(method, data, url, question_id){
     $.ajax({
-        type : "POST",
-        url : "/boards/question",
+        type : method,
         data : data,
+        url : url,
         dataType: 'json',
         success : function(res){
             console.log(res);
             if(res.resultCode) {
-                alert("문제 출제에 성공했습니다.");
-                location.replace("/main");
+                alert("success!");
+                if(question_id) location.replace("/boards?question_id="+question_id);
+                else location.replace("/boardList");
             }
             else{
                 let errorMessage = res.errorMessage;
@@ -143,9 +134,49 @@ function submitQuestion(type){
             }
         },
         error : function(XMLHttpRequest, textStatus, errorThrown){
-            alert("통신 실패");
+            alert("fail to write board");
         }
     });
+}
+
+// question_id 가 0이면 질문 0이 아니면 답변
+function submitAnswer(question_id){
+    let url = "/boards/answer";
+    let content = editor.getHTML();
+    let data = {"content" : content, "question_id" : question_id, "question" : false};
+    submitBoardAjaxForm("POST", data, url, question_id);
+}
+
+function updateAnswer(question_id, board_id){
+    let content = editor.getHTML();
+    let url = "/boards/answer?content=" + content + "&board_id=" + board_id;
+    submitBoardAjaxForm("PUT", url, 0, question_id);
+}
+
+
+// submitAnswer -> boardWritePage 에서 질문 할 때 사용
+// board_id 가 0이면 추가 요청 0이 아니면 수정 요청
+function submitQuestion(){
+    let url = "/boards/question";
+    let content = editor.getHTML();
+    let problem_id = document.getElementById("problem_id").value;
+    let title = document.getElementById("title").value;
+    let data = {"content" : content, "problem_id" : problem_id, "question" : true, "title" : title};
+    submitBoardAjaxForm("POST", data, url, 0);
+}
+
+function updateQuestion(board_id){
+    let problem_id = document.getElementById("problem_id").value;
+    let content = editor.getHTML();
+    let title = document.getElementById("title").value;
+    let url = "/boards/question?content=" + content + "&title=" + title + "&problem_id=" + problem_id + "&board_id=" + board_id;
+    submitBoardAjaxForm("PUT", url, 0, board_id);
+}
+
+// question 이나 board 나 둘다 삭제할 때 사용하는 function
+function deleteBoard(board_id){
+    let url = "/boards/question?board_id=" + board_id;
+    submitBoardAjaxForm("DELETE", url, 0, board_id);
 }
 
 function getImageFileNamesStringFromHtmlCode(htmlCode){

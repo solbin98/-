@@ -1,0 +1,20 @@
+http.addFilterBefore(new JwtFilter(), UsernamePasswordAuthenticationFilter.class);
+
+        http.csrf().disable();
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .formLogin().disable()
+                .httpBasic().disable()
+                .authorizeRequests()
+                .antMatchers("/**")
+                .access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')");
+
+
+                package com.project.config;
+
+                import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
+
+                public class SecurityWebApplicationInitializer extends AbstractSecurityWebApplicationInitializer {
+
+                }
+

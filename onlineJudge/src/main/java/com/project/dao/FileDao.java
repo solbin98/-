@@ -1,6 +1,5 @@
 package com.project.dao;
 
-import com.project.dto.CategoryDto;
 import com.project.dto.FileDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
