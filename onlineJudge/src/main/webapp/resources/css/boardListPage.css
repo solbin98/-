@@ -22,9 +22,8 @@
 .board-side-element-search-option-div{
     display: flex;
     width: 80%;
-    margin-bottom: 5%;
+    margin-bottom: 1%;
     margin-left: 2%;
-    border-bottom: solid 1px lightgray;
     margin-top: 3%;
 }
 

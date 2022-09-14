@@ -60,15 +60,16 @@ public class ProblemDao {
     }
 
     public void insert(ProblemDto problemDto) throws Exception{
-        jdbcTemplate.update("insert into problem(title, time_limit, memory_limit, content, input_condition, output_condition, difficulty)" +
-                "values(?, ?, ?, ?, ?, ?, ?)",
+        jdbcTemplate.update("insert into problem(title, time_limit, memory_limit, content, input_condition, output_condition, difficulty, testcase_num)" +
+                "values(?, ?, ?, ?, ?, ?, ?, ?)",
                 problemDto.getTitle(),
                 problemDto.getTime_limit(),
                 problemDto.getMemory_limit(),
                 problemDto.getContent(),
                 problemDto.getInput_condition(),
                 problemDto.getOutput_condition(),
-                problemDto.getDifficulty());
+                problemDto.getDifficulty(),
+                problemDto.getTestcase_num());
     }
 
 }

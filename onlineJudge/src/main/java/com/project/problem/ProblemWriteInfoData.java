@@ -21,16 +21,14 @@ public class ProblemWriteInfoData {
     @NotBlank
     String difficulty;
     int testcase_num;
-
     List<String> tags; // 파싱되어 넘어온 태그 목록
-    List<String> images; // 최종적으로 들어온 이미지 파일 목록
+    List<Integer> images; // 최종적으로 들어온 이미지 파일 아이디 목록
     List<MultipartFile> inputFiles; // 문제의 입력 파일들
     List<MultipartFile> outputFiles; // 문제의 출력 파일들
 
     public int getTestcase_num() {
         return testcase_num;
     }
-
     public void setTestcase_num(int testcase_num) {
         this.testcase_num = testcase_num;
     }
@@ -43,7 +41,7 @@ public class ProblemWriteInfoData {
                                 String output_condition,
                                 String difficulty,
                                 List<String> tags,
-                                List<String> images,
+                                List<Integer> images,
                                 List<MultipartFile> inputFiles,
                                 List<MultipartFile> outputFiles,
                                 int testcase_num) {
@@ -124,11 +122,11 @@ public class ProblemWriteInfoData {
         this.tags = tags;
     }
 
-    public List<String> getImages() {
+    public List<Integer> getImages() {
         return images;
     }
 
-    public void setImages(List<String> images) {
+    public void setImages(List<Integer> images) {
         this.images = images;
     }
 

@@ -18,8 +18,7 @@ public class FileDao {
                     rs.getString("name"),
                     rs.getString("path"),
                     rs.getString("type"),
-                    rs.getString("date"),
-                    rs.getString("size"),
+                    rs.getTimestamp("date").toLocalDateTime(),
                     rs.getBoolean("used")
 
             );
@@ -29,14 +28,24 @@ public class FileDao {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
+    public int selectLastFileId(){
+        return jdbcTemplate.queryForObject("SELECT last_insert_id()", Integer.class);
+    }
 
     public void insert(FileDto fileDto) throws Exception{
-        jdbcTemplate.update("insert into file(name, path, type, date, size, used) values(?, ?, ?, ?, ?, ?)",
+        jdbcTemplate.update("insert into file(name, path, type, date, used) values(?, ?, ?, ?, ?)",
                 fileDto.getName(),
                 fileDto.getPath(),
                 fileDto.getType(),
                 fileDto.getDate(),
-                fileDto.getSize(),
                 fileDto.getUsed());
+    }
+
+    public void setUsedColumnTrueByFileId(int file_id) throws Exception{
+        jdbcTemplate.update("update file set used=true where file_id = ?", file_id);
+    }
+
+    public void setUsedColumnFalseByFileId(int file_id) throws Exception{
+        jdbcTemplate.update("update file set used=false where file_id = ?", file_id);
     }
 }

@@ -22,4 +22,9 @@ public class ProblemFileDao {
     };
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
+    public void insert(ProblemFileDto problemFileDto){
+        jdbcTemplate.update("insert into problem_file (problem_id, file_id ) values (?, ?)",
+                problemFileDto.getProblem_id(), problemFileDto.getFile_id());
+    }
 }

@@ -1,21 +1,22 @@
 package com.project.dto;
 
+
+import java.time.LocalDateTime;
+
 public class FileDto {
     int file_id;
     String name;
     String path;
     String type;
-    String date;
-    String size;
+    LocalDateTime date;
     boolean used;
 
-    public FileDto(int file_id, String name, String path, String type, String date, String size, boolean used) {
+    public FileDto(int file_id, String name, String path, String type, LocalDateTime date, boolean used) {
         this.file_id = file_id;
         this.name = name;
         this.path = path;
         this.type = type;
         this.date = date;
-        this.size = size;
         this.used = used;
     }
 
@@ -51,22 +52,13 @@ public class FileDto {
         this.type = type;
     }
 
-    public String getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
-
-    public String getSize() {
-        return size;
-    }
-
-    public void setSize(String size) {
-        this.size = size;
-    }
-
     public boolean getUsed() {
         return used;
     }

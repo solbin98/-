@@ -19,7 +19,7 @@ public class PrincipalDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         MemberDto memberDto = memberDao.selectByUserUserId(username);
         if(memberDto != null){
-            User user = new User(memberDto.getMember_id(), memberDto.getUserid(), memberDto.getPassword(), "ROLE_USER", memberDto.getName());
+            User user = new User(memberDto.getMember_id(), memberDto.getUserid(), memberDto.getPassword(), memberDto.getRole(), memberDto.getName());
             return new PrincipalDetails(user);
         }
         else {

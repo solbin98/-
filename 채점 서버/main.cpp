@@ -14,7 +14,6 @@
 #include <arpa/inet.h>
 #include <sys/types.h>
 #include <sys/un.h>
-
 using namespace std;
 
 #define MEMORY_LIMIT_EXCEEDED -4
@@ -273,10 +272,28 @@ void grading(vector<SubmissionData> & queue){
     }    
 }
 
+string getStringStateCode(int code){
+    if(code == TIME_LIMIT_EXCEEDED) return "TLE";
+    else if(code == MEMORY_LIMIT_EXCEEDED) return "MLE";
+    else if(code == RUNTIME_ERROR) return "RE";
+    else if(code == COMPILE_ERROR) return "CE"; 
+    else if(code == PROCEEDING) return "PC";
+    else if(code == WRONG_ANSWER) return "WA";
+    else if(code == ANSWER_CORRECT) return "AC";
+}
 
-void updateSubmissionState(){
-    
+void updateSubmissionState(const vector<SubmissionData> & queue, MYSQL & mysql){
+    for(int i=0;i<queue.size();i++){
+	string sid = std::to_string(queue[i].submission_id);
+	string stateCode = getStringStateCode(queue[i].gradingResult);
+	string runningTime = std::to_string(queue[i].runningTime);
+	string memoryUsage = std::to_string(queue[i].memoryUsage);
 
+	string query = "update submission set state = \"" + stateCode  + "\", time = "+ runningTime + ", memory =  " + memoryUsage + " where submission_id = " + sid + "\0"; 
+	cout << query << endl;
+	int ret = mysql_query(&mysql, query.c_str());
+	printf("ret : %d\n",ret);
+    }
 }
 
 
@@ -289,11 +306,11 @@ int main()
     //mysql 객체들  초기화    
     initMysql(&mysql, res, &row);
     
-    int testcase = 1;
+    int testcase = 10000000;
     while(testcase--){
 	// 제출 목록을 담고 있는 벡터 
 	vector<SubmissionData> queue;
-	mysql_query(&mysql, "select submission_id, submission.problem_id, code, problem.time_limit, problem.memory_limit from submission inner join problem on submission.problem_id = problem.problem_id;");
+	mysql_query(&mysql, "select submission_id, submission.problem_id, code, problem.time_limit, problem.memory_limit from submission inner join problem on submission.problem_id = problem.problem_id where state = \"PC\" order by submission_id desc");
 	res = mysql_store_result(&mysql);
 	
 	pushSubmissionsToQueue(queue, res);
@@ -302,8 +319,8 @@ int main()
 	grading(queue);
 	printSubmissionQueue(queue);
 
-	updateSubmissionState();
-
+	updateSubmissionState(queue, mysql);
+	sleep(1);
     }  
     mysql_close(&mysql);
     return 0;

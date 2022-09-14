@@ -1,9 +1,7 @@
 package com.project.problem;
 
-import com.project.dto.ProblemDto;
-import com.project.dto.ProblemTagDto;
-import com.project.dto.TagDto;
-import com.project.dto.TestcaseDto;
+import com.project.dto.*;
+import com.project.file.FileService;
 import com.project.submission.SubmissionService;
 import com.project.util.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +31,8 @@ public class ProblemController {
     TagService tagService;
     @Autowired
     SubmissionService submissionService;
+    @Autowired
+    FileService fileService;
 
     @GetMapping("/problems/{problem_id}")
     public String getProblemDetailPage(@PathVariable("problem_id") int problem_id, Model model) throws Exception {
@@ -92,35 +92,31 @@ public class ProblemController {
     @PostMapping("/problems")
     public String writeProblem(@Validated @ModelAttribute ProblemWriteInfoData problemWriteInfoData,
                                @RequestPart(value = "testcases", required = false) Map<String, Object> testcases) throws Exception {
-        problemWriteInfoData.setTestcase_num((Integer)testcases.get("testcaseNumber"));
         ProblemDto problemDto = ConvertProblemWriteInfoDateToProblemDto(problemWriteInfoData);
-        try{
-            // problem db에 삽입하기
-            int problem_id = problemService.addNewProblem(problemDto);
+        // problem db에 삽입하기
+        int problem_id = problemService.addNewProblem(problemDto);
 
-            // problem 테스트 케이스 db에 추가
-            List<TestcaseDto> testcaseDtoList = getTestCaseDtoList(testcases, problem_id);
-            for(int i=0;i<testcaseDtoList.size();i++) testcaseService.addTestCase(testcaseDtoList.get(i));
+        // problem 테스트 케이스 db에 추가
+        List<TestcaseDto> testcaseDtoList = getTestCaseDtoList(testcases, problem_id);
+        for(int i=0;i<testcaseDtoList.size();i++) testcaseService.addTestCase(testcaseDtoList.get(i));
 
-            // 채점 데이터 해당하는 경로에 저장해주기
-            // 1. makeProblemInputOutputFilesFolder 호출해서 폴더가 없는 경우 만들어주고
-            // 2. saveInputOutputFiles() 호출해서 채점 파일들을 저장해준다.
-            makeProblemInputOutputFilesFolder(problem_id);
-            saveInputOutputFiles(problemWriteInfoData.getInputFiles(), problemWriteInfoData.getOutputFiles(), problem_id);
+        // 채점 데이터 해당하는 경로에 저장해주기
+        // 1. makeProblemInputOutputFilesFolder 호출해서 폴더가 없는 경우 만들어주고
+        // 2. saveInputOutputFiles() 호출해서 채점 파일들을 저장해준다.
+        makeProblemInputOutputFilesFolder(problem_id);
+        saveInputOutputFiles(problemWriteInfoData.getInputFiles(), problemWriteInfoData.getOutputFiles(), problem_id);
 
-            // 태그 db에 추가
-            // 1. 태그의 이름을 바탕으로 태그 db 업데이트 해줌.
-            // 2. 문제-태그 연관 db도 같이 업데이트
-            tagService.addTagByTagNameList(problemWriteInfoData.getTags());
-            List<TagDto> tagDtoList = tagService.getTagDtoListByTagNames(problemWriteInfoData.getTags());
-            problemTagService.addProblemTagDtos(tagDtoList, problem_id);
+        // 태그 db에 추가
+        // 1. 태그의 이름을 바탕으로 태그 db 업데이트 해줌.
+        // 2. 문제-태그 연관 db도 같이 업데이트
+        tagService.addTagByTagNameList(problemWriteInfoData.getTags());
+        List<TagDto> tagDtoList = tagService.getTagDtoListByTagNames(problemWriteInfoData.getTags());
+        problemTagService.addProblemTagDtos(tagDtoList, problem_id);
 
-            // Todo : 이미지 파일 db에 삽입하기
-        }
-        catch (Exception e){
-            System.out.println("서비스 에러 발생 에러 내용 : " + e);
-        }
-
+        // 1. 게시글에서 실제로 사용하는 이미지 파일의 used 칼럼 값을 true 로 바꿔주기.
+        // 2. problem_file 테이블에 새로운 행들 추가해주기.
+        fileService.setUsedColumnTrueByIdList(problemWriteInfoData.getImages());
+        fileService.addProblemFileByFileIdListAndBoardId(problemWriteInfoData.getImages(), problem_id);
         return "problem/problemListPage";
     }
 

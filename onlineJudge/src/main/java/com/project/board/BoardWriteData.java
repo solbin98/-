@@ -1,11 +1,14 @@
 package com.project.board;
 
+import java.util.List;
+
 public class BoardWriteData {
     int member_id;
     int problem_id;
     boolean question;
     String title;
     String content;
+    List<Integer> images;
 
     public boolean isQuestion() {
         return question;
@@ -27,10 +30,19 @@ public class BoardWriteData {
         this.question = question;
     }
 
-    public BoardWriteData(int problem_id, boolean question, String title, String content) {
+    public BoardWriteData(int problem_id, boolean question, String title, String content, List<Integer> images) {
         this.problem_id = problem_id;
         this.title = title;
         this.content = content;
+        this.images = images;
+    }
+
+    public List<Integer> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Integer> images) {
+        this.images = images;
     }
 
     public int getProblem_id() {

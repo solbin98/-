@@ -32,19 +32,14 @@
             <input class="problem" type="text" placeholder="문제번호" id="problem_id" value="${problem_id}">
             <input class="title" type="text" placeholder="<spring:message code="input.text.title"></spring:message>" id="title" value="${title}">
         </div>
-
         <div class="editor" id="editor"></div>
-
         <div class="submit-button-div">
             <button onclick="submitQuestion()" class="submit-button" id="submit-button"> <spring:message code="button.text.submit"></spring:message> </button>
         </div>
-
         <div class="line"></div>
-
         <div class="submit-button-div">
             <button onclick="submitTest()" class="submit-button"> 게시글 미리보기 </button>
         </div>
-
         <p id="preview-Page"></p>
     </div>
 </body>

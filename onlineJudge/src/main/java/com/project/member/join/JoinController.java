@@ -47,6 +47,7 @@ public class JoinController {
         }
 
         joinService.joinMember(convertJoinFormDataToMemberDto(joinFormData));
+        joinFormData.getImage();
         return "login/loginPage";
     }
 

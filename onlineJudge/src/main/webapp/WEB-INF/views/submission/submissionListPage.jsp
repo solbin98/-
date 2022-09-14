@@ -99,7 +99,6 @@
         else {
             if(state <= 0) stateElement.className = "wrong-answer";
             else stateElement.className = "answer-correct";
-
             let runningTime = document.getElementById("submission-time"+sid);
             let memoryUsage = document.getElementById("submission-memory" + sid);
             if(runningTime == null || memoryUsage == null) return;
@@ -134,7 +133,6 @@
         echoText.value += "Error \n";
         console.log("error", message);
     }
-
 </script>
 </html>
 

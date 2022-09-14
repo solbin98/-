@@ -2,6 +2,7 @@ package com.project.config;
 
 
 import com.project.board.BoardService;
+import com.project.file.FileService;
 import com.project.member.MemberService;
 import com.project.member.join.JoinService;
 import com.project.member.join.MailService;
@@ -44,5 +45,7 @@ public class ServiceConfig {
     public MemberService memberService() { return new MemberService(); }
     @Bean
     public BoardService boardService() { return new BoardService(); }
+    @Bean
+    public FileService fileService() { return new FileService(); }
 
 }

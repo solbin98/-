@@ -1,10 +1,14 @@
 package com.project.board;
 
+import java.util.List;
+
 public class AnswerWriteData {
     int member_id;
     int question_id;
     boolean question;
     String content;
+
+    List<Integer> images;
 
     public int getMember_id() {
         return member_id;
@@ -38,9 +42,18 @@ public class AnswerWriteData {
         this.content = content;
     }
 
-    public AnswerWriteData(int question_id, boolean question, String content) {
+    public List<Integer> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Integer> images) {
+        this.images = images;
+    }
+
+    public AnswerWriteData(int question_id, boolean question, String content, List<Integer> images) {
         this.question_id = question_id;
         this.question = question;
         this.content = content;
+        this.images = images;
     }
 }

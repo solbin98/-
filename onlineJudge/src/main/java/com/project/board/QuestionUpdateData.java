@@ -1,17 +1,22 @@
 package com.project.board;
 
+import java.util.List;
+
 public class QuestionUpdateData{
     int member_id;
     int board_id;
     int problem_id;
     String title;
     String content;
+    List<Integer> images;
 
-    public QuestionUpdateData(int board_id, int problem_id, String title, String content) {
+    public QuestionUpdateData(int member_id, int board_id, int problem_id, String title, String content, List<Integer> images) {
+        this.member_id = member_id;
         this. board_id = board_id;
         this.problem_id = problem_id;
         this.title = title;
         this.content = content;
+        this.images = images;
     }
 
     public int getBoard_id() {
@@ -52,5 +57,20 @@ public class QuestionUpdateData{
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public List<Integer> getImages() {return images;}
+
+    public void setImages(List<Integer> images) {this.images = images;}
+
+    @Override
+    public String toString() {
+        return "QuestionUpdateData{" +
+                "member_id=" + member_id +
+                ", board_id=" + board_id +
+                ", problem_id=" + problem_id +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                '}';
     }
 }

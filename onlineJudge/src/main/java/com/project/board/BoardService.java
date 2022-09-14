@@ -21,7 +21,13 @@ public class BoardService {
         return sql;
     }
 
-    public void updateQuestion(QuestionUpdateData questionUpdateData) { boardDao.updateQuestion(questionUpdateData); }
+    public Integer getLastBoardId() { return boardDao.selectLastBoardId(); }
+
+    public void deleteBoardById(int board_id) { boardDao.deleteById(board_id); }
+
+    public void updateAnswer(AnswerUpdateData answerUpdateData)  throws Exception { boardDao.updateAnswer(answerUpdateData);}
+
+    public void updateQuestion(QuestionUpdateData questionUpdateData) throws Exception { boardDao.updateQuestion(questionUpdateData); }
 
     public BoardListPageDto getBoardByBoardId(int board_id) throws Exception { return boardDao.selectByBoardId(board_id);}
 

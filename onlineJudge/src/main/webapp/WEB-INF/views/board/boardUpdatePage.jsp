@@ -27,16 +27,17 @@
 <body>
 <%@include file="/resources/jsp/header.jsp" %>
 <div class="board-write-root-div">
+    <input id="member_id" value="${member_id}" hidden></input>
     <div class="tag-box"> <h3 class="tag-text">질문 수정</h3>  </div>
     <div class="title-problem-div">
-        <input class="problem" type="text" placeholder="문제번호" id="problem_id" value="${problem_id}">
+        <input class="problem" type="text" readonly placeholder="문제번호" id="problem_id" value="${problem_id}">
         <input class="title" type="text" placeholder="<spring:message code="input.text.title"></spring:message>" id="title" value="${title}">
     </div>
 
     <div class="editor" id="editor"></div>
 
     <div class="submit-button-div">
-        <button onclick="updateQuestion()" class="submit-button" id="submit-button"> <spring:message code="button.text.submit"></spring:message> </button>
+        <button onclick="updateQuestion(${board_id},${member_id})" class="submit-button" id="submit-button"> <spring:message code="button.text.submit"></spring:message> </button>
     </div>
 
     <div class="line"></div>

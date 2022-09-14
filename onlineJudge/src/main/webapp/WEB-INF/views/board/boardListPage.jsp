@@ -12,27 +12,18 @@
         <div id="page-wrapper">
             <div id="sidebar-wrapper">
                 <ul class="sidebar-nav" id="sidebar-nav">
-                    <h6 class="category-text"> • 질문 & 답변 </h6>
                 </ul>
             </div>
         </div>
 
         <div class="board-side-div">
             <div class="board-side-list-div">
-                <div class="board-side-element-search-div">
-                    <input class="board-search-bar" placeholder="질문을 검색하세요!"></input>
-                    <button class="board-search-button"> 검색 </button>
-                </div>
-
                 <div class="board-side-element-search-option-div">
-                    <p class="board-order-text"> • 최신순 </p>
-                    <p class="board-order-text"> • 좋아요 순 </p>
-                    <p class="board-order-text"> • 답변 많은 순서 </p>
                     <a href="/board-write" class="board-write-button"> 질문작성 </a>
                 </div>
 
                 <c:forEach var="board" items="${boards}" varStatus="idx">
-                    <a class="a-tag" href="/boards/?question_id=${board.board_id}">
+                    <a class="a-tag" href="/boards?question_id=${board.board_id}">
                     <div class="board-side-element-div">
                         <div class="board-side-element-content-side">
                             <div class="board-number"> ${board.board_id}번 게시글 </div>
@@ -55,7 +46,7 @@
             </div>
         </div>
     </div>
-    <br></br><br></br><br></br>
+    <br></br><br></br>
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
             <li class="page-item disabled">
