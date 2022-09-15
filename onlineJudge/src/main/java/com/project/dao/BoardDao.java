@@ -1,6 +1,10 @@
 package com.project.dao;
 
-import com.project.board.*;
+import com.project.board.answer.AnswerUpdateData;
+import com.project.board.answer.AnswerWriteData;
+import com.project.board.common.BoardListPageDto;
+import com.project.board.question.BoardWriteData;
+import com.project.board.question.QuestionUpdateData;
 import com.project.dto.BoardDto;
 import com.project.util.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,8 +65,12 @@ public class BoardDao {
         return jdbcTemplate.query("select member.member_id, board.board_id, board.problem_id, board.content, board.title, member.name as nickName, board.date  from board inner join member on member.member_id = board.member_id where question_id = ? order by question_id asc", boardListPageDtoRowMapper, question_id);
     }
 
-    public int selectByCount(){
+    public int selectCount(){
         return jdbcTemplate.queryForObject("select count(*) from board", Integer.class);
+    }
+
+    public int selectCountByQuestionId(int question_id){
+        return jdbcTemplate.queryForObject("select count(*) from board where question_id = ?", Integer.class, question_id);
     }
 
     public List<BoardListPageDto> selectByConditionAndPaging(String conditionSql, Paging paging){
@@ -70,10 +78,9 @@ public class BoardDao {
         int limit = paging.getPerPage();
         String query = "select member.member_id, board.board_id, board.problem_id, board.content, board.title, member.name as nickName, board.date  from " +
                 "board inner join member on member.member_id = board.member_id ";
-        query += conditionSql + " and question = true ";
+        query += conditionSql + " question = true ";
         query += " order by board.date desc";
         query += " limit ?, ?";
-
         return jdbcTemplate.query(query, boardListPageDtoRowMapper, offset, limit);
     }
 

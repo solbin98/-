@@ -35,6 +35,13 @@ public class SubmissionController {
         return "submission/submissionPage";
     }
 
+    @GetMapping("/submissionHistoryPage*")
+    public String getSubmissionHistoryPage(@RequestParam(value = "submission_id", required = false) int submission_id, Model model){
+        model.addAttribute("code", submissionService.getCodeBySubmissionId(submission_id));
+        model.addAttribute("submission_id", submission_id);
+        return "submission/submissionHistoryPage";
+    }
+
     @GetMapping("/submissionList*")
     public String getSubmissionListPage(@RequestParam(value = "page", required = false) Integer nowPage,
                                         @RequestParam(value = "nickname", required = false) String nickname,

@@ -2,6 +2,7 @@ package com.project.dao;
 
 import com.project.dto.SubmissionDto;
 import com.project.dto.SubmissionJoinDto;
+import com.project.member.profile.SolvedProblemData;
 import com.project.util.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -55,8 +56,19 @@ public class SubmissionDao {
         }
     };
 
+    private RowMapper<SolvedProblemData> solvedProblemDataRowMapper = new RowMapper<SolvedProblemData>() {
+        @Override
+        public SolvedProblemData mapRow(ResultSet rs, int i) throws SQLException {
+            return new SolvedProblemData(rs.getInt("problem_id"), rs.getString("name"));
+        }
+    };
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
+    public String selectCodeBySubmissionId(int submission_id){
+        return jdbcTemplate.queryForObject("select code from submission where submission_id = ?", String.class, submission_id);
+    }
 
     public Integer selectByProblemId(int problem_id) {
         Integer ret = jdbcTemplate.queryForObject("select count(*) from submission where problem_id = ?",
@@ -107,6 +119,11 @@ public class SubmissionDao {
                 submissionDto.getCode_length(),
                 submissionDto.getDate(),
                 submissionDto.getMember_id());
+    }
+
+    public List<SolvedProblemData> selectSolvedProblemIdListByMemberId(int member_id) {
+        List<SolvedProblemData> ret = jdbcTemplate.query("select submission.problem_id, problem.title as name from submission inner join problem on problem.problem_id = submission.problem_id where submission.member_id = ? and submission.state='AC' group by submission.problem_id", solvedProblemDataRowMapper, member_id);
+        return ret;
     }
 }
 

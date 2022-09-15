@@ -44,7 +44,7 @@
                 <td id="submission-time${submission.submission_id}"> ${submission.time} ms </td>
                 <td id="submission-memory${submission.submission_id}"> ${submission.memory} kb </td>
                 <td> ${submission.code_length} B </td>
-                <td> ${submission.languageName} </td>
+                <td> <a href="/submissionHistoryPage?submission_id=${submission.submission_id}">${submission.languageName}</a>  </td>
                 <td> ${submission.date} </td>
                 <td id="submission-testcase${submission.submission_id}" hidden> ${submission.testcase_num}</td>
             </tr>

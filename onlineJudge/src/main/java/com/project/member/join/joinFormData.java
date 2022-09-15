@@ -17,16 +17,14 @@ public class JoinFormData {
     @Email(message = "잘못된 이메일 형식입니다.")
     String email;
     String introduction;
-    MultipartFile image;
 
-    public JoinFormData(String username, String password, String passwordCheck, String nickName, String email, String introduction, MultipartFile image) {
+    public JoinFormData(String username, String password, String passwordCheck, String nickName, String email, String introduction) {
         this.username = username;
         this.password = password;
         this.passwordCheck = passwordCheck;
         this.nickName = nickName;
         this.email = email;
         this.introduction = introduction;
-        this.image = image;
     }
 
     public String getUsername() {
@@ -77,13 +75,6 @@ public class JoinFormData {
         this.introduction = introduction;
     }
 
-    public MultipartFile getImage() {
-        return image;
-    }
-
-    public void setImage(MultipartFile image) {
-        this.image = image;
-    }
 
     @Override
     public String toString() {
@@ -94,7 +85,6 @@ public class JoinFormData {
                 ", nickName='" + nickName + '\'' +
                 ", email='" + email + '\'' +
                 ", introduction='" + introduction + '\'' +
-                ", image=" + image +
                 '}';
     }
 }

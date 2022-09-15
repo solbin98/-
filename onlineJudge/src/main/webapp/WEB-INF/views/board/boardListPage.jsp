@@ -18,8 +18,22 @@
 
         <div class="board-side-div">
             <div class="board-side-list-div">
+                <form method="GET" action="boardList">
+                    <div class="board-side-element-search-div">
+                        <input name="keyword" id="keyword" class="board-search-bar" placeholder="질문을 검색하세요!"></input>
+                        <button type="submit" class="board-search-button"> 검색 </button>
+                        <button class="board-search-button"> <a href="/board-write" class="board-search-bar"> 질문작성 </a> </button>
+                    </div>
+                    <div class="board-side-element-search-div">
+                        <select name="type">
+                            <option value="content">본문으로 검색</option>
+                            <option value="title">제목으로 검색</option>
+                        </select><br>
+                    </div>
+                </form>
+
                 <div class="board-side-element-search-option-div">
-                    <a href="/board-write" class="board-write-button"> 질문작성 </a>
+
                 </div>
 
                 <c:forEach var="board" items="${boards}" varStatus="idx">
@@ -38,7 +52,7 @@
 
                         <div class="board-side-element-info-side">
                             <div class="board-answer-text"> • 답변수 ${board.answerCount}</div>
-                            <div class="board-like-text"> • 좋아요 ${board.likeCount} </div>
+                            <div class="board-like-text"> • 추천수 ${board.likeCount} </div>
                         </div>
                     </div>
                     </a>
@@ -50,13 +64,13 @@
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
             <li class="page-item disabled">
-                <a class="page-link" href="/boardList?page=${paging.nowPage-1}">이전 </a>
+                <a class="page-link" href="/boardList?page=${paging.nowPage-1}&type=${type}&keyword=${keyword}">이전 </a>
             </li>
             <c:forEach begin="${paging.leftMostPage}" end="${paging.rightMostPage}" varStatus="page">
-                <li class="page-item"><a class="page-link" href="/boardList?page=${page.current}">${page.current}</a></li>
+                <li class="page-item"><a class="page-link" href="/boardList?page=${page.current}&type=${type}&keyword=${keyword}">${page.current}</a></li>
             </c:forEach>
             <li class="page-item">
-                <a class="page-link" href="/boardList?page=${paging.nowPage+1}">다음</a>
+                <a class="page-link" href="/boardList?page=${paging.nowPage+1}&type=${type}&keyword=${keyword}">다음</a>
             </li>
         </ul>
     </nav>

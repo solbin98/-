@@ -65,22 +65,9 @@
                                         <p class="error-text"><form:errors path="email"></form:errors></p>
                                     </div>
                                 </div>
-
-                                <br><br>
-
-                                <div class="form-outline mb-4">
-                                    <p><img class="form-control" id="profile-image" src="/resources/png/default_profile.jpg"></p>
-                                </div>
-
-                                <div class="fw-bold mb-5">
-                                    <p> <spring:message code="join.text.profileImageText"></spring:message> </p>
-                                </div>
-
-                                <input class="form-control" name="image" type="file" class="profile-image-select-box" id="chooseFile" accept="image/*" onchange="loadFile(this)">
                                 <div class="form-outline mb-4">
                                     <textarea class="form-control" name="introduction" class="introduction-box" placeholder="<spring:message code="join.text.introduction"></spring:message>" value="${introduction}"></textarea>
                                 </div>
-
                                 <!-- Submit button -->
                                 <button type="submit" class="btn btn-primary btn-block mb-4"><spring:message code="login.text.joinText"></spring:message></button>
                             </form:form>
@@ -93,12 +80,6 @@
 </body>
 
 <script>
-    function loadFile(input){
-        let file = input.files[0];
-        let image = document.getElementById("profile-image");
-        image.src = URL.createObjectURL(file);
-    }
-
     function setEmailHiddenBoxValue(){
         let emailHiddenBox = document.getElementById("total-email");
         emailHiddenBox.value = document.getElementById("email-prefix").value + "@" + document.getElementById("email-suffix").value;

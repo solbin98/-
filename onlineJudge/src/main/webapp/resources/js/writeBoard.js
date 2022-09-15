@@ -139,26 +139,22 @@ function submitBoardAjaxForm(method, data, url){
 
 // question_id 가 0이면 질문 0이 아니면 답변
 function submitAnswer(question_id){
-    let htmlCode = editor.getHTML();
-    let imageNameList = getImageFileNamesStringFromHtmlCode(htmlCode);
-    let images = getImageFileIdsFromImageNameList(imageNameList);
+    let htmlCode = setImageFileIdByImageList(editor.getHTML());
+    let images = getImageFileIdsStringFromHtmlCode(htmlCode);
     let url = "/boards/answer";
-    let content = editor.getHTML();
-    let data = {"content" : content, "question_id" : question_id, "question" : false, "images" : images};
+    let data = {"content" : htmlCode, "question_id" : question_id, "question" : false, "images" : images};
     submitBoardAjaxForm("POST", data, url);
 }
 
 // submitAnswer -> boardWritePage 에서 질문 할 때 사용
 // board_id 가 0이면 추가 요청 0이 아니면 수정 요청
 function submitQuestion(){
-    let htmlCode = editor.getHTML();
-    let imageNameList = getImageFileNamesStringFromHtmlCode(htmlCode);
-    let images = getImageFileIdsFromImageNameList(imageNameList);
+    let htmlCode = setImageFileIdByImageList(editor.getHTML());
+    let images = getImageFileIdsStringFromHtmlCode(htmlCode);
     let url = "/boards/question";
-    let content = editor.getHTML();
     let problem_id = document.getElementById("problem_id").value;
     let title = document.getElementById("title").value;
-    let data = {"content" : content, "problem_id" : problem_id, "question" : true, "title" : title, "images" : images};
+    let data = {"content" : htmlCode, "problem_id" : problem_id, "question" : true, "title" : title, "images" : images};
     submitBoardAjaxForm("POST", data, url);
 }
 
@@ -167,27 +163,26 @@ function updateAnswer(question_id, board_id, member_id){
     textElement.scrollIntoView();
     textElement.textContent = "답변 수정";
     let contentElement = document.getElementById("content"+board_id);
-    editor.setHTML(contentElement.textContent);
+    initializeAllImageList(contentElement.innerHTML);
+    editor.setHTML(contentElement.innerHTML);
     let submitButton = document.getElementById("submit-button");
     submitButton.onclick = function func(){
-        let imageNameList = getImageFileNamesStringFromHtmlCode(editor.getHTML());
-        let images = getImageFileIdsFromImageNameList(imageNameList);
-        let url = "/boards/answer?content=" + editor.getHTML() + "&board_id=" + board_id + "&member_id=" + member_id + "&question_id=" + question_id;
+        let htmlCode = setImageFileIdByImageList(editor.getHTML());
+        alert(htmlCode);
+        let images = getImageFileIdsStringFromHtmlCode(htmlCode);
+        let url = "/boards/answer?content=" + htmlCode + "&board_id=" + board_id + "&member_id=" + member_id + "&question_id=" + question_id;
         for(let i=0;i<images.length;i++) url += "&images="+images[i];
-
-        alert("url = " + url);
         submitBoardAjaxForm("PUT", {}, url);
     };
 }
 
 function updateQuestion(board_id, member_id){
+    let htmlCode = setImageFileIdByImageList(editor.getHTML());
     let problem_id = document.getElementById("problem_id").value;
-    let content = editor.getHTML();
     let title = document.getElementById("title").value;
 
-    let imageNameList = getImageFileNamesStringFromHtmlCode(editor.getHTML());
-    let images = getImageFileIdsFromImageNameList(imageNameList);
-    let url = "/boards/question?content=" + content + "&title=" + title + "&problem_id=" + problem_id + "&board_id=" + board_id + "&member_id=" + member_id;
+    let images = getImageFileIdsStringFromHtmlCode(editor.getHTML());
+    let url = "/boards/question?content=" + htmlCode + "&title=" + title + "&problem_id=" + problem_id + "&board_id=" + board_id + "&member_id=" + member_id;
     for(let i=0;i<images.length;i++) url += "&images="+images[i];
 
     submitBoardAjaxForm("PUT", {}, url);
@@ -195,43 +190,56 @@ function updateQuestion(board_id, member_id){
 
 // question 이나 board 둘다 삭제할 때 사용하는 함수
 function deleteBoard(question_id, board_id, member_id){
-    console.log("member_id : " + member_id);
     let url = "/boards?board_id=" + board_id +"&member_id=" + member_id + "&question_id=" + question_id;
-    console.log(url);
     submitBoardAjaxForm("DELETE", {}, url);
 }
 
-function getImageFileNamesStringFromHtmlCode(htmlCode){
-    let names = [];
+function getImageFileNameFromSrc(src){
+    let imageFileName = "";
+    for(let i=src.length-1;i>=0;i--) {
+        if(src[i] == "/") break;
+        imageFileName += src[i];
+    }
+    imageFileName = imageFileName.split('').reverse().join('');
+    return imageFileName;
+}
+
+function getImageFileIdsStringFromHtmlCode(htmlCode){
+    let ids = [];
     let tmpDoc = document.createElement('div');
+    tmpDoc.innerHTML = htmlCode;
+    let images = tmpDoc.getElementsByTagName("img");
+    for(let i=0;i<images.length;i++) ids.push(images[i].id);
+    return ids;
+}
+
+function setImageFileIdByImageList(htmlCode){
+    let tmpDoc = document.createElement("div");
     tmpDoc.innerHTML = htmlCode;
     let images = tmpDoc.getElementsByTagName("img");
     for(let i=0;i<images.length;i++){
         let src = images[i].src;
-        let imageFileName = "";
-        for(let i=src.length-1;i>=0;i--) {
-            if(src[i] == "/") break;
-            imageFileName += src[i];
-        }
-        imageFileName = imageFileName.split('').reverse().join('');
-        names.push(imageFileName);
-    }
-    return names;
-}
-
-function getImageFileIdsFromImageNameList(images){
-    let fileIdList = [];
-    for(let i=0;i<images.length;i++){
+        let fileName = getImageFileNameFromSrc(src);
+        console.log(allImage);
         for(let j=0;j<allImage.length;j++){
-            let imageName = allImage[j]['fileName'];
-            let fileId = allImage[j]['fileId'];
-            if(imageName == images[i]){
-                fileIdList.push(fileId)
-                break;
+            if(fileName == allImage[j]['fileName']) {
+                images[i].id = allImage[j]['fileId'];
             }
         }
     }
-    return fileIdList;
+    return tmpDoc.innerHTML;
+}
+
+function initializeAllImageList(htmlCode){
+    let tmpDoc = document.createElement("div");
+    tmpDoc.innerHTML = htmlCode;
+    let images = tmpDoc.getElementsByTagName("img");
+    for(let i=0;i<images.length;i++){
+        let src = images[i].src;
+        let fileName = getImageFileNameFromSrc(src);
+        let fileId = images[i].id;
+        allImage.push({"fileName" : fileName, "fileId" : fileId});
+    }
 }
 
 function createTestCaseElements(){

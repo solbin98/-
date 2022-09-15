@@ -51,6 +51,8 @@
 </body>
 <script>
     <%@include file="/resources/js/writeBoard.js" %>
+    initializeAllImageList("${content}");
+    console.log(allImage);
     editor.setHTML("${content}");
 </script>
 </html>

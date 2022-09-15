@@ -3,11 +3,9 @@ package com.project.file;
 import com.project.dao.BoardFileDao;
 import com.project.dao.FileDao;
 import com.project.dao.ProblemFileDao;
-import com.project.dao.ProfileFileDao;
 import com.project.dto.BoardFileDto;
 import com.project.dto.FileDto;
 import com.project.dto.ProblemFileDto;
-import com.project.dto.ProfileFileDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
@@ -26,8 +24,6 @@ public class FileService {
     BoardFileDao boardFileDao;
     @Autowired
     ProblemFileDao problemFileDao;
-    @Autowired
-    ProfileFileDao profileFileDao;
 
     public void setUsedColumnTrueByIdList(List<Integer> ids) throws Exception {
         if(ids == null) return;
@@ -68,14 +64,6 @@ public class FileService {
         }
     }
 
-    public void addProfileFileByFileIdListAndBoardId(List<Integer> list, int board_id){
-        if(list == null) return;
-        for(int i=0;i<list.size();i++) {
-            try{ addProfileFile(new ProfileFileDto(board_id, list.get(i))); }
-            catch (Exception e){ System.out.println("중복 존재!"); }
-        }
-    }
-
     public void addProblemFileByFileIdListAndBoardId(List<Integer> list, int board_id){
         if(list == null) return;
         for(int i=0;i<list.size();i++) {
@@ -86,10 +74,6 @@ public class FileService {
 
     public void addBoardFile(BoardFileDto boardFileDto) throws Exception{
         boardFileDao.insert(boardFileDto);
-    }
-
-    public void addProfileFile(ProfileFileDto profileFileDto) throws Exception{
-        profileFileDao.insert(profileFileDto);
     }
 
     public void addProblemFile(ProblemFileDto problemFileDto) throws Exception{

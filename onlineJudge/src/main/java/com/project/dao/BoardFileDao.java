@@ -26,11 +26,10 @@ public class BoardFileDao {
     private JdbcTemplate jdbcTemplate;
 
     public List<BoardFileDto> selectByBoardId(int board_id){
-        return jdbcTemplate.query("select file_id from board_file where board_id = ?", boardFileDtoRowMapper, board_id);
+        return jdbcTemplate.query("select * from board_file where board_id = ?", boardFileDtoRowMapper, board_id);
     }
 
     public void insert(BoardFileDto boardFileDto){
-        System.out.println("보드파일 : " + boardFileDto.toString());
         jdbcTemplate.update("insert into board_file (board_id, file_id) values (?, ?)", boardFileDto.getBoard_id(), boardFileDto.getFile_id());
     }
 

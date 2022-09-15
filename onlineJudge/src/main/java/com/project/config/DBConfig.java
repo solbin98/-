@@ -54,8 +54,6 @@ public class DBConfig {
     @Bean
     public LanguageDao languageDao() { return new LanguageDao(); }
     @Bean
-    public ProfileFileDao profileFileDao() { return new ProfileFileDao(); }
-    @Bean
     public ProblemFileDao problemFileDao() { return new ProblemFileDao(); }
     @Bean
     public BoardFileDao boardFileDao() { return new BoardFileDao(); }

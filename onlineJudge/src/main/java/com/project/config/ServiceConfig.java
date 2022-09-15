@@ -1,21 +1,22 @@
 package com.project.config;
 
 
-import com.project.board.BoardService;
+import com.project.board.common.BoardService;
+import com.project.dao.ProfileDao;
 import com.project.file.FileService;
 import com.project.member.MemberService;
 import com.project.member.join.JoinService;
 import com.project.member.join.MailService;
 import com.project.member.login.LoginService;
+import com.project.member.profile.ProfileService;
 import com.project.problem.*;
+import com.project.member.ranking.RankingService;
 import com.project.security.PrincipalDetailsService;
 import com.project.submission.LanguageService;
 import com.project.submission.SubmissionService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.jdbc.core.JdbcTemplate;
 
 
 @Configuration
@@ -47,5 +48,8 @@ public class ServiceConfig {
     public BoardService boardService() { return new BoardService(); }
     @Bean
     public FileService fileService() { return new FileService(); }
-
+    @Bean
+    public RankingService rankingService() { return new RankingService(); }
+    @Bean
+    public ProfileService profileService() { return new ProfileService(); }
 }

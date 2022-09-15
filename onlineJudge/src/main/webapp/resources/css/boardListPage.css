@@ -1,5 +1,6 @@
 .board-root-div{
     display: flex;
+    min-width: 1070px;
 }
 
 .board-side-div{
@@ -14,8 +15,7 @@
 .board-side-element-search-div{
     display: flex;
     width: 100%;
-    margin-bottom: 5%;
-    margin-top: 2%;
+    margin-top: 1%;
     margin-left: 2%;
 }
 
@@ -52,6 +52,7 @@
 }
 
 .board-search-bar{
+    color: white;
     padding: 2%;
     height: 46px;
     width: 80%;

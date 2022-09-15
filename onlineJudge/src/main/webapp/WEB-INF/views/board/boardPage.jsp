@@ -19,25 +19,26 @@
             <a href="/problems/${question.problem_id}"><h4> ${question.problem_id}번 문제</h4></a>
         </div>
         <div class="board-headline">
-            <div calss="board-headline-front-div">
-                <p class="board-headline-image"> <img class="board-headline-image" src="/resources/png/default_profile.jpg"> </p>
-            </div>
             <div class="board-headline-middle-div">
                 <p class="board-headline-nickName"> ${question.nickName} </p>
-                <p class="board-headline-date"> ${question.date} </p>
+                <p class="board-headline-date">  ${question.date} </p>
             </div>
-            <div class="board-headline-back-div">
-                <sec:authorize access="isAuthenticated()">
+            <sec:authorize access="isAuthenticated()">
+                <div class="board-headline-back-div">
                     <sec:authentication property="principal" var="user"/>
                     <c:if test="${user.nickname eq question.nickName}">
-                        <p class="board-edit-text">
-                            <a href="/boards/question-update?content=${question.content}&title=${question.title}&problem_id=${question.problem_id}&board_id=${question.board_id}&member_id=${question.member_id}">• 수정하기</a>
-                        </p>
-                        <p></p>
+                        <p class="board-edit-text"><a href="/boards/question-update?board_id=${question.board_id}">• 수정하기</a></p>
                         <p onclick="deleteBoard(${question.board_id}, ${question.board_id},${question.member_id})" class="board-edit-text"> • 삭제하기 </p>
                     </c:if>
-                </sec:authorize>
-            </div>
+                </div>
+                <div class="board-headline-last-div">
+                    <form method="post" action="/like">
+                        <input value="${question.board_id}" name="board_id" hidden>
+                        <button class="board-edit-text" style="background: none; border: none" type="submit">• 추천수(${question.likeCount})</button>
+                        <p class="board-edit-text"></p>
+                    </form>
+                </div>
+            </sec:authorize>
         </div>
         <div class="board-content">${question.content}</div>
     </div>
@@ -46,9 +47,6 @@
     <c:forEach var="answer" items="${answers}" varStatus="idx">
         <div class="board-block-full" id="board${answer.board_id}">
                 <div class="board-headline">
-                    <div calss="board-headline-front-div">
-                        <p class="board-headline-image"> <img class="board-headline-image" src="/resources/png/default_profile.jpg"> </p>
-                    </div>
                     <div class="board-headline-middle-div">
                         <p class="board-headline-nickName"> ${answer.nickName} </p>
                         <p class="board-headline-date"> ${answer.date} </p>

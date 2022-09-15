@@ -29,8 +29,6 @@
         <div class="board-block-full">
             <div class="board-headline" id="board-headline">
                 <h2 class="board-headline-title"> ${problem.title} </h2>
-                <img src="/resources/png/delete.png" class="board-delete" id="board-delete">
-                <a href="/board-update-page/${problem.problem_id}" class="board-edit-outer" id="board-edit"> <img src="/resources/png/edit.png" class="board-edit" > </img> </a>
             </div>
 
             <div class="board-tagline" id = "board-tagline">

@@ -1,7 +1,6 @@
 package com.project.config;
 
 
-import com.project.interceptor.LoginInterceptor;
 import com.project.member.join.JoinValidator;
 import com.project.member.join.AuthKeyMaker;
 import org.springframework.context.annotation.Bean;
@@ -33,13 +32,6 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
         registry.addResourceHandler("/images/boards/**").addResourceLocations("file:///C:/springTest/images/boards/");
         registry.addResourceHandler("/images/profiles/**").addResourceLocations("file:///C:/springTest/images/profiles/");
-    }
-
-    @Override
-    public void addInterceptors(InterceptorRegistry registry){
-        registry.addInterceptor(new LoginInterceptor())
-                .order(1)
-                .addPathPatterns();
     }
 
     @Bean

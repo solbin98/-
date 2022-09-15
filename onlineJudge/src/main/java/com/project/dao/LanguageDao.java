@@ -28,4 +28,6 @@ public class LanguageDao {
     public List<LanguageDto> select(){
         return jdbcTemplate.query("select * from language", languageDtoRowMapper);
     }
+
+
 }

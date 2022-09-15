@@ -7,7 +7,6 @@ import com.project.dto.SubmissionJoinDto;
 import com.project.util.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -15,7 +14,6 @@ import java.util.List;
 public class SubmissionService {
     @Autowired
     SubmissionDao submissionDao;
-
     @Autowired
     MemberDao memberDao;
 
@@ -48,9 +46,13 @@ public class SubmissionService {
         return submissionDao.selectByProblemIdAndAc(problem_id);
     }
 
+    public String getCodeBySubmissionId(int submission_id){
+        return submissionDao.selectCodeBySubmissionId(submission_id);
+    }
+
     public void setSubmissionDtoListUsername(List<SubmissionDto> submissionDtoList) {
         for(int i=0;i<submissionDtoList.size();i++){
-            String username = memberDao.selectByMemberId(submissionDtoList.get(i).getMember_id());
+            String username = memberDao.selectUserNameByMemberId(submissionDtoList.get(i).getMember_id());
             submissionDtoList.get(i).setUsername(username);
         }
     }

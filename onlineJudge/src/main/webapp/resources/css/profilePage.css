@@ -1,0 +1,55 @@
+.profile-root-div{
+    padding : 3%;
+    margin-bottom: 3%;
+    margin-top: 4%;
+    margin-left: 15%;
+    width: 70%;
+    background-color: white;
+    border: 0.2px solid lightgray;
+    -webkit-box-shadow: 0px -2px 250px -54px rgba(0,0,0,0.21);
+    -moz-box-shadow: 0px -2px 250px -54px rgba(0,0,0,0.21);
+    box-shadow: 0px -2px 250px -54px rgba(0,0,0,0.21);
+    min-width: 800px;
+}
+
+.title{
+    border-bottom: solid 1px lightgray;
+    padding-bottom: 2%;
+}
+
+.header{
+    margin-top: 3%;
+}
+
+.content-80{
+    width: 80%;
+    height: 80px;
+}
+
+.content-15{
+    font-weight: bold;
+    font-size: 14px;
+    color: white;
+    background-color: #00c471;
+    width: 15%;
+}
+
+.submit-text{
+    margin-left: 4%;
+}
+
+.introduction-box{
+    margin-top: 2%;
+    width: 80%;
+    display: flex;
+}
+
+.solved-problem-div{
+    width: 80%;
+    display: flex;
+}
+
+.solved-problem-text{
+    margin: 3%;
+    font-size: 14px;
+}

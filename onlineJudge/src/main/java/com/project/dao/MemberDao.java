@@ -47,8 +47,13 @@ public class MemberDao {
         }
     }
 
-    public String selectByMemberId(int member_id){
+    public String selectUserNameByMemberId(int member_id){
         String ret = jdbcTemplate.queryForObject("select username from member where member_id = ?", String.class, member_id);
+        return ret;
+    }
+
+    public String selectIntroductionByMemberId(int member_id){
+        String ret = jdbcTemplate.queryForObject("select introduction from member where member_id = ?", String.class, member_id);
         return ret;
     }
 

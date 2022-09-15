@@ -23,7 +23,6 @@ public class ImageController {
     MessageSource messageSource;
     @Autowired
     FileService fileService;
-
     Locale locale = new Locale("KOREA");
 
     @PostMapping("/images")
