@@ -15,5 +15,4 @@ public class SuccessHandler implements AuthenticationSuccessHandler {
         if(requestURI.equals("/login")) response.sendRedirect("/main");
         else response.sendRedirect(requestURI);
     }
-
 }

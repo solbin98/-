@@ -29,6 +29,7 @@ public class SpringMvcAnnotationConfigDispatcherServletInitializer
                 MvcConfig.class,
                 ControllerConfig.class,
                 DBConfig.class,
+                SchedulingConfig.class
         };
     }
     @Override

@@ -1,12 +1,14 @@
 package com.project.config;
 
 
-import com.project.member.join.JoinValidator;
-import com.project.member.join.AuthKeyMaker;
+import com.project.common.Scheduler;
+import com.project.domain.member.join.JoinValidator;
+import com.project.domain.member.join.AuthKeyMaker;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.*;
@@ -15,6 +17,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableWebMvc
+@EnableScheduling
 public class MvcConfig implements WebMvcConfigurer {
 
     @Override
@@ -81,5 +84,8 @@ public class MvcConfig implements WebMvcConfigurer {
 
     @Bean
     public JoinValidator joinValidator() { return new JoinValidator();}
+
+    @Bean
+    public Scheduler scheduler() { return new Scheduler(); }
 
 }

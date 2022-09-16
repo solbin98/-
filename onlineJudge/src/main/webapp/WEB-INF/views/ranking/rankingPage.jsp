@@ -19,12 +19,12 @@
         <th scope="col">닉네임</th>
         <th scope="col">자기소개</th>
         <th scope="col">맞은 문제수</th>
-        <th scope="col">제출수</th>
+        <th scope="col">시도한 문제수</th>
         </thead>
 
         <c:forEach var="ranking" items="${rankingData}" varStatus="idx">
             <tr>
-                <td> ${(paging.nowPage-1) * 50 + (idx.index)} </td>
+                <td> ${(paging.nowPage-1) * 50 + (idx.index) + 1} </td>
                 <td> ${ranking.nickname} </td>
                 <td> ${ranking.introduction} </td>
                 <td> ${ranking.acSubmissionNumber} </td>

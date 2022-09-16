@@ -20,7 +20,6 @@
     let email = "${email}";
 
     function ajaxForm(type, url, data, header){
-        let result;
         $.ajax({
             type : type,
             url : url,
@@ -28,21 +27,17 @@
             headers : header,
             async: false,
             success : function(res){
-                result = res;
+                alert("인증 성공");
             },
             error : function(XMLHttpRequest, textStatus, errorThrown){
-                alert("통신 에러");
+                alert(XMLHttpRequest.responseJSON.message);
             }
         });
-        return result;
     }
 
     function emailCheckDialog(){
-        let message = ajaxForm("POST", "/email", { email : email }, {});
-        let result = alert(message);
-        console.log(result);
+        ajaxForm("POST", "/email", { email : email }, {});
     }
-
 
     function checkEmailCode(){
         let codeInput = document.getElementById("email-code");

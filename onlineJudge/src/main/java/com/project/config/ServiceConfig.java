@@ -1,19 +1,21 @@
 package com.project.config;
 
 
-import com.project.board.common.BoardService;
-import com.project.dao.ProfileDao;
-import com.project.file.FileService;
-import com.project.member.MemberService;
-import com.project.member.join.JoinService;
-import com.project.member.join.MailService;
-import com.project.member.login.LoginService;
-import com.project.member.profile.ProfileService;
-import com.project.problem.*;
-import com.project.member.ranking.RankingService;
+import com.project.domain.board.common.BoardService;
+import com.project.domain.problem.service.ProblemService;
+import com.project.domain.problem.service.ProblemTagService;
+import com.project.domain.problem.service.TagService;
+import com.project.domain.problem.service.TestcaseService;
+import com.project.domain.file.FileService;
+import com.project.domain.member.MemberService;
+import com.project.domain.member.join.JoinService;
+import com.project.domain.member.join.MailService;
+import com.project.domain.member.login.LoginService;
+import com.project.domain.member.profile.ProfileService;
+import com.project.domain.member.ranking.RankingService;
 import com.project.security.PrincipalDetailsService;
-import com.project.submission.LanguageService;
-import com.project.submission.SubmissionService;
+import com.project.domain.submission.service.LanguageService;
+import com.project.domain.submission.service.SubmissionService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;

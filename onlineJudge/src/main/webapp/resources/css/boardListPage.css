@@ -1,15 +1,23 @@
 .board-root-div{
     display: flex;
     min-width: 1070px;
+    color: #1b1c1d;
 }
 
 .board-side-div{
+    margin-top: 3%;
     padding-top: 2%;
-    width: 70%
+    width: 70%;
+    border: solid 1px lightgray;
+    -webkit-box-shadow: 0px -2px 250px -54px rgba(0,0,0,0.21);
+    -moz-box-shadow: 0px -2px 250px -54px rgba(0,0,0,0.21);
+    box-shadow: 0px -2px 250px -54px rgba(0,0,0,0.21);
 }
 
 .board-side-list-div{
-
+    margin-left: 10%;
+    width: 80%;
+    color: #1b1c1d;
 }
 
 .board-side-element-search-div{
@@ -52,7 +60,6 @@
 }
 
 .board-search-bar{
-    color: white;
     padding: 2%;
     height: 46px;
     width: 80%;

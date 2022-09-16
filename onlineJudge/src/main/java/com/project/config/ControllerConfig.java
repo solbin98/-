@@ -1,15 +1,15 @@
 package com.project.config;
 
-import com.project.board.common.BoardController;
-import com.project.board.question.LikeController;
-import com.project.image.ImageController;
+import com.project.domain.board.common.BoardController;
+import com.project.domain.board.question.LikeController;
+import com.project.domain.image.ImageController;
 import com.project.mainController;
-import com.project.member.join.JoinController;
-import com.project.member.login.LoginController;
-import com.project.member.profile.ProfileController;
-import com.project.problem.ProblemController;
-import com.project.member.ranking.RankingController;
-import com.project.submission.SubmissionController;
+import com.project.domain.member.join.JoinController;
+import com.project.domain.member.login.LoginController;
+import com.project.domain.member.profile.ProfileController;
+import com.project.domain.problem.controller.ProblemController;
+import com.project.domain.member.ranking.RankingController;
+import com.project.domain.submission.SubmissionController;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

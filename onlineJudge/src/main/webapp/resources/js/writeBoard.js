@@ -137,7 +137,6 @@ function submitBoardAjaxForm(method, data, url){
     });
 }
 
-// question_id 가 0이면 질문 0이 아니면 답변
 function submitAnswer(question_id){
     let htmlCode = setImageFileIdByImageList(editor.getHTML());
     let images = getImageFileIdsStringFromHtmlCode(htmlCode);
@@ -146,8 +145,6 @@ function submitAnswer(question_id){
     submitBoardAjaxForm("POST", data, url);
 }
 
-// submitAnswer -> boardWritePage 에서 질문 할 때 사용
-// board_id 가 0이면 추가 요청 0이 아니면 수정 요청
 function submitQuestion(){
     let htmlCode = setImageFileIdByImageList(editor.getHTML());
     let images = getImageFileIdsStringFromHtmlCode(htmlCode);
@@ -168,7 +165,6 @@ function updateAnswer(question_id, board_id, member_id){
     let submitButton = document.getElementById("submit-button");
     submitButton.onclick = function func(){
         let htmlCode = setImageFileIdByImageList(editor.getHTML());
-        alert(htmlCode);
         let images = getImageFileIdsStringFromHtmlCode(htmlCode);
         let url = "/boards/answer?content=" + htmlCode + "&board_id=" + board_id + "&member_id=" + member_id + "&question_id=" + question_id;
         for(let i=0;i<images.length;i++) url += "&images="+images[i];
@@ -188,7 +184,6 @@ function updateQuestion(board_id, member_id){
     submitBoardAjaxForm("PUT", {}, url);
 }
 
-// question 이나 board 둘다 삭제할 때 사용하는 함수
 function deleteBoard(question_id, board_id, member_id){
     let url = "/boards?board_id=" + board_id +"&member_id=" + member_id + "&question_id=" + question_id;
     submitBoardAjaxForm("DELETE", {}, url);

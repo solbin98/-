@@ -40,7 +40,6 @@ public class mainController {
 
     @GetMapping("/access-denied")
     public String getAccessDeniedPage(){
-        System.out.println();
         return "login/loginPage";
     }
 }

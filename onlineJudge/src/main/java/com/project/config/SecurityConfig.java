@@ -18,11 +18,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter  {
     public SuccessHandler successHandler() { return new SuccessHandler();}
 
     @Override
-   protected void configure(HttpSecurity http) throws  Exception {
+    protected void configure(HttpSecurity http) throws  Exception {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/submit", "/board-write", "/boards/question*", "/boards/answer*").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/submit", "/board-write", "/boards/question*", "/boards/answer*", "/submissionPage*", "profilePage*").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/problem-write").hasRole("ADMIN")
                 .anyRequest().permitAll()
                 .and()

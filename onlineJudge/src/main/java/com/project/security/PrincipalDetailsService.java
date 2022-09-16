@@ -1,7 +1,7 @@
 package com.project.security;
 
-import com.project.dao.MemberDao;
-import com.project.dto.MemberDto;
+import com.project.domain.member.MemberDao;
+import com.project.domain.member.MemberDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

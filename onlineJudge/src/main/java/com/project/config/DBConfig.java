@@ -1,12 +1,19 @@
 package com.project.config;
 
-import com.project.dao.*;
-import com.project.dto.TestcaseDto;
+import com.project.domain.board.BoardDao;
+import com.project.domain.board.BoardFileDao;
+import com.project.domain.board.LikeDBDao;
+import com.project.domain.file.FileDao;
+import com.project.domain.member.join.EmailAuthDao;
+import com.project.domain.member.MemberDao;
+import com.project.domain.member.profile.ProfileDao;
+import com.project.domain.problem.dao.*;
+import com.project.domain.submission.dao.LanguageDao;
+import com.project.domain.submission.dao.SubmissionDao;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.security.core.parameters.P;
 
 @Configuration
 public class DBConfig {

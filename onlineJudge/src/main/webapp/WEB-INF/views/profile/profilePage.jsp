@@ -16,15 +16,18 @@
     </div>
     <br><br>
     <div class="introduction-box">
-        <textarea class="content-80" id="introduction">${introduction}</textarea>
-        <button class="content-15"> 자기소개 수정하기 </button>
+        <form class="introduction-box" method="post" action="/introduction">
+            <textarea class="content-80" id="introduction" name="introduction">${introduction}</textarea>
+            <button type="submit" class="content-15"> 자기소개 수정하기 </button>
+        </form>
+
     </div>
 </div>
 
 <div class="profile-root-div">
     <h2 class="title"> 히스토리 </h2>
     <div class="introduction-box">
-        <h4> 제출 횟수 : ${profileDto.submission_num}</h4>
+        <h4> 시도한 문제 : ${profileDto.submission_num}</h4>
         <h4 class="submit-text"> 맞은 문제 : ${profileDto.solved_num}</h4>
         <h4 class="submit-text"> 정답률(%) : ${ 100 * (profileDto.solved_num) / profileDto.submission_num} </h4>
     </div>
