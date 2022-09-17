@@ -1,8 +1,7 @@
-package com.project.domain.board;
+package com.project.domain.board.common;
 
 import com.project.domain.board.answer.AnswerUpdateData;
 import com.project.domain.board.answer.AnswerWriteData;
-import com.project.domain.board.common.BoardListPageDto;
 import com.project.domain.board.question.BoardWriteData;
 import com.project.domain.board.question.QuestionUpdateData;
 import com.project.common.Paging;
@@ -97,7 +96,7 @@ public class BoardDao {
 
     public void insertQuestion(BoardWriteData boardWriteData){
         jdbcTemplate.update("insert into board (problem_id, question, content, date, member_id, title) " +
-                "values (?, ?, ?, ?, ?, ?)", boardWriteData.getProblem_id(),
+                "values (?, ?, ?, ?, ?, ?)", Integer.parseInt(boardWriteData.getProblem_id()),
                                          boardWriteData.getQuestion(),
                                          boardWriteData.getContent(),
                                          LocalDateTime.now(), boardWriteData.getMember_id(), boardWriteData.getTitle());

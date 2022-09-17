@@ -16,30 +16,14 @@ public class mainController {
     @Autowired
     MessageSource messageSource;
 
-    @GetMapping("/socket")
-    public String socketTestPage(){
-        return "test/test";
-    }
-
-    @GetMapping("/submit")
-    public String test(Authentication authentication, HttpSession session){
-        String abc = (String)session.getAttribute("username");
-        UserDetails userDetails = (UserDetails)authentication.getPrincipal();
-        return "main/mainPage";
-    }
-
     @GetMapping("/main")
     public String getMainPage(){
         return "main/mainPage";
     }
 
-    @GetMapping("/test")
-    public String getTest(){
+    @GetMapping("/")
+    public String getDefaultPage(){
         return "main/mainPage";
     }
 
-    @GetMapping("/access-denied")
-    public String getAccessDeniedPage(){
-        return "login/loginPage";
-    }
 }

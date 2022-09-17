@@ -1,4 +1,4 @@
-package com.project.domain.board;
+package com.project.domain.board.common;
 
 public class BoardFileDto {
     int board_id;

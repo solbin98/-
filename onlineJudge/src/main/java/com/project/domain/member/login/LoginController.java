@@ -16,9 +16,9 @@ public class LoginController {
     }
 
     @GetMapping("/loginFail*")
-    public String loginFail(String username, Model model){
+    public String loginFail(String username, String message, Model model){
          model.addAttribute("username", username);
-         model.addAttribute("error", "아이디나 비밀번호가 잘못되었습니다.");
+         model.addAttribute("error", message);
         return "login/loginPage";
     }
 }

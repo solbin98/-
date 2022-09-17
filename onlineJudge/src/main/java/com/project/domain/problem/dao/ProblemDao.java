@@ -44,7 +44,7 @@ public class ProblemDao {
 
     public ProblemDto selectById(int problem_id) throws Exception{
         List<ProblemDto> ret = jdbcTemplate.query("select * from problem where problem_id = ?", problemDtoRowMapper, problem_id);
-        if(ret.size() == 0) throw new Exception();
+        if(ret.size() == 0) return null;
         else return ret.get(0);
     }
 

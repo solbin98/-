@@ -48,7 +48,7 @@ public class MailService {
                 updateEmailAuth(new EmailAuthDto(email, authKey, newExpireDateTime, false));
             }
             else { // 아직 만료되지 않은 코드인 경우에, 에러 던지기
-                throw new IllegalStateException(messageSource.getMessage("emailCodeRetry", null, locale) + emailAuthDto.getExpire_date());
+                throw new IllegalStateException(emailAuthDto.getExpire_date() + messageSource.getMessage("emailCodeRetry", null, locale) );
             }
         }
 
@@ -65,9 +65,7 @@ public class MailService {
     public void checkAuthCode(String email, String code) throws Exception {
         EmailAuthDto result = getEmailAuthByEmailAndCode(email, code);
         if(result != null) {
-            if(isExpiredCode(result)) {
-                throw new IllegalStateException(messageSource.getMessage("emailCodeExpired", null, locale));
-            }
+            if(isExpiredCode(result)) throw new IllegalStateException(messageSource.getMessage("emailCodeExpired", null, locale));
             updateEmailAuth(new EmailAuthDto(email, code, LocalDateTime.now(), true));
         }
         else throw new IllegalArgumentException(messageSource.getMessage("emailCodeWrong", null, locale));

@@ -6,19 +6,19 @@ import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 public class ProblemWriteInfoData {
-    @NotBlank
+    @NotBlank(message = "제목을 입력해 주세요.")
     String title;
-    @NotBlank
+    @NotBlank(message = "시간제한을 입력해 주세요.")
     String time_limit;
-    @NotBlank
+    @NotBlank(message = "메모리 제한을 입력해 주세요.")
     String memory_limit;
-    @NotBlank
+    @NotBlank(message = "본문을 입력해 주세요.")
     String content;
-    @NotBlank
+    @NotBlank(message = "입력 제한을 입력해 주세요.")
     String input_condition;
-    @NotBlank
+    @NotBlank(message = "출력 제한을 입력해 주세요.")
     String output_condition;
-    @NotBlank
+    @NotBlank(message = "제목을 입력해 주세요.")
     String difficulty;
     int testcase_num;
     List<String> tags; // 파싱되어 넘어온 태그 목록

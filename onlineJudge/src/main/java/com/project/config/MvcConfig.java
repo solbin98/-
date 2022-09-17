@@ -4,6 +4,7 @@ package com.project.config;
 import com.project.common.Scheduler;
 import com.project.domain.member.join.JoinValidator;
 import com.project.domain.member.join.AuthKeyMaker;
+import com.project.exception.ExceptionHandlerClass;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
@@ -50,7 +51,8 @@ public class MvcConfig implements WebMvcConfigurer {
         ReloadableResourceBundleMessageSource source = new ReloadableResourceBundleMessageSource();
         source.setBasenames("/resources/messages/errors_ko",
                 "/resources/messages/labels_ko",
-                "/resources/messages/system_ko");
+                "/resources/messages/system_ko",
+                "/resources/messages/response_ko");
         source.setDefaultEncoding("utf-8");
         return source;
     }
@@ -88,4 +90,6 @@ public class MvcConfig implements WebMvcConfigurer {
     @Bean
     public Scheduler scheduler() { return new Scheduler(); }
 
+    @Bean
+    public ExceptionHandlerClass exceptionHandlerController() { return new ExceptionHandlerClass(); }
 }

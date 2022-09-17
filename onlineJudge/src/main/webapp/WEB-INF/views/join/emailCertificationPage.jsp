@@ -1,3 +1,4 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
@@ -7,12 +8,12 @@
     <link href="/resources/css/join.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-    <h1 class="input-box">이메일 인증 페이지</h1>
-    <h4 class="input-box"> ${email} 계정의 소유를 인증합니다. </h4>
-    <input class="input-box" id="email-code" placeholder="인증 코드를 입력해주세요."> </input>
+    <h1 class="input-box"><spring:message code="text.emailPage"> </spring:message> </h1>
+    <h4 class="input-box"> ${email} <spring:message code="text.emailCertification"> </spring:message>  </h4>
+    <input class="input-box" id="email-code" placeholder="<spring:message code="input.text.emailCode"> </spring:message> "> </input>
     <div class="email-check-button-div">
-        <button class="email-check-button" onclick="emailCheckDialog()"> 인증요청 </button>
-        <button class="email-check-button" onclick="checkEmailCode()"> 인증완료 </button>
+        <button class="email-check-button" onclick="emailCheckDialog()"> <spring:message code="button.text.sendEmail"> </spring:message> </button>
+        <button class="email-check-button" onclick="checkEmailCode()"> <spring:message code="button.text.certificationComplete"> </spring:message>  </button>
     </div>
 </body>
 
@@ -27,7 +28,7 @@
             headers : header,
             async: false,
             success : function(res){
-                alert("인증 성공");
+                alert(res.message);
             },
             error : function(XMLHttpRequest, textStatus, errorThrown){
                 alert(XMLHttpRequest.responseJSON.message);

@@ -1,11 +1,13 @@
 package com.project.domain.board.answer;
 
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 public class AnswerUpdateData {
     int question_id;
     int member_id;
     int board_id;
+    @NotBlank(message = "본문을 입력해주세요.")
     String content;
     List<Integer> images;
 
@@ -23,6 +25,9 @@ public class AnswerUpdateData {
         this.board_id = board_id;
         this.content = content;
         this.images = images;
+    }
+
+    public AnswerUpdateData() {
     }
 
     public int getMember_id() {

@@ -55,8 +55,7 @@ function sendImage(formData, callback){
 
 function submitProblem(){
     let htmlCode = editor.getHTML();
-    let imageNameList = getImageFileNamesStringFromHtmlCode(htmlCode);
-    let images = getImageFileIdsFromImageNameList(imageNameList);
+    let images = getImageFileIdsStringFromHtmlCode(htmlCode);
     let title = document.getElementById("title").value;
     let tags = document.getElementById("tag-text").value.split("/");
     let input_limit = document.getElementById("input-limit-text").value;
@@ -105,17 +104,23 @@ function submitProblem(){
         timeout: 6000000,
         success : function(res){
             console.log(res);
-            if(res.resultCode) {
-                alert("문제 출제에 성공했습니다.");
-                location.replace("/main");
-            }
-            else{
-                let errorMessage = res.errorMessage;
-                alert(errorMessage);
-            }
+            alert("문제 출제에 성공했습니다.");
+            location.replace("/problemsList?page=1");
         },
         error : function(XMLHttpRequest, textStatus, errorThrown){
-            alert("통신 실패");
+            console.log(XMLHttpRequest);
+            try{
+                let size = XMLHttpRequest.responseJSON.fieldErrorList.length;
+                for(let i=0;i<size;i++) alert(XMLHttpRequest.responseJSON.fieldErrorList[i].message);
+            }
+            catch (e){
+                try{
+                    alert(XMLHttpRequest.responseJSON.message)
+                }
+                catch (e){
+
+                }
+            }
         }
     });
 }
@@ -123,16 +128,27 @@ function submitProblem(){
 function submitBoardAjaxForm(method, data, url){
     $.ajax({
         type : method,
-        data : data,
+        data : JSON.stringify(data),
+        dataType:'json',
+        contentType: "application/json; charset=utf-8",
         url : url,
-        dataType: 'text',
         async:true,
-        success : function(resultURL){
+        success : function(res){
             alert("요청에 성공했습니다.");
-            location.replace(resultURL);
+            location.replace(res.message);
         },
         error : function(XMLHttpRequest, textStatus, errorThrown){
-            alert("요청에 실패했습니다!");
+            console.log(XMLHttpRequest);
+            try{
+                let size = XMLHttpRequest.responseJSON.fieldErrorList.length;
+                for(let i=0;i<size;i++) alert(XMLHttpRequest.responseJSON.fieldErrorList[i].message);
+            }
+            catch (e){
+                try{
+                    alert(XMLHttpRequest.responseJSON.message)
+                }
+                catch (e){}
+            }
         }
     });
 }
@@ -152,6 +168,7 @@ function submitQuestion(){
     let problem_id = document.getElementById("problem_id").value;
     let title = document.getElementById("title").value;
     let data = {"content" : htmlCode, "problem_id" : problem_id, "question" : true, "title" : title, "images" : images};
+    alert(JSON.stringify(data));
     submitBoardAjaxForm("POST", data, url);
 }
 
@@ -224,6 +241,8 @@ function setImageFileIdByImageList(htmlCode){
     }
     return tmpDoc.innerHTML;
 }
+
+
 
 function initializeAllImageList(htmlCode){
     let tmpDoc = document.createElement("div");

@@ -8,34 +8,34 @@
 <%@include file="/resources/jsp/header.jsp" %>
 
 <div class="profile-root-div">
-    <h2 class="title"> 내 프로필 </h2>
+    <h2 class="title"> <spring:message code="text.myProfile"> </spring:message>  </h2>
     <div class="introduction-box">
         <sec:authentication property="principal" var="user"/>
-        <h6> 닉네임 : ${user.nickname}</h6>
-        <h6 class="submit-text"> 아이디: ${user.username}</h6>
+        <h6> <spring:message code="text.nickname"> </spring:message>  : ${user.nickname}</h6>
+        <h6 class="submit-text"> <spring:message code="text.id"> </spring:message> : ${user.username}</h6>
     </div>
     <br><br>
     <div class="introduction-box">
         <form class="introduction-box" method="post" action="/introduction">
             <textarea class="content-80" id="introduction" name="introduction">${introduction}</textarea>
-            <button type="submit" class="content-15"> 자기소개 수정하기 </button>
+            <button type="submit" class="content-15"> <spring:message code="button.text.editIntro"> </spring:message>  </button>
         </form>
 
     </div>
 </div>
 
 <div class="profile-root-div">
-    <h2 class="title"> 히스토리 </h2>
+    <h2 class="title"> <spring:message code="text.history"> </spring:message>  </h2>
     <div class="introduction-box">
-        <h4> 시도한 문제 : ${profileDto.submission_num}</h4>
-        <h4 class="submit-text"> 맞은 문제 : ${profileDto.solved_num}</h4>
-        <h4 class="submit-text"> 정답률(%) : ${ 100 * (profileDto.solved_num) / profileDto.submission_num} </h4>
+        <h4> <spring:message code="text.triedProblem"> </spring:message>  : ${profileDto.submission_num}</h4>
+        <h4 class="submit-text"> <spring:message code="text.solvedProblem"> </spring:message>  : ${profileDto.solved_num}</h4>
+        <h4 class="submit-text"> <spring:message code="text.acRate"> </spring:message>  : ${ 100 * (profileDto.solved_num) / profileDto.submission_num} </h4>
     </div>
     <br>
 
     <div class="solved-problem-div">
         <c:forEach var="problem" items="${problemIdList}"  varStatus="idx">
-            <a href="/problems/${problem.problem_id}" class="solved-problem-text"><h5>${problem.problem_id}번 - ${problem.problem_name}</h5></h3></a>
+            <a href="/problems/${problem.problem_id}" class="solved-problem-text"><h5>${problem.problem_id}번 - ${problem.problem_name}</h5></a>
         </c:forEach>
     </div>
 </div>

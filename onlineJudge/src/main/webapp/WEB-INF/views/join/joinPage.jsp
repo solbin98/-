@@ -15,26 +15,26 @@
                 <div class="card-body py-5 px-md-5">
                     <div class="row d-flex justify-content-center">
                         <div class="col-lg-8">
-                            <h2 class="fw-bold mb-5"> <spring:message code="login.text.title"></spring:message></h2>
+                            <h2 class="fw-bold mb-5"> <spring:message code="text.websiteTitle"></spring:message></h2>
                             <form:form modelAttribute="JoinFormData" method="post" enctype="multipart/form-data" action="/join">
                                 <div class="form-outline mb-4">
-                                    <input name="username" class="form-control" placeholder="<spring:message code="join.text.id"></spring:message>" value="${username}"></input>
+                                    <input name="username" class="form-control" placeholder="<spring:message code="text.id"></spring:message>" value="${username}"></input>
                                     <form:errors path="username" cssClass="error-text"></form:errors>
                                 </div>
 
                                 <!-- Password input -->
                                 <div class="form-outline mb-4">
-                                    <input name="password" type="password" class="form-control" placeholder="<spring:message code="join.text.password"></spring:message>" value="${password}"> </input>
+                                    <input name="password" type="password" class="form-control" placeholder="<spring:message code="text.password"></spring:message>" value="${password}"> </input>
                                     <form:errors path="password" cssClass="error-text"></form:errors>
                                 </div>
 
                                 <div class="form-outline mb-4">
-                                    <input name="passwordCheck" type="password" class="form-control" placeholder="<spring:message code="join.text.passwordCheck"></spring:message>" value="${passwordCheck}"> </input>
+                                    <input name="passwordCheck" type="password" class="form-control" placeholder="<spring:message code="text.passwordCheck"></spring:message>" value="${passwordCheck}"> </input>
                                     <form:errors path="passwordCheck" cssClass="error-text"></form:errors>
                                 </div>
 
                                 <div class="form-outline mb-4">
-                                    <input name="nickName" class="form-control" placeholder="<spring:message code="join.text.nickname"></spring:message>" value="${nickName}"> </input>
+                                    <input name="nickName" class="form-control" placeholder="<spring:message code="text.nickname"></spring:message>" value="${nickName}"> </input>
                                     <form:errors path="nickName" cssClass="error-text"></form:errors>
                                 </div>
 
@@ -42,7 +42,7 @@
                                 <div class="row">
                                     <div class="col-md-6 mb-4">
                                         <div class="form-outline">
-                                            <input type="text" id="email-prefix" class="form-control" onchange="setEmailHiddenBoxValue()" placeholder="<spring:message code="join.text.email"></spring:message>"></input>
+                                            <input type="text" id="email-prefix" class="form-control" onchange="setEmailHiddenBoxValue()" placeholder="<spring:message code="text.email"></spring:message>"></input>
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-4">
@@ -61,15 +61,15 @@
 
                                 <div class="email-box">
                                     <div class="email-button-text-box">
-                                        <button type="button" class="form-control" onclick="openEmailAuthPage()"> <spring:message code="join.text.emailCheckButton"></spring:message> </button>
+                                        <button type="button" class="form-control" onclick="openEmailAuthPage()"> <spring:message code="text.emailCheckButton"></spring:message> </button>
                                         <p class="error-text"><form:errors path="email"></form:errors></p>
                                     </div>
                                 </div>
                                 <div class="form-outline mb-4">
-                                    <textarea class="form-control" name="introduction" class="introduction-box" placeholder="<spring:message code="join.text.introduction"></spring:message>" value="${introduction}"></textarea>
+                                    <textarea class="form-control" name="introduction" class="introduction-box" placeholder="<spring:message code="input.text.introduction"></spring:message>" value="${introduction}"></textarea>
                                 </div>
                                 <!-- Submit button -->
-                                <button type="submit" class="btn btn-primary btn-block mb-4"><spring:message code="login.text.joinText"></spring:message></button>
+                                <button type="submit" class="btn btn-primary btn-block mb-4"><spring:message code="text.joinText"></spring:message></button>
                             </form:form>
                         </div>
                     </div>

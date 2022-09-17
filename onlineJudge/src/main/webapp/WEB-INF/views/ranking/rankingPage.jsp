@@ -15,11 +15,11 @@
 <div class="problem-list-table">
     <table class="table table-striped">
         <thead>
-        <th scope="col">순위</th>
-        <th scope="col">닉네임</th>
-        <th scope="col">자기소개</th>
-        <th scope="col">맞은 문제수</th>
-        <th scope="col">시도한 문제수</th>
+        <th scope="col"><spring:message code="text.ranking"> </spring:message></th>
+        <th scope="col"><spring:message code="text.nickname"> </spring:message></th>
+        <th scope="col"><spring:message code="text.introduction"> </spring:message></th>
+        <th scope="col"><spring:message code="text.solvedProblem"> </spring:message></th>
+        <th scope="col"><spring:message code="text.triedProblem"> </spring:message></th>
         </thead>
 
         <c:forEach var="ranking" items="${rankingData}" varStatus="idx">

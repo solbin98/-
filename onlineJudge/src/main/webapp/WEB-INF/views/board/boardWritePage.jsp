@@ -27,9 +27,9 @@
 <body>
     <%@include file="/resources/jsp/header.jsp" %>
     <div class="board-write-root-div">
-        <div class="tag-box"> <h3 class="tag-text">질문 작성</h3>  </div>
+        <div class="tag-box"> <h3 class="tag-text"><spring:message code="text.questionWrite"> </spring:message> </h3>  </div>
         <div class="title-problem-div">
-            <input class="problem" type="text" placeholder="문제번호" id="problem_id" value="${problem_id}">
+            <input class="problem" type="text" placeholder="<spring:message code="text.problemNumber"> </spring:message> " id="problem_id" value="${problem_id}">
             <input class="title" type="text" placeholder="<spring:message code="input.text.title"></spring:message>" id="title" value="${title}">
         </div>
         <div class="editor" id="editor"></div>
@@ -38,7 +38,7 @@
         </div>
         <div class="line"></div>
         <div class="submit-button-div">
-            <button onclick="submitTest()" class="submit-button"> 게시글 미리보기 </button>
+            <button onclick="submitTest()" class="submit-button"> <spring:message code="button.text.preview"> </spring:message>  </button>
         </div>
         <p id="preview-Page"></p>
     </div>

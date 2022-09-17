@@ -1,13 +1,15 @@
 package com.project.domain.board.answer;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 public class AnswerWriteData {
     int member_id;
     int question_id;
     boolean question;
+    @NotBlank(message = "본문을 입력해주세요.")
     String content;
-
     List<Integer> images;
 
     public int getMember_id() {
@@ -55,5 +57,8 @@ public class AnswerWriteData {
         this.question = question;
         this.content = content;
         this.images = images;
+    }
+
+    public AnswerWriteData() {
     }
 }

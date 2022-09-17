@@ -59,7 +59,7 @@
     <div class="content-side">
         <div class="board-block-full">
             <div class="testcase-text-header">
-                <h2 class="testcase-text">  조건 제한 </h2>
+                <h2 class="testcase-text">  <spring:message code="text.condition"> </spring:message>  </h2>
             </div>
 
             <h5 class="testcase-text">  <spring:message code="text.inputLimit"></spring:message> </h5>
@@ -85,6 +85,6 @@
             </c:forEach>
         </div>
     </div>
-    <a href="/submissionPage?problem_id=${problem.problem_id}"><button class="submit-button" onclick=""> 제출 하기</button> </a>
+    <a href="/submissionPage?problem_id=${problem.problem_id}"><button class="submit-button" onclick=""> <spring:message code="text.submission"> </spring:message> </button> </a>
 </body>
 </html>

@@ -71,9 +71,9 @@
     </div>
 
     <div class="testcase-box">
-        <h3>Input 파일 추가하기</h3>
+        <h3>Input <spring:message code="text.add"> </spring:message> </h3>
         <input name="input" type="file" class="profile-image-select-box" id="inputFile" multiple  accept="multipart/form-data" onchange="loadFile(this)">
-        <h3>Output 파일 추가하기</h3>
+        <h3>Output <spring:message code="text.add"> </spring:message> </h3>
         <input name="output" type="file" class="profile-image-select-box" id="outputFile" multiple  accept="multipart/form-data" onchange="loadFile(this)">
     </div>
 
@@ -82,7 +82,7 @@
     </div>
 
     <div class="submit-button-div">
-        <button onclick="submitTest()" class="submit-button"> 게시글 미리보기 </button>
+        <button onclick="submitTest()" class="submit-button"> <spring:message code="button.text.preview"> </spring:message>  </button>
     </div>
 
     <p id="preview-Page"></p>

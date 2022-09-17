@@ -4,7 +4,6 @@ import com.project.domain.board.answer.AnswerUpdateData;
 import com.project.domain.board.answer.AnswerWriteData;
 import com.project.domain.board.question.BoardWriteData;
 import com.project.domain.board.question.QuestionUpdateData;
-import com.project.domain.board.BoardDao;
 import com.project.domain.board.LikeDBDao;
 import com.project.common.Paging;
 import org.springframework.beans.factory.annotation.Autowired;

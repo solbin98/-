@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 @Controller
@@ -32,11 +33,7 @@ public class JoinController {
     @Autowired
     MessageSource messageSource;
 
-    @ExceptionHandler
-    public ResponseEntity<ResponseForm> exceptionHandler(Exception e){
-        ResponseForm responseForm = new ResponseForm(e.getMessage());
-        return new ResponseEntity<ResponseForm>(responseForm, HttpStatus.BAD_REQUEST);
-    }
+    Locale locale = Locale.getDefault();
 
     @GetMapping("/join")
     public String getJoinPage(){
@@ -62,7 +59,8 @@ public class JoinController {
     @PostMapping("/email")
     public ResponseEntity<ResponseForm> sendEmail(@RequestParam String email) throws Exception {
         mailService.sendAuthMail(email);
-        return new ResponseEntity<ResponseForm>(HttpStatus.OK);
+        ResponseForm responseForm = new ResponseForm(messageSource.getMessage("emailSendingSuccess", null, locale));
+        return new ResponseEntity<ResponseForm>(responseForm, HttpStatus.OK);
     }
 
     @PostMapping(value ="/emailCertification")
@@ -70,7 +68,8 @@ public class JoinController {
     public ResponseEntity<ResponseForm> certificateEmail(@RequestParam("email") String email,
                                                @RequestParam("code") String code) throws Exception {
         mailService.checkAuthCode(email, code);
-        return new ResponseEntity<ResponseForm>(HttpStatus.OK);
+        ResponseForm responseForm = new ResponseForm(messageSource.getMessage("emailCertificationSuccess", null, locale));
+        return new ResponseEntity<ResponseForm>(responseForm, HttpStatus.OK);
     }
 
     @GetMapping("/emailCertificationPage*")

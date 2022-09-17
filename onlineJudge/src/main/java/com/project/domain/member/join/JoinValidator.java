@@ -21,7 +21,7 @@ public class JoinValidator implements Validator {
 
         // 비밀번호와 비밀번호 확인이 일치하는지 검사
         if(!joinFormData.getPassword().equals(joinFormData.getPasswordCheck())){
-            errors.rejectValue("passwordCheck", "inconsistency.password.passwordCheck");
+            errors.rejectValue("passwordCheck", "passwordWrong");
         }
 
         // 이메일 인증 받았는지 검사

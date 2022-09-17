@@ -1,5 +1,6 @@
 package com.project.domain.problem.controller;
 
+import com.project.common.ResponseForm;
 import com.project.domain.file.FileService;
 import com.project.domain.problem.dto.*;
 import com.project.domain.problem.service.ProblemService;
@@ -10,12 +11,19 @@ import com.project.domain.submission.service.SubmissionService;
 import com.project.common.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.core.MethodParameter;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
@@ -94,8 +102,21 @@ public class ProblemController {
     }
 
     @PostMapping("/problems")
-    public String writeProblem(@Validated @ModelAttribute ProblemWriteInfoData problemWriteInfoData,
-                               @RequestPart(value = "testcases", required = false) Map<String, Object> testcases) throws Exception {
+    @ResponseBody
+    public ResponseEntity<ResponseForm> writeProblem(@Valid @ModelAttribute ProblemWriteInfoData problemWriteInfoData, BindingResult bindingResult,
+                                                     @RequestPart(value = "testcases", required = false) Map<String, Object> testcases) throws Exception {
+
+        // 요청이 multipart/form-data로 오기 때문에, requestBody 어노테이션을 통해서 구현할 수 없음..
+        // requestBody를 통해 구현할 수 없으므로, json 으로 Vaild 결과로 발생한 methodArgumentNotValidExceptionHandler
+        // 로 곧바로 에러를 반환해줄 수 있는 방법을 모르겠음...
+        // 추후에 더 나은 방법 생각할 것.
+        if(bindingResult.hasErrors()){
+            List<ObjectError> list = bindingResult.getAllErrors();
+            String message = "";
+            for(int i=0;i<list.size();i++) message += list.get(i).getDefaultMessage() + "\n";
+            throw new IllegalArgumentException(message);
+        }
+
         ProblemDto problemDto = ConvertProblemWriteInfoDateToProblemDto(problemWriteInfoData);
         // problem db에 삽입하기
         int problem_id = problemService.addNewProblem(problemDto);
@@ -121,7 +142,9 @@ public class ProblemController {
         // 2. problem_file 테이블에 새로운 행들 추가해주기.
         fileService.setUsedColumnTrueByIdList(problemWriteInfoData.getImages());
         fileService.addProblemFileByFileIdListAndBoardId(problemWriteInfoData.getImages(), problem_id);
-        return "problem/problemListPage";
+
+        ResponseForm responseForm = new ResponseForm("");
+        return new ResponseEntity<>(responseForm, HttpStatus.OK);
     }
 
     public ProblemDto ConvertProblemWriteInfoDateToProblemDto(ProblemWriteInfoData problemWriteInfoData){
@@ -159,13 +182,10 @@ public class ProblemController {
         if (!Folder.exists()) {
             try{
                 Folder.mkdir(); //폴더 생성합니다.
-                System.out.println("폴더가 생성되었습니다.");
             }
             catch(Exception e){
                 e.getStackTrace();
             }
-        }else {
-            System.out.println("이미 폴더가 생성되어 있습니다.");
         }
     }
 

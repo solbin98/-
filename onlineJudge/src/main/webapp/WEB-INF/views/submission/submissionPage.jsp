@@ -9,11 +9,11 @@
     <%@include file="/resources/jsp/header.jsp" %>
     <div class="content-side">
         <div class="board-block-full">
-            <h2 class="source-code-text"> ${problem_id}번 문제 / 소스코드 제출</h2>
+            <h2 class="source-code-text"> ${problem_id}번 문제 / <spring:message code="text.submission"> </spring:message> </h2>
 
             <form method="post" action="/submission">
                 <div class="submit-language">
-                    <h4> 제출 언어 </h4>
+                    <h4> <spring:message code="text.submissionLanguage"> </spring:message>  </h4>
                     <select class="submit-language-select" value="select" name="language_id">
                         <c:forEach items="${languages}" var="language">
                             <option value="${language.language_id}">${language.name}</option>
@@ -22,7 +22,7 @@
                 </div>
                 <textarea class="source-code-div" id="source-code" name="sourceCode"></textarea>
                 <input name="problem_id" value="${problem_id}" hidden="true"></input>
-                <button class="submit-button" type="submit"> 코드 제출 </button>
+                <button class="submit-button" type="submit"> <spring:message code="text.submission"> </spring:message>  </button>
             </form>
 
         </div>

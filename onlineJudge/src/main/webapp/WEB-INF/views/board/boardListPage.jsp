@@ -20,14 +20,14 @@
             <div class="board-side-list-div">
                 <form method="GET" action="boardList">
                     <div class="board-side-element-search-div">
-                        <input name="keyword" id="keyword" class="board-search-bar" placeholder="질문을 검색하세요!"></input>
-                        <button type="submit" class="board-search-button"> 검색 </button>
-                        <button class="board-search-button"> <a href="/board-write" class="board-search-bar"> 질문작성 </a> </button>
+                        <input name="keyword" id="keyword" class="board-search-bar" placeholder="<spring:message code="text.searchBar"> </spring:message> "></input>
+                        <button type="submit" class="board-search-button"> <spring:message code="text.search"> </spring:message>  </button>
+                        <button class="board-search-button"> <a href="/board-write" class="board-search-bar"> <spring:message code="text.writeQuestion"> </spring:message>  </a> </button>
                     </div>
                     <div class="board-side-element-search-div">
                         <select name="type">
-                            <option value="content">본문으로 검색</option>
-                            <option value="title">제목으로 검색</option>
+                            <option value="content"><spring:message code="text.searchByContent"> </spring:message> </option>
+                            <option value="title"><spring:message code="text.searchByTitle"> </spring:message> </option>
                         </select><br>
                     </div>
                 </form>
@@ -40,19 +40,19 @@
                     <a class="a-tag" href="/boards?question_id=${board.board_id}">
                     <div class="board-side-element-div">
                         <div class="board-side-element-content-side">
-                            <div class="board-number"> ${board.board_id}번 게시글 </div>
+                            <div class="board-number"> ${board.board_id} <spring:message code="text.boardAndNumber"> </spring:message>  </div>
                             <div class="board-title"> ${board.title} </div>
                             <div class="board-content"> ${board.content} </div>
                             <div class="board-bottom">
-                                <p class="board-writer-text"> • ${board.problem_id}번</p>
+                                <p class="board-writer-text"> • ${board.problem_id} <spring:message code="text.problemAndNumber"> </spring:message> </p>
                                 <p class="board-time-text"> • ${board.nickName}</p>
                                 <p class="board-time-text"> • ${board.date}</p>
                             </div>
                         </div>
 
                         <div class="board-side-element-info-side">
-                            <div class="board-answer-text"> • 답변수 ${board.answerCount}</div>
-                            <div class="board-like-text"> • 추천수 ${board.likeCount} </div>
+                            <div class="board-answer-text"> • <spring:message code="text.answer"> </spring:message>  ${board.answerCount}</div>
+                            <div class="board-like-text"> • <spring:message code="text.like"> </spring:message>  ${board.likeCount} </div>
                         </div>
                     </div>
                     </a>

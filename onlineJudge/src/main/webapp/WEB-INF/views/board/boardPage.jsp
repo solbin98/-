@@ -27,14 +27,14 @@
                 <div class="board-headline-back-div">
                     <sec:authentication property="principal" var="user"/>
                     <c:if test="${user.nickname eq question.nickName}">
-                        <p class="board-edit-text"><a href="/boards/question-update?board_id=${question.board_id}">• 수정하기</a></p>
-                        <p onclick="deleteBoard(${question.board_id}, ${question.board_id},${question.member_id})" class="board-edit-text"> • 삭제하기 </p>
+                        <p class="board-edit-text"><a href="/boards/question-update?board_id=${question.board_id}">• <spring:message code="text.edit"> </spring:message> </a></p>
+                        <p onclick="deleteBoard(${question.board_id}, ${question.board_id},${question.member_id})" class="board-edit-text"> • <spring:message code="text.remove"> </spring:message>  </p>
                     </c:if>
                 </div>
                 <div class="board-headline-last-div">
                     <form method="post" action="/like">
                         <input value="${question.board_id}" name="board_id" hidden>
-                        <button class="board-edit-text" style="background: none; border: none" type="submit">• 추천수(${question.likeCount})</button>
+                        <button class="board-edit-text" style="background: none; border: none" type="submit">• <spring:message code="text.like"> </spring:message> (${question.likeCount})</button>
                         <p class="board-edit-text"></p>
                     </form>
                 </div>
@@ -55,9 +55,9 @@
                         <sec:authorize access="isAuthenticated()">
                             <sec:authentication property="principal" var="user"/>
                             <c:if test="${user.nickname eq answer.nickName}">
-                                <p class="board-edit-text" onclick="updateAnswer(${question.board_id},${answer.board_id},${answer.member_id})"> • 수정하기 <p/>
+                                <p class="board-edit-text" onclick="updateAnswer(${question.board_id},${answer.board_id},${answer.member_id})"> • <spring:message code="text.edit"> </spring:message>  <p/>
                                 <p></p>
-                                <p onclick="deleteBoard(${question.board_id}, ${answer.board_id}, ${answer.member_id})" class="board-edit-text"> • 삭제하기 </p>
+                                <p onclick="deleteBoard(${question.board_id}, ${answer.board_id}, ${answer.member_id})" class="board-edit-text"> • <spring:message code="text.remove"> </spring:message>  </p>
                             </c:if>
                         </sec:authorize>
                     </div>
@@ -68,7 +68,7 @@
 
     <div class="board-block-full">
         <sec:authorize access="isAuthenticated()">
-            <h3 id="submit-title" class="tag-text">답변 작성</h3>
+            <h3 id="submit-title" class="tag-text"><spring:message code="text.answerDo"> </spring:message> </h3>
             <div class="editor" id="editor"></div>
             <div class="submit-button-div">
                 <button onclick="submitAnswer(${question.board_id})" class="submit-button" id="submit-button"> <spring:message code="button.text.submit"></spring:message> </button>

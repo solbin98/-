@@ -1,12 +1,17 @@
 package com.project.domain.board.question;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public class BoardWriteData {
     int member_id;
-    int problem_id;
+    @NotBlank(message = "문제 번호를 입력해주세요.")
+    String problem_id;
     boolean question;
+    @NotBlank(message = "제목을 입력해주세요.")
     String title;
+    @NotBlank(message = "본문을 입력해주세요.")
     String content;
     List<Integer> images;
 
@@ -30,8 +35,13 @@ public class BoardWriteData {
         this.question = question;
     }
 
-    public BoardWriteData(int problem_id, boolean question, String title, String content, List<Integer> images) {
+    public BoardWriteData(){
+
+    }
+
+    public BoardWriteData(String problem_id, boolean question, String title, String content, List<Integer> images) {
         this.problem_id = problem_id;
+        this.question = question;
         this.title = title;
         this.content = content;
         this.images = images;
@@ -45,11 +55,11 @@ public class BoardWriteData {
         this.images = images;
     }
 
-    public int getProblem_id() {
+    public String getProblem_id() {
         return problem_id;
     }
 
-    public void setProblem_id(int problem_id) {
+    public void setProblem_id(String problem_id) {
         this.problem_id = problem_id;
     }
 

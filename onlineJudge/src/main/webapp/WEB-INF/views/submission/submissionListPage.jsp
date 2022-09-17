@@ -16,16 +16,16 @@
     <div class="problem-list-table">
         <table class="table">
             <thead class="thead-dark">
-            <th scope="col">제출번호</th>
-            <th scope="col">닉네임</th>
-            <th scope="col">문제번호</th>
-            <th scope="col">문제이름</th>
-            <th scope="col">상태</th>
-            <th scope="col">수행시간</th>
-            <th scope="col">메모리</th>
-            <th scope="col">코드길이</th>
-            <th scope="col">제출언어</th>
-            <th scope="col">제출시간</th>
+            <th scope="col"><spring:message code="text.submissionNumber"> </spring:message></th>
+            <th scope="col"><spring:message code="text.nickname"> </spring:message></th>
+            <th scope="col"><spring:message code="text.problemNumber"> </spring:message></th>
+            <th scope="col"><spring:message code="text.problemName"> </spring:message></th>
+            <th scope="col"><spring:message code="text.submissionState"> </spring:message></th>
+            <th scope="col"><spring:message code="text.runningTime"> </spring:message></th>
+            <th scope="col"><spring:message code="text.memoryUsage"> </spring:message></th>
+            <th scope="col"><spring:message code="text.codeLength"> </spring:message></th>
+            <th scope="col"><spring:message code="text.submissionLanguage"> </spring:message></th>
+            <th scope="col"><spring:message code="text.submissionTime"> </spring:message></th>
             </thead>
 
         <c:forEach var="submission" items="${submissions}" varStatus="idx">

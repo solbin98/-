@@ -17,26 +17,26 @@
         <img class="logo-image" src="/resources/png/logo.jpg">
 
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <a href="/main" class="navbar-brand" style="font-size : 23px">  <spring:message code="menu.text.title"> </spring:message> </a>
+            <a href="/main" class="navbar-brand" style="font-size : 23px">  <spring:message code="text.websiteTitle"> </spring:message> </a>
             <div class="navbar-nav">
-                <a href="/problemsList?page=1" methods="GET" class="nav-item nav-link" id="problem-link"> <spring:message code="menu.text.problem"> </spring:message> </a>
-                <a href="/boardList" methods="GET" class="nav-item nav-link" id="board-link">  <spring:message code="menu.text.board"> </spring:message> </a>
-                <a href="/submissionListPage" methods="GET" class="nav-item nav-link" id="submission-link">  <spring:message code="menu.text.submission"> </spring:message> </a>
-                <a href="/rankingPage" methods="GET" class="nav-item nav-link" id="ranking-link">  <spring:message code="menu.text.ranking"> </spring:message> </a>
+                <a href="/problemsList?page=1" methods="GET" class="nav-item nav-link" id="problem-link"> <spring:message code="text.problem"> </spring:message> </a>
+                <a href="/boardList" methods="GET" class="nav-item nav-link" id="board-link">  <spring:message code="text.board"> </spring:message> </a>
+                <a href="/submissionListPage" methods="GET" class="nav-item nav-link" id="submission-link">  <spring:message code="text.submission"> </spring:message> </a>
+                <a href="/rankingPage" methods="GET" class="nav-item nav-link" id="ranking-link">  <spring:message code="text.ranking"> </spring:message> </a>
             </div>
             <div class="navbar-nav">
 
                 <sec:authorize access="isAnonymous()">
-                    <a href="/login" methods="GET" class="nav-item nav-link" id="login-link">  <spring:message code="menu.text.login"> </spring:message> </a>
-                    <a href="/join" methods="GET" class="nav-item nav-link" id="join-link">   <spring:message code="menu.text.join"> </spring:message> </a>
+                    <a href="/login" methods="GET" class="nav-item nav-link" id="login-link">  <spring:message code="text.login"> </spring:message> </a>
+                    <a href="/join" methods="GET" class="nav-item nav-link" id="join-link">   <spring:message code="text.join"> </spring:message> </a>
                 </sec:authorize>
 
                 <sec:authorize access="isAuthenticated()">
-                    <a href="/profilePage" methods="GET" class="nav-item nav-link" id="profile-link">  <spring:message code="menu.text.profile"> </spring:message> </a>
+                    <a href="/profilePage" methods="GET" class="nav-item nav-link" id="profile-link">  <spring:message code="text.profile"> </spring:message> </a>
                     <sec:authorize access="hasRole('ADMIN')">
-                        <a href="/problem-write" methods="GET" class="nav-item nav-link" id="login-link">  문제 출제 </a>
+                        <a href="/problem-write" methods="GET" class="nav-item nav-link" id="login-link">  <spring:message code="text.problemWrite"> </spring:message> </a>
                     </sec:authorize>
-                    <a href="/logout" methods="GET" class="nav-item nav-link" id="join-link"> <spring:message code="menu.text.logout"> </spring:message> </a>
+                    <a href="/logout" methods="GET" class="nav-item nav-link" id="join-link"> <spring:message code="text.logout"> </spring:message> </a>
                 </sec:authorize>
 
 

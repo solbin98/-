@@ -1,8 +1,8 @@
 package com.project.domain.file;
 
-import com.project.domain.board.BoardFileDao;
+import com.project.domain.board.common.BoardFileDao;
 import com.project.domain.problem.dao.ProblemFileDao;
-import com.project.domain.board.BoardFileDto;
+import com.project.domain.board.common.BoardFileDto;
 import com.project.domain.problem.dto.ProblemFileDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;

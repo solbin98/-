@@ -15,12 +15,12 @@
     <div class="problem-list-table">
         <table class="table table-striped">
             <thead>
-                <th scope="col">번호</th>
-                <th scope="col">난이도</th>
-                <th scope="col">제목</th>
-                <th scope="col">분류</th>
-                <th scope="col">제출</th>
-                <th scope="col">맞힌 사람</th>
+                <th scope="col"><spring:message code="text.problemNumber"> </spring:message> </th>
+                <th scope="col"><spring:message code="text.difficulty"> </spring:message> </th>
+                <th scope="col"><spring:message code="text.category"> </spring:message> </th>
+                <th scope="col"><spring:message code="text.join"> </spring:message> </th>
+                <th scope="col"><spring:message code="text.submission"> </spring:message> </th>
+                <th scope="col"><spring:message code="text.acNumber"> </spring:message> </th>
             </thead>
 
             <c:forEach var="problem" items="${problems}" varStatus="idx">

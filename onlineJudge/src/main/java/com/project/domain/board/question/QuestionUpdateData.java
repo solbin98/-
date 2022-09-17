@@ -1,12 +1,16 @@
 package com.project.domain.board.question;
 
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 public class QuestionUpdateData{
     int member_id;
     int board_id;
+    @NotBlank
     int problem_id;
+    @NotBlank
     String title;
+    @NotBlank
     String content;
     List<Integer> images;
 
