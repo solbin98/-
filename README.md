@@ -26,7 +26,8 @@ Force .. 등등 ) 과 같이, 온라인 소스코드 채점 시스템 구현을 
 
 ### 💻 시스템 구성
 
-![시스템 구성도-1](https://user-images.githubusercontent.com/76681977/190891757-c0800f43-cf0a-483e-a0a5-dc847b9e7b5f.png)
+![system_diagram](https://user-images.githubusercontent.com/76681977/194015459-ff5d8cc9-dabf-427e-88f1-370539aa56b6.png)
+
 
 ### 💾 데이터 베이스 ERD
 
