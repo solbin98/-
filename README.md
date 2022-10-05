@@ -333,6 +333,15 @@ MultipartFile 클래스를 활용했습니다.
 ![이미지 첨부](https://user-images.githubusercontent.com/76681977/190899870-263974ee-1e26-4999-ac3c-f27118707d7f.png)
 * 이미지 첨부
 
+![틀렸습니다](https://user-images.githubusercontent.com/76681977/194070142-d2c835eb-98d4-46dc-b67b-2bb25d130e86.gif)
+* 틀린 정답 제출
+
+![시간 초과](https://user-images.githubusercontent.com/76681977/194070154-7c277754-0815-4245-9294-a8b380660b45.gif)
+* 시간 초과인 정답 제출
+
+![컴파일 에러](https://user-images.githubusercontent.com/76681977/194070166-a5cca62b-5e48-4ad3-8323-bbdbd5f14227.gif)
+* 컴파일 에러인 정답 제출
+
 
 <br>
 
@@ -351,6 +360,8 @@ MultipartFile 클래스를 활용했습니다.
 
 ![제출 현황 페이지](https://user-images.githubusercontent.com/76681977/190900248-c5544d10-a0a2-4d6a-a505-7ce8d4a1c69a.png)
 * 채점 현황 페이지
+
+
 
 <br>
 
