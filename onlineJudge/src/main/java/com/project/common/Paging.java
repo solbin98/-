@@ -7,16 +7,13 @@ public class Paging {
     int lastPage; // 마지막 페이지
     int leftMostPage; // 가장 왼쪽 페이지
     int rightMostPage; // 가장 우측 페이지
-    boolean leftPossible; // 페이지 -1 가능 여부
-    boolean rightPossible; // 페이지 + 1 가능 여부
 
     public Paging(int nowPage, int perPage, int total) {
-        this.nowPage = nowPage;
-        this.perPage = perPage;
         this.total = total;
+        this.perPage = perPage;
         calcLastPage();
+        setNowPage(nowPage);
         calcLeftAndRightMostPage();
-        calcPossible();
     }
 
     void calcLastPage(){
@@ -29,22 +26,15 @@ public class Paging {
         this.rightMostPage = Math.min(rightMostPage, lastPage);
     }
 
-    void calcPossible(){
-        if(leftMostPage <= 1) this.leftPossible = false;
-        else this.leftPossible = true;
-
-        if(rightMostPage <= nowPage) this.rightPossible = false;
-        else this.rightPossible = true;
-    }
-
     public int getNowPage() {
         return nowPage;
     }
 
     public void setNowPage(int nowPage) {
-        this.nowPage = nowPage;
+        if(nowPage < 1) this.nowPage = 1;
+        else if(nowPage > this.lastPage) this.nowPage = lastPage;
+        else this.nowPage = nowPage;
     }
-
     public int getPerPage() {
         return perPage;
     }
@@ -85,19 +75,4 @@ public class Paging {
         this.rightMostPage = rightMostPage;
     }
 
-    public boolean isLeftPossible() {
-        return leftPossible;
-    }
-
-    public void setLeftPossible(boolean leftPossible) {
-        this.leftPossible = leftPossible;
-    }
-
-    public boolean isRightPossible() {
-        return rightPossible;
-    }
-
-    public void setRightPossible(boolean rightPossible) {
-        this.rightPossible = rightPossible;
-    }
 }

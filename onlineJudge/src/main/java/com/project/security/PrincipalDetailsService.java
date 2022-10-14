@@ -23,7 +23,8 @@ public class PrincipalDetailsService implements UserDetailsService {
             return new PrincipalDetails(user);
         }
         else {
-            throw new UsernameNotFoundException("로그인 실패");
+            System.out.println("찾을 수 없어요");
+            throw new UsernameNotFoundException("");
         }
     }
 }

@@ -12,7 +12,7 @@
     <h2 class="source-code-text"> ${submission_id} 번 제출 / 소스코드</h2>
 
     <form method="post" action="/submission">
-      <textarea class="source-code-div" id="source-code" name="sourceCode"> ${code}</textarea>
+      <textarea class="source-code-div" id="source-code" name="sourceCode" readonly> ${code}</textarea>
     </form>
 
   </div>

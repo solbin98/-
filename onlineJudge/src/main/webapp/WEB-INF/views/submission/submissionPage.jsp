@@ -24,7 +24,6 @@
                 <input name="problem_id" value="${problem_id}" hidden="true"></input>
                 <button class="submit-button" type="submit"> <spring:message code="text.submission"> </spring:message>  </button>
             </form>
-
         </div>
     </div>
 </body>

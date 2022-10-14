@@ -20,15 +20,6 @@ public class TagService {
         return ret;
     }
 
-    public List<TagDto> getTagDtoListByProblemTagDtoList(List<ProblemTagDto> problemTagDtoList){
-        List<TagDto> ret = new ArrayList<TagDto>();
-        for(int i=0;i< problemTagDtoList.size();i++){
-            int tag_id = problemTagDtoList.get(i).getTag_id();
-            ret.add(tagDao.selectById(tag_id));
-        }
-        return ret;
-    }
-
     public void addTagByTagNameList(List<String> tagNameList) throws Exception {
         // 1. 이미 존재하는 태그인지를 검사하고,
         // 2. 존재하지 않는 태그인 경우에는 insert 해줌.

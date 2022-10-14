@@ -94,7 +94,7 @@ function submitProblem(){
 
     $.ajax({
         type : "POST",
-        url : "/problems",
+        url : "/problem",
         data : formData,
         dataType: 'json',
         processData: false,
@@ -105,7 +105,7 @@ function submitProblem(){
         success : function(res){
             console.log(res);
             alert("문제 출제에 성공했습니다.");
-            location.replace("/problemsList?page=1");
+            location.replace("/problemList?page=1");
         },
         error : function(XMLHttpRequest, textStatus, errorThrown){
             console.log(XMLHttpRequest);
@@ -117,9 +117,7 @@ function submitProblem(){
                 try{
                     alert(XMLHttpRequest.responseJSON.message)
                 }
-                catch (e){
-
-                }
+                catch (e){}
             }
         }
     });
@@ -144,10 +142,7 @@ function submitBoardAjaxForm(method, data, url){
                 for(let i=0;i<size;i++) alert(XMLHttpRequest.responseJSON.fieldErrorList[i].message);
             }
             catch (e){
-                try{
-                    alert(XMLHttpRequest.responseJSON.message)
-                }
-                catch (e){}
+                alert(XMLHttpRequest.responseJSON.message)
             }
         }
     });
@@ -168,7 +163,6 @@ function submitQuestion(){
     let problem_id = document.getElementById("problem_id").value;
     let title = document.getElementById("title").value;
     let data = {"content" : htmlCode, "problem_id" : problem_id, "question" : true, "title" : title, "images" : images};
-    alert(JSON.stringify(data));
     submitBoardAjaxForm("POST", data, url);
 }
 
@@ -204,6 +198,7 @@ function updateQuestion(board_id, member_id){
 function deleteBoard(question_id, board_id, member_id){
     let url = "/boards?board_id=" + board_id +"&member_id=" + member_id + "&question_id=" + question_id;
     submitBoardAjaxForm("DELETE", {}, url);
+    window.location.href='/boardList';
 }
 
 function getImageFileNameFromSrc(src){
@@ -241,7 +236,6 @@ function setImageFileIdByImageList(htmlCode){
     }
     return tmpDoc.innerHTML;
 }
-
 
 
 function initializeAllImageList(htmlCode){

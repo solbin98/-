@@ -11,20 +11,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class LikeController {
-    // like 서비스를 구현하는 것이 정석이지만,
-    // 재 활용성이 적은 파트이기 때문에 Dao 를 controller 에서 직접 불러오도록 간단하게 구현
     @Autowired
     LikeDBDao likeDBDao;
 
     @PostMapping("like")
     public String addLike(@RequestParam("board_id") int board_id, Authentication authentication){
         int member_id = ((PrincipalDetails)(authentication.getPrincipal())).getUser().getId();
-        try{
-            int cnt = likeDBDao.selectCountByBoardIdAndMemberId(board_id, member_id);
-            if(cnt > 0) likeDBDao.deleteByBoardIdAndMemberId(board_id, member_id);
-            else likeDBDao.insert(new LikeDBDto(board_id, member_id));
-        }
-        catch (Exception exception){}
+        int cnt = likeDBDao.selectCountByBoardIdAndMemberId(board_id, member_id);
+        if(cnt > 0) likeDBDao.deleteByBoardIdAndMemberId(board_id, member_id);
+        else likeDBDao.insert(new LikeDBDto(board_id, member_id));
         return "redirect:/boards?question_id=" + board_id;
     }
 }

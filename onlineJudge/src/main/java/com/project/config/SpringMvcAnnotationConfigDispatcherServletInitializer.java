@@ -36,6 +36,4 @@ public class SpringMvcAnnotationConfigDispatcherServletInitializer
     protected String[] getServletMappings() {
         return new String[] { "/" };
     }
-
-
 }

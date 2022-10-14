@@ -31,7 +31,7 @@ void initMysql(MYSQL* mysql, MYSQL_RES* res, MYSQL_ROW* row){
     
     mysql_init(mysql);
 
-    if (!mysql_real_connect(mysql, NULL, "", "", "", , (char*)NULL, 0))
+    if (!mysql_real_connect(mysql, NULL, "solbin98", "rmsmsrksma1@", "onlineJudge", 3306, (char*)NULL, 0))
     {
         printf("%s\n", mysql_error(mysql));
         exit(1);
@@ -108,6 +108,7 @@ int compile(){
 }
 
 string getInputFilePath(const string & problem_id, const string & num){
+    cout << "problem_id : " << problem_id << endl;
     string path = "/home/ubuntu/files/testcases/" + problem_id + "/input" + num + ".txt";
     return path;
 }
@@ -315,9 +316,9 @@ int main()
 	
 	pushSubmissionsToQueue(queue, res);
 	
-	printSubmissionQueue(queue);
+	//printSubmissionQueue(queue);
 	grading(queue);
-	printSubmissionQueue(queue);
+	//printSubmissionQueue(queue);
 
 	updateSubmissionState(queue, mysql);
 	sleep(1);

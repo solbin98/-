@@ -1,8 +1,13 @@
-package com.project.domain.board.common;
+package com.project.domain.board.common.controller;
 
 import com.project.common.ResponseForm;
 import com.project.domain.board.answer.AnswerUpdateData;
 import com.project.domain.board.answer.AnswerWriteData;
+import com.project.domain.board.common.dto.BoardDeleteData;
+import com.project.domain.board.common.dto.BoardFileDto;
+import com.project.domain.board.common.dto.BoardFileQuestionDto;
+import com.project.domain.board.common.dto.BoardListPageDto;
+import com.project.domain.board.common.service.BoardService;
 import com.project.domain.board.question.BoardWriteData;
 import com.project.domain.board.question.QuestionUpdateData;
 import com.project.domain.file.FileService;
@@ -17,7 +22,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -27,7 +31,6 @@ import java.util.Locale;
 @Controller
 public class BoardController {
     static final int perPage = 10;
-
     @Autowired
     MessageSource messageSource;
     @Autowired
@@ -43,7 +46,7 @@ public class BoardController {
                                    @RequestParam(value = "type", required = false) String type,
                                    Model model){
         if(nowPage == null) nowPage = 1;
-        Paging paging = new Paging(nowPage, perPage, boardService.getTotalBoard());
+        Paging paging = new Paging(nowPage, perPage, boardService.getTotalQuestionBoard());
         String sql = boardService.getSqlConditionByKeyWord(keyword, type);
         List<BoardListPageDto> boardList = boardService.getBoardListPageDtoByConditionSqlAndPaging(sql, paging);
         model.addAttribute("boards", boardList);
@@ -70,7 +73,6 @@ public class BoardController {
     @GetMapping("boards/question-update")
     public String getBoardUpdatePage(@RequestParam("board_id") int board_id, Model model) throws Exception {
         BoardListPageDto data = boardService.getBoardByBoardId(board_id);
-
         model.addAttribute("board_id", data.getBoard_id());
         model.addAttribute("problem_id", data.getProblem_id());
         model.addAttribute("content", data.getContent());
@@ -99,10 +101,9 @@ public class BoardController {
     @PreAuthorize("isAuthenticated() and (( #questionUpdateData.member_id == principal.id ) or hasRole('ROLE_ADMIN'))")
     @PutMapping("boards/question*")
     @ResponseBody
-    public ResponseEntity<ResponseForm> updateQuestionBoard(@Valid @RequestBody QuestionUpdateData questionUpdateData, BindingResult bindingResult, Authentication authentication) throws Exception {
-        if(bindingResult.hasErrors()) throw new IllegalArgumentException();
-
+    public ResponseEntity<ResponseForm> updateQuestionBoard(@Valid @RequestBody QuestionUpdateData questionUpdateData, Authentication authentication) throws Exception {
         boardService.updateQuestion(questionUpdateData);
+
         List<BoardFileDto> boardFileDtoList = fileService.getBoardFileDtoByBoardId(questionUpdateData.getBoard_id());
         List<Integer> fileIdList = fileService.getFileIdListFromBoardFileDtoList(boardFileDtoList);
         fileService.setUsedColumnFalseByIdList(fileIdList);
@@ -114,9 +115,7 @@ public class BoardController {
 
     @PostMapping("boards/answer")
     @ResponseBody
-    public ResponseEntity<ResponseForm> addAnswerBoard(@RequestBody AnswerWriteData answerWriteData, BindingResult bindingResult, Authentication authentication) throws Exception{
-        if(bindingResult.hasErrors()) throw new IllegalArgumentException();
-
+    public ResponseEntity<ResponseForm> addAnswerBoard(@RequestBody AnswerWriteData answerWriteData,  Authentication authentication) throws Exception{
         int member_id = ((PrincipalDetails)(authentication.getPrincipal())).getUser().getId();
         answerWriteData.setMember_id(member_id);
         boardService.addAnswer(answerWriteData);
@@ -129,7 +128,8 @@ public class BoardController {
     @PutMapping("boards/answer*")
     @PreAuthorize("isAuthenticated() and (( #answerUpdateData.member_id == principal.id ) or hasRole('ROLE_ADMIN'))")
     @ResponseBody
-    public ResponseEntity<ResponseForm> updateAnswerBoard(@RequestBody AnswerUpdateData answerUpdateData, BindingResult bindingResult) throws Exception{
+    public ResponseEntity<ResponseForm> updateAnswerBoard(@ModelAttribute AnswerUpdateData answerUpdateData) throws Exception{
+
         boardService.updateAnswer(answerUpdateData);
         List<BoardFileDto> boardFileDtoList = fileService.getBoardFileDtoByBoardId(answerUpdateData.getBoard_id());
         List<Integer> fileIdList = fileService.getFileIdListFromBoardFileDtoList(boardFileDtoList);
@@ -144,11 +144,16 @@ public class BoardController {
     @PreAuthorize("isAuthenticated() and (( #boardDeleteData.member_id == principal.id ) or hasRole('ROLE_ADMIN'))")
     @ResponseBody
     public ResponseEntity<ResponseForm> deleteBoard(BoardDeleteData boardDeleteData) throws Exception {
-        List<BoardFileDto> boardFileDtoList = fileService.getBoardFileDtoByBoardId(boardDeleteData.getBoard_id());
-        List<Integer> fileIdList = fileService.getFileIdListFromBoardFileDtoList(boardFileDtoList);
-        fileService.setUsedColumnFalseByIdList(fileIdList);
-        boardService.deleteBoardById(boardDeleteData.getBoard_id());
+        List<BoardFileDto> questionBoardFileDtoList = fileService.getBoardFileDtoByBoardId(boardDeleteData.getBoard_id());
+        List<BoardFileQuestionDto> answerBoardFileDtoList = fileService.getBoardFileDtoByQuestionId(boardDeleteData.getBoard_id());
 
-        return new ResponseEntity<>(new ResponseForm("/boards?question_id=" + boardDeleteData.getQuestion_id()), HttpStatus.OK);
+        List<Integer> questionFileIdList = fileService.getFileIdListFromBoardFileDtoList(questionBoardFileDtoList);
+        List<Integer> answerFileIdList = fileService.getFileIdListFromBoardFileQuestionDtoList(answerBoardFileDtoList);
+
+        fileService.setUsedColumnFalseByIdList(questionFileIdList);
+        fileService.setUsedColumnFalseByIdList(answerFileIdList);
+        boardService.deleteBoardById(boardDeleteData.getBoard_id());
+        boardService.deleteBoardByQuestionId(boardDeleteData.getBoard_id());
+        return new ResponseEntity<>(new ResponseForm("/boardList?page=1"), HttpStatus.OK);
     }
 }

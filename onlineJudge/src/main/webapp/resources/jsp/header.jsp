@@ -17,11 +17,11 @@
         <img class="logo-image" src="/resources/png/logo.jpg">
 
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <a href="/main" class="navbar-brand" style="font-size : 23px">  <spring:message code="text.websiteTitle"> </spring:message> </a>
+            <a class="navbar-brand" style="font-size : 23px">  <spring:message code="text.websiteTitle"> </spring:message> </a>
             <div class="navbar-nav">
-                <a href="/problemsList?page=1" methods="GET" class="nav-item nav-link" id="problem-link"> <spring:message code="text.problem"> </spring:message> </a>
+                <a href="/problemList?page=1" methods="GET" class="nav-item nav-link" id="problem-link"> <spring:message code="text.problem"> </spring:message> </a>
                 <a href="/boardList" methods="GET" class="nav-item nav-link" id="board-link">  <spring:message code="text.board"> </spring:message> </a>
-                <a href="/submissionListPage" methods="GET" class="nav-item nav-link" id="submission-link">  <spring:message code="text.submission"> </spring:message> </a>
+                <a href="/submissionList" methods="GET" class="nav-item nav-link" id="submission-link">  <spring:message code="text.submission"> </spring:message> </a>
                 <a href="/rankingPage" methods="GET" class="nav-item nav-link" id="ranking-link">  <spring:message code="text.ranking"> </spring:message> </a>
             </div>
             <div class="navbar-nav">

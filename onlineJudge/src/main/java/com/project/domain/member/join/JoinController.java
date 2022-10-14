@@ -29,7 +29,6 @@ public class JoinController {
     MailService mailService;
     @Autowired
     JoinValidator joinValidator;
-
     @Autowired
     MessageSource messageSource;
 
@@ -44,7 +43,6 @@ public class JoinController {
     public String join(@Validated @ModelAttribute("JoinFormData") JoinFormData joinFormData, BindingResult bindingResult, Model model){
         // joinValidator 을 통한 회원 가입 폼 데이터 검증
         joinValidator.validate(joinFormData, bindingResult);
-
         if(bindingResult.hasErrors()) {
             setModelObjectFromJoinFormData(model, joinFormData);
             return "join/joinPage";

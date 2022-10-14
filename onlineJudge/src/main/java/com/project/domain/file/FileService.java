@@ -1,8 +1,9 @@
 package com.project.domain.file;
 
-import com.project.domain.board.common.BoardFileDao;
+import com.project.domain.board.common.dao.BoardFileDao;
+import com.project.domain.board.common.dto.BoardFileQuestionDto;
 import com.project.domain.problem.dao.ProblemFileDao;
-import com.project.domain.board.common.BoardFileDto;
+import com.project.domain.board.common.dto.BoardFileDto;
 import com.project.domain.problem.dto.ProblemFileDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -42,6 +43,19 @@ public class FileService {
         return idList;
     }
 
+    public List<Integer> getFileIdListFromBoardFileQuestionDtoList(List<BoardFileQuestionDto> list){
+        if(list == null) return new ArrayList<Integer>();
+        List<Integer> idList = new ArrayList<>();
+        for(int i=0;i<list.size();i++){
+            idList.add(list.get(i).getFile_id());
+        }
+        return idList;
+    }
+
+    public List<BoardFileQuestionDto> getBoardFileDtoByQuestionId(int question_id){
+        return boardFileDao.selectByQuestionIdWithJoin(question_id);
+    }
+
     public List<FileDto> getUnusedFile(){
         return fileDao.selectUnused();
     }
@@ -62,19 +76,17 @@ public class FileService {
         fileDao.insert(fileDto);
     }
 
-    public void addBoardFileByFileIdListAndBoardId(List<Integer> list, int board_id){
+    public void addBoardFileByFileIdListAndBoardId(List<Integer> list, int board_id) throws Exception{
         if(list == null) return;
         for(int i=0;i<list.size();i++) {
-            try{ addBoardFile(new BoardFileDto(board_id, list.get(i))); }
-            catch (Exception e){ System.out.println("중복 존재!"); }
+            addBoardFile(new BoardFileDto(board_id, list.get(i)));
         }
     }
 
-    public void addProblemFileByFileIdListAndBoardId(List<Integer> list, int board_id){
+    public void addProblemFileByFileIdListAndBoardId(List<Integer> list, int board_id) throws Exception{
         if(list == null) return;
         for(int i=0;i<list.size();i++) {
-            try{ addProblemFile(new ProblemFileDto(board_id, list.get(i))); }
-            catch (Exception e){ System.out.println("중복 존재!"); }
+            addProblemFile(new ProblemFileDto(board_id, list.get(i)));
         }
     }
 

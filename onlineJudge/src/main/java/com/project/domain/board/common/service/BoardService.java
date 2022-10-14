@@ -1,7 +1,9 @@
-package com.project.domain.board.common;
+package com.project.domain.board.common.service;
 
 import com.project.domain.board.answer.AnswerUpdateData;
 import com.project.domain.board.answer.AnswerWriteData;
+import com.project.domain.board.common.dao.BoardDao;
+import com.project.domain.board.common.dto.BoardListPageDto;
 import com.project.domain.board.question.BoardWriteData;
 import com.project.domain.board.question.QuestionUpdateData;
 import com.project.domain.board.LikeDBDao;
@@ -18,15 +20,27 @@ public class BoardService {
     @Autowired
     LikeDBDao  likeDBDao;
 
+    public static boolean isNullOrEmpty(String str) {
+        if (str == null) {
+            return true;
+        } else if (str.trim().isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public String getSqlConditionByKeyWord(String keyword, String type){
         String sql = " where ";
-        if(keyword != null) sql += " board." + type + " like '%" + keyword + "%' and ";
+        if(!isNullOrEmpty(keyword) && !isNullOrEmpty(type)) sql += " board." + type + " like '%" + keyword + "%' and ";
         return sql;
     }
 
     public Integer getLastBoardId() { return boardDao.selectLastBoardId(); }
 
     public void deleteBoardById(int board_id) { boardDao.deleteById(board_id); }
+
+    public void deleteBoardByQuestionId(int question_id) { boardDao.deleteByQuestionId(question_id);}
 
     public void updateAnswer(AnswerUpdateData answerUpdateData)  throws Exception { boardDao.updateAnswer(answerUpdateData);}
 
@@ -59,8 +73,7 @@ public class BoardService {
         return list;
     }
 
-
-    public int getTotalBoard(){
-        return boardDao.selectCount();
+    public int getTotalQuestionBoard(){
+        return boardDao.selectCountQuestionBoard();
     }
 }

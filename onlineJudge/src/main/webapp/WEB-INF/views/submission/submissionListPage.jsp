@@ -33,7 +33,7 @@
                 <td> ${submission.submission_id} </td>
                 <td> ${submission.nickName} </td>
                 <td> ${submission.problem_id}</td>
-                <td><a href="/problems/${submission.problem_id}">${submission.problemName}</a></td>
+                <td><a href="/problem/${submission.problem_id}">${submission.problemName}</a></td>
                 <c:if test="${submission.state eq 'PC'}"> <td class="proceeding" id="submission-state${submission.submission_id}"> 채점 대기중.... </td></c:if>
                 <c:if test="${submission.state eq 'AC'}"> <td class="answer-correct" id="submission-state${submission.submission_id}"> 맞았습니다! </td></c:if>
                 <c:if test="${submission.state eq 'WA'}"> <td class="wrong-answer" id="submission-state${submission.submission_id}"> 틀렸습니다 </td></c:if>
@@ -52,7 +52,7 @@
     </table>
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
+            <li class="page-item">
                 <a class="page-link" href="/submissionList?page=${paging.nowPage-1}">이전 </a>
             </li>
             <c:forEach begin="${paging.leftMostPage}" end="${paging.rightMostPage}" varStatus="page">
@@ -85,6 +85,11 @@
         else if(state == 2) return "진행중..";
     }
 
+    // sid -> submission_id 제출 번호
+    // ipn -> input_number 몇 번째 테스트 케이스 검사 중인지
+    // rt -> running time 수행 시간
+    // mu -> memory usage 메모리 사용량
+    // endOfFile -> 파일의 끝임을 검사
     function findSubmissionBySidAndUpdate(state, sid, ipn, rt, mu, endOfFile){
         let stateElement = document.getElementById("submission-state"+sid);
         let testcaseNumElement = document.getElementById("submission-testcase" + sid);

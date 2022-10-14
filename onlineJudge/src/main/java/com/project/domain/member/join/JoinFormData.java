@@ -1,5 +1,6 @@
 package com.project.domain.member.join;
 
+import org.hibernate.validator.constraints.Length;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.*;
@@ -16,6 +17,7 @@ public class JoinFormData {
     @NotBlank
     @Email(message = "잘못된 이메일 형식입니다.")
     String email;
+    @Length(min=0, max=150)
     String introduction;
 
     public JoinFormData(String username, String password, String passwordCheck, String nickName, String email, String introduction) {
@@ -31,8 +33,8 @@ public class JoinFormData {
         return username;
     }
 
-    public void setUsername(String id) {
-        this.username = id;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {

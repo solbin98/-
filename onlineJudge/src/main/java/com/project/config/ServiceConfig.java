@@ -1,7 +1,7 @@
 package com.project.config;
 
 
-import com.project.domain.board.common.BoardService;
+import com.project.domain.board.common.service.BoardService;
 import com.project.domain.problem.service.ProblemService;
 import com.project.domain.problem.service.ProblemTagService;
 import com.project.domain.problem.service.TagService;

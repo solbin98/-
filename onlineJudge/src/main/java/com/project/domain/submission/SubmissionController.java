@@ -30,15 +30,15 @@ public class SubmissionController {
     LanguageService languageService;
 
 
-    @GetMapping("/submissionPage*")
-    public String getSubmissionPage(@RequestParam(value = "problem_id", required = false) String problem_id, Model model){
+    @GetMapping("/submission?*")
+    public String getSubmissionPage(@RequestParam(value = "problem_id") String problem_id, Model model){
         model.addAttribute("problem_id", problem_id);
         model.addAttribute("languages", languageService.getLanguage());
         return "submission/submissionPage";
     }
 
-    @GetMapping("/submissionHistoryPage*")
-    public String getSubmissionHistoryPage(@RequestParam(value = "submission_id", required = false) int submission_id, Model model){
+    @GetMapping("/submissionHistory?*")
+    public String getSubmissionHistoryPage(@RequestParam(value = "submission_id") int submission_id, Model model){
         model.addAttribute("code", submissionService.getCodeBySubmissionId(submission_id));
         model.addAttribute("submission_id", submission_id);
         return "submission/submissionHistoryPage";

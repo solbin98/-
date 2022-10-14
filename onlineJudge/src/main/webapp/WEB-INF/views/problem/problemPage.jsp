@@ -33,9 +33,9 @@
 
             <div class="board-tagline" id = "board-tagline">
                 <div class="tag-front"> • <spring:message code="text.timeLimit"></spring:message> : </div>
-                <div class="tag-box"> ${problem.time_limit}</div>
+                <div class="tag-box"> ${problem.time_limit} 초</div>
                 <div class="tag-front"> • <spring:message code="text.memoryLimit"></spring:message> : </div>
-                <div class="tag-box"> ${problem.memory_limit}</div>
+                <div class="tag-box"> ${problem.memory_limit} MB</div>
                 <div class="tag-front"> • <spring:message code="text.submission"></spring:message> : </div>
                 <div class="tag-box"> ${submitNumber}</div>
                 <div class="tag-front"> • <spring:message code="text.acSubmission"></spring:message> : </div>

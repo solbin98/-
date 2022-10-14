@@ -24,7 +24,7 @@ public class Scheduler {
     FileService fileService;
 
     // 유저의 랭킹을 업데이트 하기 위함
-    @Scheduled(fixedDelay = 1000 * 60 * 15 ) // 15분 간격으로 유저 랭크 업데이트 * 60 * 15
+    @Scheduled(fixedDelay = 1000 * 60 * 15 ) // 15분 간격으로 유저 랭크 업데이트
     public void updateUserRankingState() {
         List<MemberDto> allMemberList = memberService.getAllMember();
         for(int i=0;i<allMemberList.size();i++){
@@ -35,7 +35,7 @@ public class Scheduler {
         }
     }
 
-    // 매일 새벽 1시에 일괄 삭제 수행
+    // 매일 새벽 3시에 일괄 삭제 수행
     @Scheduled(cron = "0 0 3 * * ?")
     public void removeUnusedImageFile() {
         List<FileDto> fileList = fileService.getUnusedFile();

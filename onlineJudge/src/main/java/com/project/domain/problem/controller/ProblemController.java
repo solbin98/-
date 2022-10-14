@@ -46,19 +46,18 @@ public class ProblemController {
     @Autowired
     FileService fileService;
 
-    @GetMapping("/problems/{problem_id}")
+    @GetMapping("/problem/{problem_id}")
     public String getProblemDetailPage(@PathVariable("problem_id") int problem_id, Model model) throws Exception {
         ProblemDto problemDto = problemService.getProblemById(problem_id);
 
-        List<ProblemTagDto> problemTagDtoList = problemTagService.getProblemTagByProblemId(problem_id);
-        List<TagDto> tagDtoList = tagService.getTagDtoListByProblemTagDtoList(problemTagDtoList);
+        List<ProblemTagJoinDto> problemTagJoinDtoList = problemTagService.getProblemTagJoinDtoListByProblemId(problem_id);
 
         int submitNumber = submissionService.getSubmissionCountByProblemId(problem_id);
         int acSubmitNumber = submissionService.getAcSubmissionCountByProblemId(problem_id);
 
         List<TestcaseDto> testcaseDtoList = testcaseService.getTestCase(problem_id);
 
-        model.addAttribute("tags", tagDtoList);
+        model.addAttribute("tags", problemTagJoinDtoList);
         model.addAttribute("problem", problemDto);
         model.addAttribute("submitNumber", submitNumber);
         model.addAttribute("acSubmitNumber", acSubmitNumber);
@@ -66,20 +65,20 @@ public class ProblemController {
         return "problem/problemPage";
     }
 
-    @GetMapping("/problemsList*")
-    public String getProblemListPage(@RequestParam(value = "page", required = false) String nowPage, Model model) throws Exception {
+    @GetMapping("/problemList*")
+    public String getProblemListPage(@RequestParam(value = "page", required = false) Integer nowPage, Model model) throws Exception {
+        if(nowPage == null) nowPage = 1;
         int total = problemService.getTotal();
-        Paging paging = new Paging(Integer.parseInt(nowPage), perPage, total);
+        Paging paging = new Paging(nowPage, perPage, total);
         List<ProblemDto> problemDtoList = problemService.getProblemsByPaging(paging);
 
-        Map<Integer, List<TagDto>> tags = new HashMap<>();
+        Map<Integer, List<ProblemTagJoinDto>> tags = new HashMap<>();
         Map<Integer, String> submits = new HashMap<>();
         Map<Integer, String> acSubmits = new HashMap<>();
 
         for(int i=0;i<problemDtoList.size();i++){
             int problem_id = problemDtoList.get(i).getProblem_id();
-            List<ProblemTagDto> problemTagDtoList = problemTagService.getProblemTagByProblemId(problem_id);
-            List<TagDto> tagDtoList = tagService.getTagDtoListByProblemTagDtoList(problemTagDtoList);
+            List<ProblemTagJoinDto> tagDtoList = problemTagService.getProblemTagJoinDtoListByProblemId(problem_id);
 
             String submitNumber = Integer.toString(submissionService.getSubmissionCountByProblemId(problem_id));
             String acSubmitNumber = Integer.toString(submissionService.getAcSubmissionCountByProblemId(problem_id));
@@ -101,15 +100,11 @@ public class ProblemController {
         return "problem/problemWritePage";
     }
 
-    @PostMapping("/problems")
+    @PostMapping("/problem")
     @ResponseBody
     public ResponseEntity<ResponseForm> writeProblem(@Valid @ModelAttribute ProblemWriteInfoData problemWriteInfoData, BindingResult bindingResult,
                                                      @RequestPart(value = "testcases", required = false) Map<String, Object> testcases) throws Exception {
 
-        // 요청이 multipart/form-data로 오기 때문에, requestBody 어노테이션을 통해서 구현할 수 없음..
-        // requestBody를 통해 구현할 수 없으므로, json 으로 Vaild 결과로 발생한 methodArgumentNotValidExceptionHandler
-        // 로 곧바로 에러를 반환해줄 수 있는 방법을 모르겠음...
-        // 추후에 더 나은 방법 생각할 것.
         if(bindingResult.hasErrors()){
             List<ObjectError> list = bindingResult.getAllErrors();
             String message = "";
@@ -177,11 +172,9 @@ public class ProblemController {
     public void makeProblemInputOutputFilesFolder(int problem_id){
         String path = messageSource.getMessage("path.testcases.board", null, Locale.KOREAN) + "\\" + problem_id;
         File Folder = new File(path);
-
-        // 해당 디렉토리가 없을경우 디렉토리를 생성합니다.
         if (!Folder.exists()) {
             try{
-                Folder.mkdir(); //폴더 생성합니다.
+                Folder.mkdir();
             }
             catch(Exception e){
                 e.getStackTrace();

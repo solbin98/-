@@ -1,7 +1,7 @@
 package com.project.config;
 
-import com.project.domain.board.common.BoardDao;
-import com.project.domain.board.common.BoardFileDao;
+import com.project.domain.board.common.dao.BoardDao;
+import com.project.domain.board.common.dao.BoardFileDao;
 import com.project.domain.board.LikeDBDao;
 import com.project.domain.file.FileDao;
 import com.project.domain.member.join.EmailAuthDao;

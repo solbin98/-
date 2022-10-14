@@ -1,7 +1,9 @@
-package com.project.domain.board.common;
+package com.project.domain.board.common.dao;
 
 import com.project.domain.board.answer.AnswerUpdateData;
 import com.project.domain.board.answer.AnswerWriteData;
+import com.project.domain.board.common.dto.BoardDto;
+import com.project.domain.board.common.dto.BoardListPageDto;
 import com.project.domain.board.question.BoardWriteData;
 import com.project.domain.board.question.QuestionUpdateData;
 import com.project.common.Paging;
@@ -63,8 +65,8 @@ public class BoardDao {
         return jdbcTemplate.query("select member.member_id, board.board_id, board.problem_id, board.content, board.title, member.name as nickName, board.date  from board inner join member on member.member_id = board.member_id where question_id = ? order by question_id asc", boardListPageDtoRowMapper, question_id);
     }
 
-    public int selectCount(){
-        return jdbcTemplate.queryForObject("select count(*) from board", Integer.class);
+    public int selectCountQuestionBoard(){
+        return jdbcTemplate.queryForObject("select count(*) from board where question = true", Integer.class);
     }
 
     public int selectCountByQuestionId(int question_id){
@@ -114,4 +116,5 @@ public class BoardDao {
     public void deleteById(int board_id){
         jdbcTemplate.update("delete from board where board_id = ?", board_id);
     }
+    public void deleteByQuestionId(int question_id){jdbcTemplate.update("delete from board where question_id = ?", question_id);}
 }

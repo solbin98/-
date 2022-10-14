@@ -14,8 +14,6 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 public class SecurityConfig extends WebSecurityConfigurerAdapter  {
     @Bean
     public FailureHandler failureHandler() { return new FailureHandler();}
-    @Bean
-    public SuccessHandler successHandler() { return new SuccessHandler();}
 
     @Override
     protected void configure(HttpSecurity http) throws  Exception {
@@ -30,7 +28,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter  {
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
                 .failureHandler(failureHandler()) // 로그인 실패 핸들러
-                .successHandler(successHandler()) // 로그인 성공 핸들러
                 .and()
                 .logout()
                 .invalidateHttpSession(true).deleteCookies("JSESSIONID");

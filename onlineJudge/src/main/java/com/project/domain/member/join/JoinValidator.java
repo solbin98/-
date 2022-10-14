@@ -31,7 +31,7 @@ public class JoinValidator implements Validator {
 
         // 아이디 중복 여부 검사
         if(!joinService.checkUserIdDuplication(joinFormData.getUsername())){
-            errors.rejectValue("id","idDuplication");
+            errors.rejectValue("username","idDuplication");
         }
 
         // 닉네임 중복 여부 검사
@@ -40,8 +40,8 @@ public class JoinValidator implements Validator {
         }
 
         //이메일 중복 여부 검사
-        if(!joinService.checkEmailDuplication(joinFormData.getEmail())){
-            errors.rejectValue("email","emailDuplication");
+        if(!joinService.checkEmailDuplication(joinFormData.getEmail())) {
+            errors.rejectValue("email", "emailDuplication");
         }
     }
 }

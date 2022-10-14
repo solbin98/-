@@ -1,9 +1,8 @@
 package com.project.config;
 
-import com.project.domain.board.common.BoardController;
+import com.project.domain.board.common.controller.BoardController;
 import com.project.domain.board.question.LikeController;
 import com.project.domain.image.ImageController;
-import com.project.mainController;
 import com.project.domain.member.join.JoinController;
 import com.project.domain.member.login.LoginController;
 import com.project.domain.member.profile.ProfileController;
@@ -20,9 +19,6 @@ public class ControllerConfig {
 
     @Bean
     public JoinController joinController(){ return new JoinController(); }
-
-    @Bean
-    public mainController mainController() { return new mainController();}
 
     @Bean
     public ProblemController problemController() { return new ProblemController(); }

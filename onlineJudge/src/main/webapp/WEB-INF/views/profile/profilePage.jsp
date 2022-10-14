@@ -35,7 +35,7 @@
 
     <div class="solved-problem-div">
         <c:forEach var="problem" items="${problemIdList}"  varStatus="idx">
-            <a href="/problems/${problem.problem_id}" class="solved-problem-text"><h5>${problem.problem_id}번 - ${problem.problem_name}</h5></a>
+            <a href="/problem/${problem.problem_id}" class="solved-problem-text"><h5>${problem.problem_id}번 - ${problem.problem_name}</h5></a>
         </c:forEach>
     </div>
 </div>

@@ -49,7 +49,6 @@
                                 <p class="board-time-text"> • ${board.date}</p>
                             </div>
                         </div>
-
                         <div class="board-side-element-info-side">
                             <div class="board-answer-text"> • <spring:message code="text.answer"> </spring:message>  ${board.answerCount}</div>
                             <div class="board-like-text"> • <spring:message code="text.like"> </spring:message>  ${board.likeCount} </div>
@@ -63,7 +62,7 @@
     <br>
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
+            <li class="page-item">
                 <a class="page-link" href="/boardList?page=${paging.nowPage-1}&type=${type}&keyword=${keyword}">이전 </a>
             </li>
             <c:forEach begin="${paging.leftMostPage}" end="${paging.rightMostPage}" varStatus="page">

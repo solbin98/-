@@ -16,7 +16,7 @@
         <input id="member_id${question.board_id}" value="${question.member_id}" hidden></input>
         <div class="question-title">
             <h3> Q. ${question.title}</h3>
-            <a href="/problems/${question.problem_id}"><h4> ${question.problem_id}번 문제</h4></a>
+            <a href="/problem/${question.problem_id}"><h4> ${question.problem_id}번 문제</h4></a>
         </div>
         <div class="board-headline">
             <div class="board-headline-middle-div">
@@ -74,7 +74,7 @@
                 <button onclick="submitAnswer(${question.board_id})" class="submit-button" id="submit-button"> <spring:message code="button.text.submit"></spring:message> </button>
             </div>
         </sec:authorize>
-
+        <!-- "/login?redirect="${request.getContextPath()} -->
         <sec:authorize access="isAnonymous()">
             <h3 class="tag-text">답변을 작성하려면 <a href="/login"> 로그인 </a> 해야합니다.</h3>
         </sec:authorize>
@@ -82,6 +82,6 @@
 </body>
 
 <script>
-    <%@include file="/resources/js/writeBoard.js" %>
+    <%@include file="/resources/js/board.js" %>
 </script>
 </html>

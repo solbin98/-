@@ -1,8 +1,6 @@
 package com.project.domain.problem.service;
 
-import com.project.domain.problem.dto.ProblemDto;
-import com.project.domain.problem.dto.ProblemInfoData;
-import com.project.domain.problem.dto.TagDto;
+import com.project.domain.problem.dto.*;
 import com.project.domain.problem.dao.ProblemDao;
 import com.project.common.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,10 +35,10 @@ public class ProblemService {
     }
 
     public List<ProblemInfoData> getProblemsInfoDataListByProblemDtoList(
-                                                                List<ProblemDto> problemDtoList,
-                                                                Map<Integer, List<TagDto>> tagsList,
-                                                                Map<Integer, String> submissionNumberMap,
-                                                                Map<Integer, String> acSubmissionNumberMap
+            List<ProblemDto> problemDtoList,
+            Map<Integer, List<ProblemTagJoinDto>> tagsList,
+            Map<Integer, String> submissionNumberMap,
+            Map<Integer, String> acSubmissionNumberMap
                                                                 ){
         List<ProblemInfoData> ret = new ArrayList<>();
         for(int i=0;i<problemDtoList.size();i++){
@@ -48,7 +46,7 @@ public class ProblemService {
             int pid = problemDto.getProblem_id();
             String submissionNumber = submissionNumberMap.get(pid);
             String acSubmissionNumber = acSubmissionNumberMap.get(pid);
-            List<TagDto> tags = tagsList.get(pid);
+            List<ProblemTagJoinDto> tags = tagsList.get(pid);
             ret.add(convertProblemDtoToProblemInfoData(problemDto, submissionNumber, acSubmissionNumber, tags));
         }
         return ret;
@@ -57,7 +55,7 @@ public class ProblemService {
     public ProblemInfoData convertProblemDtoToProblemInfoData(ProblemDto problemDto,
                                                               String submissionNumber,
                                                               String acSubmissionNumber,
-                                                              List<TagDto> tags){
+                                                              List<ProblemTagJoinDto> tags){
         return new ProblemInfoData(
                 problemDto.getProblem_id(),
                 problemDto.getTitle(),
@@ -71,5 +69,4 @@ public class ProblemService {
                 acSubmissionNumber,
                 tags);
     }
-
 }

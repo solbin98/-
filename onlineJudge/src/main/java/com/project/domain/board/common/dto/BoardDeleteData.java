@@ -1,4 +1,4 @@
-package com.project.domain.board.common;
+package com.project.domain.board.common.dto;
 
 public class BoardDeleteData {
     int member_id;

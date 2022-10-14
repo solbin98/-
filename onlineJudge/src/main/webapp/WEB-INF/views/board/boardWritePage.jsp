@@ -44,6 +44,6 @@
     </div>
 </body>
 <script>
-    <%@include file="/resources/js/writeBoard.js" %>
+    <%@include file="/resources/js/board.js" %>
 </script>
 </html>

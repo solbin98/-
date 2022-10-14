@@ -1,5 +1,6 @@
 package com.project.domain.problem.dto;
 
+import org.hibernate.validator.constraints.Length;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotBlank;
@@ -7,10 +8,13 @@ import java.util.List;
 
 public class ProblemWriteInfoData {
     @NotBlank(message = "제목을 입력해 주세요.")
+    @Length(min=0, max=120, message = "제목은 120자 보다 클 수 없습니다.")
     String title;
     @NotBlank(message = "시간제한을 입력해 주세요.")
+    @Length(min=0, max=45, message = "시간 제한은 45자 보다 클 수 없습니다.")
     String time_limit;
     @NotBlank(message = "메모리 제한을 입력해 주세요.")
+    @Length(min=0, max=45, message = "메모리 제한은 45자 보다 클 수 없습니다.")
     String memory_limit;
     @NotBlank(message = "본문을 입력해 주세요.")
     String content;

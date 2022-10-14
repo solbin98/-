@@ -65,6 +65,7 @@
                                         <p class="error-text"><form:errors path="email"></form:errors></p>
                                     </div>
                                 </div>
+                                <br><br>
                                 <div class="form-outline mb-4">
                                     <textarea class="form-control" name="introduction" class="introduction-box" placeholder="<spring:message code="input.text.introduction"></spring:message>" value="${introduction}"></textarea>
                                 </div>

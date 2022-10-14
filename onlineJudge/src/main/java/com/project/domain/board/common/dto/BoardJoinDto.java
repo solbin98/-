@@ -1,6 +1,4 @@
-package com.project.domain.board.common;
-
-import com.project.domain.board.common.BoardDto;
+package com.project.domain.board.common.dto;
 
 public class BoardJoinDto extends BoardDto {
     String nickName;

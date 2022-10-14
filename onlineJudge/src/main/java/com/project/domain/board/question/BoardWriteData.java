@@ -1,5 +1,7 @@
 package com.project.domain.board.question;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -10,6 +12,7 @@ public class BoardWriteData {
     String problem_id;
     boolean question;
     @NotBlank(message = "제목을 입력해주세요.")
+    @Length(min=0, max=120, message = "제목은 120자 보다 클 수 없습니다.")
     String title;
     @NotBlank(message = "본문을 입력해주세요.")
     String content;
