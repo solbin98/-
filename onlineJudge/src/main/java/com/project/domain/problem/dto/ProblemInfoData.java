@@ -12,11 +12,11 @@ public class ProblemInfoData { // 문제 리스트 페이지에서 model 객체�
     String input_condition;
     String output_condition;
     String difficulty;
-    String submissionNumber;
-    String acSubmissionNumber;
+    int submissionNumber;
+    int acSubmissionNumber;
     List<ProblemTagJoinDto> tags;
 
-    public ProblemInfoData(int problem_id, String title, String time_limit, String memory_limit, String content, String input_condition, String output_condition, String difficulty, String submissionNumber, String acSubmissionNumber, List<ProblemTagJoinDto> tags) {
+    public ProblemInfoData(int problem_id, String title, String time_limit, String memory_limit, String content, String input_condition, String output_condition, String difficulty, int submissionNumber, int acSubmissionNumber, List<ProblemTagJoinDto> tags) {
         this.problem_id = problem_id;
         this.title = title;
         this.time_limit = time_limit;
@@ -94,19 +94,19 @@ public class ProblemInfoData { // 문제 리스트 페이지에서 model 객체�
         this.difficulty = difficulty;
     }
 
-    public String getSubmissionNumber() {
+    public int getSubmissionNumber() {
         return submissionNumber;
     }
 
-    public void setSubmissionNumber(String submissionNumber) {
+    public void setSubmissionNumber(int submissionNumber) {
         this.submissionNumber = submissionNumber;
     }
 
-    public String getAcSubmissionNumber() {
+    public int getAcSubmissionNumber() {
         return acSubmissionNumber;
     }
 
-    public void setAcSubmissionNumber(String acSubmissionNumber) {
+    public void setAcSubmissionNumber(int acSubmissionNumber) {
         this.acSubmissionNumber = acSubmissionNumber;
     }
 

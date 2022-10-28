@@ -1,51 +1,29 @@
 package com.project.config;
 
-
 import com.project.common.Scheduler;
-import com.project.domain.member.join.JoinValidator;
 import com.project.domain.member.join.AuthKeyMaker;
+import com.project.domain.member.join.JoinValidator;
 import com.project.exception.ExceptionHandlerClass;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
-import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
-import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.util.Properties;
 
 @Configuration
-@EnableWebMvc
-@EnableScheduling
-public class MvcConfig implements WebMvcConfigurer {
+@ComponentScan(
+        basePackages= "com.project.domain",
+        excludeFilters= @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = {Controller.class})
+)
 
-    @Override
-    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-        configurer.enable();
-    }
-
-    @Override
-    public void configureViewResolvers(ViewResolverRegistry registry) {
-        registry.jsp("/WEB-INF/views/", ".jsp");
-    }
-
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-        registry.addResourceHandler("/images/boards/**").addResourceLocations("file:///C:/springTest/images/boards/");
-        registry.addResourceHandler("/images/profiles/**").addResourceLocations("file:///C:/springTest/images/profiles/");
-    }
-
-    @Bean
-    public MultipartResolver multipartResolver() {
-        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
-        resolver.setMaxInMemorySize(100000000);
-        resolver.setMaxUploadSize(200000000);
-        return resolver;
-    }
-
+public class RootContext {
     @Bean
     public ReloadableResourceBundleMessageSource messageSource() {
         ReloadableResourceBundleMessageSource source = new ReloadableResourceBundleMessageSource();
@@ -57,14 +35,21 @@ public class MvcConfig implements WebMvcConfigurer {
         return source;
     }
 
+    @Bean
+    public MultipartResolver multipartResolver() {
+        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+        resolver.setMaxInMemorySize(100000000);
+        resolver.setMaxUploadSize(200000000);
+        return resolver;
+    }
 
     @Bean(name="mailSender")
     public JavaMailSenderImpl mailSender(){
         JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
         javaMailSender.setHost("smtp.gmail.com");
         javaMailSender.setPort(587);
-        javaMailSender.setUsername("exode4@gmail.com");
-        javaMailSender.setPassword("rrbbwfvlmiqjptsi");
+        javaMailSender.setUsername(InfoForProject.JavaMailSenderUserName);
+        javaMailSender.setPassword(InfoForProject.JavaMailSenderPassword);
         javaMailSender.setDefaultEncoding("utf-8");
 
         Properties properties = new Properties();

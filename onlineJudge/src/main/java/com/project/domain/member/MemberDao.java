@@ -4,11 +4,13 @@ import com.project.domain.member.login.LoginInfoData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+@Repository
 public class MemberDao {
 
     private RowMapper<MemberDto> memberDtoMapper = new RowMapper<MemberDto>() {
@@ -31,7 +33,7 @@ public class MemberDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public Boolean validateLoginInfo(LoginInfoData loginInfoData){
+    public Boolean validateLoginInfo(LoginInfoData loginInfoData) {
         try{
             List<MemberDto> ret = jdbcTemplate.query("select * from member where userid = ? and password = ?",
                     memberDtoMapper,

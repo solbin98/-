@@ -34,27 +34,9 @@ public class ProblemService {
         return problemDao.selectById(problem_id);
     }
 
-    public List<ProblemInfoData> getProblemsInfoDataListByProblemDtoList(
-            List<ProblemDto> problemDtoList,
-            Map<Integer, List<ProblemTagJoinDto>> tagsList,
-            Map<Integer, String> submissionNumberMap,
-            Map<Integer, String> acSubmissionNumberMap
-                                                                ){
-        List<ProblemInfoData> ret = new ArrayList<>();
-        for(int i=0;i<problemDtoList.size();i++){
-            ProblemDto problemDto = problemDtoList.get(i);
-            int pid = problemDto.getProblem_id();
-            String submissionNumber = submissionNumberMap.get(pid);
-            String acSubmissionNumber = acSubmissionNumberMap.get(pid);
-            List<ProblemTagJoinDto> tags = tagsList.get(pid);
-            ret.add(convertProblemDtoToProblemInfoData(problemDto, submissionNumber, acSubmissionNumber, tags));
-        }
-        return ret;
-    }
-
     public ProblemInfoData convertProblemDtoToProblemInfoData(ProblemDto problemDto,
-                                                              String submissionNumber,
-                                                              String acSubmissionNumber,
+                                                              Integer submissionNumber,
+                                                              Integer acSubmissionNumber,
                                                               List<ProblemTagJoinDto> tags){
         return new ProblemInfoData(
                 problemDto.getProblem_id(),

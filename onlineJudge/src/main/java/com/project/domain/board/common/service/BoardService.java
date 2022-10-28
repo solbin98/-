@@ -6,7 +6,7 @@ import com.project.domain.board.common.dao.BoardDao;
 import com.project.domain.board.common.dto.BoardListPageDto;
 import com.project.domain.board.question.BoardWriteData;
 import com.project.domain.board.question.QuestionUpdateData;
-import com.project.domain.board.LikeDBDao;
+import com.project.domain.board.like.LikeDBDao;
 import com.project.common.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

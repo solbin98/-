@@ -7,11 +7,13 @@ import com.project.common.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+@Repository
 public class SubmissionDao {
 
     private RowMapper<SubmissionDto> submissionDtoRowMapper = new RowMapper<SubmissionDto>() {
@@ -83,8 +85,8 @@ public class SubmissionDao {
         return ret;
     }
 
-    public Integer selectTotalByQuery(String conditionSql){
-        Integer ret = jdbcTemplate.queryForObject("select count(*) from submission " + conditionSql, Integer.class);
+    public Integer selectTotal(){
+        Integer ret = jdbcTemplate.queryForObject("select count(*) from submission ", Integer.class);
         return ret;
     }
 
@@ -95,7 +97,7 @@ public class SubmissionDao {
         return jdbcTemplate.query(query, submissionDtoRowMapper, offset, limits);
     }
 
-    public List<SubmissionJoinDto> joinSelectByQueryAndPaging(String conditionSql, Paging paging){
+    public List<SubmissionJoinDto> joinSelectByPaging(Paging paging){
         int offset = (paging.getNowPage()-1) * paging.getPerPage();
         int limits = paging.getPerPage();
 
@@ -103,7 +105,7 @@ public class SubmissionDao {
                 "submission.language_id, member.name as nickName, problem.title as problemName, " +
                 "language.name as languageName, problem.testcase_num from submission inner join member on " +
                 "submission.member_id = member.member_id inner join problem on submission.problem_id = problem.problem_id " +
-                "inner join language on submission.language_id = language.language_id " + conditionSql + " order by submission_id desc limit ?, ? ";
+                "inner join language on submission.language_id = language.language_id order by submission_id desc limit ?, ? ";
 
         return jdbcTemplate.query(query, submissionJoinDtoRowMapper, offset, limits);
     }

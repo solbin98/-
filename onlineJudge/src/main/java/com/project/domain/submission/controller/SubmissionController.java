@@ -1,4 +1,4 @@
-package com.project.domain.submission;
+package com.project.domain.submission.controller;
 
 import com.project.domain.member.MemberService;
 import com.project.domain.submission.dto.SubmissionDto;
@@ -11,6 +11,7 @@ import com.project.common.Paging;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,23 +46,18 @@ public class SubmissionController {
     }
 
     @GetMapping("/submissionList*")
-    public String getSubmissionListPage(@RequestParam(value = "page", required = false) Integer nowPage,
-                                        @RequestParam(value = "nickname", required = false) String nickname,
-                                        @RequestParam(value = "problem_id", required = false) Integer problem_id,
-                                        Model model){
-
+    public String getSubmissionListPage(@RequestParam(value = "page", required = false) Integer nowPage, Model model){
         if(nowPage == null) nowPage = 1;
-        Integer member_id = memberService.getMemberIdByNickname(nickname);
-        String sqlCondition = submissionService.createSqlConditionForSubmissionSelectQuery(problem_id, member_id);
-        int total = submissionService.getTotalByQuery(sqlCondition);
+        int total = submissionService.getTotal();
         Paging paging = new Paging(nowPage, perPage, total);
-        List<SubmissionJoinDto> submissionJoinDtoList = submissionService.getSubmissionJoinDtoByQueryAndPaging(sqlCondition, paging);
+        List<SubmissionJoinDto> submissionJoinDtoList = submissionService.getSubmissionJoinDtoByPaging(paging);
         model.addAttribute("submissions", submissionJoinDtoList);
         model.addAttribute("paging", paging);
         return "submission/submissionListPage";
     }
 
     @PostMapping("/submission")
+    @Transactional
     public String submitCode(SubmissionInfoData submissionInfoData, Authentication authentication) throws Exception {
         PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
         String nickName = principalDetails.getNickname();
@@ -74,6 +70,6 @@ public class SubmissionController {
 
         SubmissionDto submissionDto = new SubmissionDto(0, problem_id, language_id, code, "PC","", "", code_length, LocalDateTime.now(), member_id);
         submissionService.addSubmission(submissionDto);
-        return "redirect:/submissionList?problem_id=" + problem_id + "&" + "nickname=" + nickName;
+        return "redirect:/submissionList?page=1";
     }
 }

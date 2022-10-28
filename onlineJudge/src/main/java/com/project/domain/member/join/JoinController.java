@@ -9,6 +9,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -40,6 +41,7 @@ public class JoinController {
     }
 
     @PostMapping("/join")
+    @Transactional
     public String join(@Validated @ModelAttribute("JoinFormData") JoinFormData joinFormData, BindingResult bindingResult, Model model){
         // joinValidator 을 통한 회원 가입 폼 데이터 검증
         joinValidator.validate(joinFormData, bindingResult);

@@ -9,6 +9,7 @@ import com.project.domain.member.profile.ProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
 import java.time.LocalDateTime;
@@ -26,6 +27,7 @@ public class Scheduler {
     // 유저의 랭킹을 업데이트 하기 위함
     @Scheduled(fixedDelay = 1000 * 60 * 15 ) // 15분 간격으로 유저 랭크 업데이트
     public void updateUserRankingState() {
+        if(true) throw new RuntimeException("daawdawdawd");
         List<MemberDto> allMemberList = memberService.getAllMember();
         for(int i=0;i<allMemberList.size();i++){
             int member_id = allMemberList.get(i).getMember_id();
@@ -37,7 +39,7 @@ public class Scheduler {
 
     // 매일 새벽 3시에 일괄 삭제 수행
     @Scheduled(cron = "0 0 3 * * ?")
-    public void removeUnusedImageFile() {
+    public void removeUnusedImageFile() throws Exception {
         List<FileDto> fileList = fileService.getUnusedFile();
         for(int i=0;i<fileList.size();i++){
             String filePath = fileList.get(i).getPath();

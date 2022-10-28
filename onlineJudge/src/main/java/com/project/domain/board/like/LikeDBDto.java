@@ -1,4 +1,4 @@
-package com.project.domain.board;
+package com.project.domain.board.like;
 
 public class LikeDBDto {
     int board_id;

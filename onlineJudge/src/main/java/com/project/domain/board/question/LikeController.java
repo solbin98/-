@@ -1,7 +1,7 @@
 package com.project.domain.board.question;
 
-import com.project.domain.board.LikeDBDao;
-import com.project.domain.board.LikeDBDto;
+import com.project.domain.board.like.LikeDBDao;
+import com.project.domain.board.like.LikeDBDto;
 import com.project.security.PrincipalDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;

@@ -4,10 +4,12 @@ import com.project.domain.problem.dto.ProblemFileDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+@Repository
 public class ProblemFileDao {
 
     private RowMapper<ProblemFileDto> problemFileDtoRowMapper = new RowMapper<ProblemFileDto>() {

@@ -21,6 +21,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,6 +50,13 @@ public class BoardController {
         Paging paging = new Paging(nowPage, perPage, boardService.getTotalQuestionBoard());
         String sql = boardService.getSqlConditionByKeyWord(keyword, type);
         List<BoardListPageDto> boardList = boardService.getBoardListPageDtoByConditionSqlAndPaging(sql, paging);
+
+        int boardListSize = boardList.size();
+        for(int i=0;i<boardListSize;i++){
+            String content = boardList.get(i).getContent();
+            boardList.get(i).setContent(makeViewMoreStr(content, 100));
+        }
+
         model.addAttribute("boards", boardList);
         model.addAttribute("paging", paging);
         model.addAttribute("keyword", keyword);
@@ -83,6 +91,7 @@ public class BoardController {
 
     @PostMapping("boards/question")
     @ResponseBody
+    @Transactional
     public ResponseEntity<ResponseForm> addQuestionBoard(@Valid @RequestBody BoardWriteData boardWriteData, Authentication authentication) throws IllegalArgumentException, Exception {
         int problem_id = Integer.parseInt(boardWriteData.getProblem_id());
         if(problemService.getProblemById(problem_id) == null )
@@ -101,6 +110,7 @@ public class BoardController {
     @PreAuthorize("isAuthenticated() and (( #questionUpdateData.member_id == principal.id ) or hasRole('ROLE_ADMIN'))")
     @PutMapping("boards/question*")
     @ResponseBody
+    @Transactional
     public ResponseEntity<ResponseForm> updateQuestionBoard(@Valid @RequestBody QuestionUpdateData questionUpdateData, Authentication authentication) throws Exception {
         boardService.updateQuestion(questionUpdateData);
 
@@ -115,7 +125,8 @@ public class BoardController {
 
     @PostMapping("boards/answer")
     @ResponseBody
-    public ResponseEntity<ResponseForm> addAnswerBoard(@RequestBody AnswerWriteData answerWriteData,  Authentication authentication) throws Exception{
+    @Transactional
+    public ResponseEntity<ResponseForm> addAnswerBoard(@RequestBody AnswerWriteData answerWriteData, Authentication authentication) throws Exception{
         int member_id = ((PrincipalDetails)(authentication.getPrincipal())).getUser().getId();
         answerWriteData.setMember_id(member_id);
         boardService.addAnswer(answerWriteData);
@@ -128,6 +139,7 @@ public class BoardController {
     @PutMapping("boards/answer*")
     @PreAuthorize("isAuthenticated() and (( #answerUpdateData.member_id == principal.id ) or hasRole('ROLE_ADMIN'))")
     @ResponseBody
+    @Transactional
     public ResponseEntity<ResponseForm> updateAnswerBoard(@ModelAttribute AnswerUpdateData answerUpdateData) throws Exception{
 
         boardService.updateAnswer(answerUpdateData);
@@ -143,6 +155,7 @@ public class BoardController {
     @DeleteMapping("boards*")
     @PreAuthorize("isAuthenticated() and (( #boardDeleteData.member_id == principal.id ) or hasRole('ROLE_ADMIN'))")
     @ResponseBody
+    @Transactional
     public ResponseEntity<ResponseForm> deleteBoard(BoardDeleteData boardDeleteData) throws Exception {
         List<BoardFileDto> questionBoardFileDtoList = fileService.getBoardFileDtoByBoardId(boardDeleteData.getBoard_id());
         List<BoardFileQuestionDto> answerBoardFileDtoList = fileService.getBoardFileDtoByQuestionId(boardDeleteData.getBoard_id());
@@ -155,5 +168,10 @@ public class BoardController {
         boardService.deleteBoardById(boardDeleteData.getBoard_id());
         boardService.deleteBoardByQuestionId(boardDeleteData.getBoard_id());
         return new ResponseEntity<>(new ResponseForm("/boardList?page=1"), HttpStatus.OK);
+    }
+
+    String makeViewMoreStr(String str, int maxSize){
+        if(str.length() > maxSize) str = str.substring(0, maxSize) + "...";
+        return str;
     }
 }

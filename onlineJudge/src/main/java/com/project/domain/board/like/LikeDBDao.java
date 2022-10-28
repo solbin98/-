@@ -1,13 +1,15 @@
-package com.project.domain.board;
+package com.project.domain.board.like;
 
-import com.project.domain.board.LikeDBDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+@Repository
 public class LikeDBDao {
     private RowMapper<LikeDBDto> likeDBDtoRowMapper = new RowMapper<LikeDBDto>() {
         @Override
@@ -19,6 +21,9 @@ public class LikeDBDao {
             return likeDBDto;
         }
     };
+
+    @Autowired
+    DataSource dataSource;
 
     @Autowired
     private JdbcTemplate jdbcTemplate;

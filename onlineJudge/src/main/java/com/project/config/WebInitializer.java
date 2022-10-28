@@ -5,7 +5,7 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 
 import javax.servlet.Filter;
 
-public class SpringMvcAnnotationConfigDispatcherServletInitializer
+public class WebInitializer
         extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override
@@ -18,18 +18,18 @@ public class SpringMvcAnnotationConfigDispatcherServletInitializer
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return null;
+        return new Class[] {
+                RootContext.class,
+                DBConfig.class,
+                SchedulingConfig.class,
+                SecurityConfig.class
+        };
     }
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
         return new Class[] {
-                SecurityConfig.class,
-                ServiceConfig.class,
-                MvcConfig.class,
-                ControllerConfig.class,
-                DBConfig.class,
-                SchedulingConfig.class
+                ServletContext.class,
         };
     }
     @Override

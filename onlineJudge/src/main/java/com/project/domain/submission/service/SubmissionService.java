@@ -17,22 +17,8 @@ public class SubmissionService {
     @Autowired
     MemberDao memberDao;
 
-    public String createSqlConditionForSubmissionSelectQuery(Integer problem_id, Integer member_id){
-        String sql = "";
-        if(problem_id != null) sql += "submission.problem_id = " + problem_id;
-        if(member_id != null) {
-            if(!sql.equals("")) sql += " and ";
-            sql += "submission.member_id = " + member_id;
-        }
-        // 결과 예시
-        // 1) problem_id 와 username이 null 이 아닌 경우
-        //   -> "where problem_id = 2 and username = solbin" 출력
-        if(!sql.equals("")) sql = "where " + sql;
-        return sql;
-    }
-
-    public List<SubmissionJoinDto> getSubmissionJoinDtoByQueryAndPaging(String conditionSql, Paging paging){
-        return submissionDao.joinSelectByQueryAndPaging(conditionSql, paging);
+    public List<SubmissionJoinDto> getSubmissionJoinDtoByPaging(Paging paging){
+        return submissionDao.joinSelectByPaging(paging);
     }
 
     public void addSubmission(SubmissionDto submissionDto) throws Exception{
@@ -57,8 +43,8 @@ public class SubmissionService {
         }
     }
 
-    public int getTotalByQuery(String sqlCondition){
-        return submissionDao.selectTotalByQuery(sqlCondition);
+    public int getTotal(){
+        return submissionDao.selectTotal();
     }
 
     public List<SubmissionDto> getSubmissionByQueryAndPaging(String sqlCondition, Paging paging){

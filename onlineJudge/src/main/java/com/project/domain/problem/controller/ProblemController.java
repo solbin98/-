@@ -15,6 +15,8 @@ import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -69,26 +71,18 @@ public class ProblemController {
     public String getProblemListPage(@RequestParam(value = "page", required = false) Integer nowPage, Model model) throws Exception {
         if(nowPage == null) nowPage = 1;
         int total = problemService.getTotal();
+
         Paging paging = new Paging(nowPage, perPage, total);
         List<ProblemDto> problemDtoList = problemService.getProblemsByPaging(paging);
-
-        Map<Integer, List<ProblemTagJoinDto>> tags = new HashMap<>();
-        Map<Integer, String> submits = new HashMap<>();
-        Map<Integer, String> acSubmits = new HashMap<>();
+        List<ProblemInfoData> problems = new ArrayList<>();
 
         for(int i=0;i<problemDtoList.size();i++){
             int problem_id = problemDtoList.get(i).getProblem_id();
             List<ProblemTagJoinDto> tagDtoList = problemTagService.getProblemTagJoinDtoListByProblemId(problem_id);
-
-            String submitNumber = Integer.toString(submissionService.getSubmissionCountByProblemId(problem_id));
-            String acSubmitNumber = Integer.toString(submissionService.getAcSubmissionCountByProblemId(problem_id));
-
-            tags.put(problem_id, tagDtoList);
-            submits.put(problem_id,submitNumber);
-            acSubmits.put(problem_id, acSubmitNumber);
+            int submitNumber = submissionService.getSubmissionCountByProblemId(problem_id);
+            int acSubmitNumber = submissionService.getAcSubmissionCountByProblemId(problem_id);
+            problems.add(problemService.convertProblemDtoToProblemInfoData(problemDtoList.get(i), submitNumber, acSubmitNumber, tagDtoList));
         }
-
-        List<ProblemInfoData> problems = problemService.getProblemsInfoDataListByProblemDtoList(problemDtoList, tags, submits, acSubmits);
 
         model.addAttribute("problems", problems);
         model.addAttribute("paging", paging);
@@ -102,6 +96,7 @@ public class ProblemController {
 
     @PostMapping("/problem")
     @ResponseBody
+    @Transactional
     public ResponseEntity<ResponseForm> writeProblem(@Valid @ModelAttribute ProblemWriteInfoData problemWriteInfoData, BindingResult bindingResult,
                                                      @RequestPart(value = "testcases", required = false) Map<String, Object> testcases) throws Exception {
 

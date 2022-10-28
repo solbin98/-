@@ -15,6 +15,7 @@ import java.util.List;
 
 @ControllerAdvice
 public class ExceptionHandlerClass {
+    // Validation 어노테이션을 통해 검출된 에러를 받는 핸들러
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ResponseForm> methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e){
         ResponseForm responseForm = new ResponseForm(e.getMessage());
@@ -31,8 +32,9 @@ public class ExceptionHandlerClass {
         return new ResponseEntity<ResponseForm>(responseForm, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<ResponseForm> illegalArgumentExceptionHandler(IllegalArgumentException e){
+    // 기타 모든 에러
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ResponseForm> generalExceptionHandler(Exception e){
         ResponseForm responseForm = new ResponseForm(e.getMessage());
         return new ResponseEntity<ResponseForm>(responseForm, HttpStatus.BAD_REQUEST);
     }
