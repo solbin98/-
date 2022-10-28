@@ -31,7 +31,7 @@ void initMysql(MYSQL* mysql, MYSQL_RES* res, MYSQL_ROW* row){
     
     mysql_init(mysql);
 
-    if (!mysql_real_connect(mysql, NULL, "solbin98", "rmsmsrksma1@", "onlineJudge", 3306, (char*)NULL, 0))
+    if (!mysql_real_connect(mysql, NULL, "", "", "", 0, (char*)NULL, 0))
     {
         printf("%s\n", mysql_error(mysql));
         exit(1);
